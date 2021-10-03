@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Román Zuleta</title>
+    <link>https://rzul.me/tags/</link>
+    <description>Recent content in Tags on Román Zuleta</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 27 Jun 2021 23:11:05 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CTF</title>
+      <link>https://rzul.me/tags/ctf/</link>
+      <pubDate>Sun, 27 Jun 2021 23:11:05 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Write-up</title>
+      <link>https://rzul.me/tags/write-up/</link>
+      <pubDate>Sun, 27 Jun 2021 23:11:05 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/write-up/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Checklist</title>
+      <link>https://rzul.me/tags/checklist/</link>
+      <pubDate>Tue, 22 Jun 2021 01:37:56 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/checklist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OSCP-Prep</title>
+      <link>https://rzul.me/tags/oscp-prep/</link>
+      <pubDate>Tue, 22 Jun 2021 01:37:56 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/oscp-prep/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

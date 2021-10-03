@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Román Zuleta</title>
+    <link>https://rzul.me/posts/</link>
+    <description>Recent content in Posts on Román Zuleta</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 27 Jun 2021 23:11:05 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BiOt CTF</title>
+      <link>https://rzul.me/posts/biot-ctf/</link>
+      <pubDate>Sun, 27 Jun 2021 23:11:05 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/biot-ctf/</guid>
+      <description>Write-up de los retos realizados del BiOt CTF.</description>
+    </item>
+    
+    <item>
+      <title>NetSecFocus Trophy Room Checklist</title>
+      <link>https://rzul.me/posts/netsecfocus-trophy-room-checklist/</link>
+      <pubDate>Tue, 22 Jun 2021 01:37:56 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/netsecfocus-trophy-room-checklist/</guid>
+      <description>Serie de máquinas y write-ups que sirven como preparación para la OSCP</description>
+    </item>
+    
+    <item>
+      <title>Mi Primer CTF</title>
+      <link>https://rzul.me/posts/first-ctf/</link>
+      <pubDate>Wed, 07 Apr 2021 10:43:09 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/first-ctf/</guid>
+      <description>Primeras impresiones y Write-up de los retos resueltos del Shakti CTF 2021.</description>
+    </item>
+    
+  </channel>
+</rss>

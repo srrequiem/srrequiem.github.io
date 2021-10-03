@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Write-up on Román Zuleta</title>
+    <link>https://rzul.me/en/tags/write-up/</link>
+    <description>Recent content in Write-up on Román Zuleta</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Apr 2021 10:43:09 -0500</lastBuildDate><atom:link href="https://rzul.me/en/tags/write-up/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First CTF</title>
+      <link>https://rzul.me/en/posts/first-ctf/</link>
+      <pubDate>Wed, 07 Apr 2021 10:43:09 -0500</pubDate>
+      
+      <guid>https://rzul.me/en/posts/first-ctf/</guid>
+      <description>First impresions and Write-up of the Shakti CTF 2021 challenges that I solved.</description>
+    </item>
+    
+  </channel>
+</rss>
