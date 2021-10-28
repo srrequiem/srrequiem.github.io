@@ -6,7 +6,25 @@
     <description>Recent content in Posts on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Jun 2021 23:11:05 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Oct 2021 18:37:10 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>echoCTF Flanders</title>
+      <link>https://rzul.me/posts/echoctf_flanders/</link>
+      <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/echoctf_flanders/</guid>
+      <description>Write-up de la máquina flanders de la plataforma echoCTF.red</description>
+    </item>
+    
+    <item>
+      <title>Buff</title>
+      <link>https://rzul.me/posts/buff/</link>
+      <pubDate>Tue, 10 Aug 2021 20:56:14 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/buff/</guid>
+      <description>Desc Text.</description>
+    </item>
+    
     <item>
       <title>BiOt CTF</title>
       <link>https://rzul.me/posts/biot-ctf/</link>
@@ -23,6 +41,60 @@
       
       <guid>https://rzul.me/posts/netsecfocus-trophy-room-checklist/</guid>
       <description>Serie de máquinas y write-ups que sirven como preparación para la OSCP</description>
+    </item>
+    
+    <item>
+      <title>Pivoting</title>
+      <link>https://rzul.me/posts/pivoting/</link>
+      <pubDate>Wed, 26 May 2021 19:04:57 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/pivoting/</guid>
+      <description>Desc Text.</description>
+    </item>
+    
+    <item>
+      <title>Lab Notes Layout</title>
+      <link>https://rzul.me/posts/lab-notes-layout/</link>
+      <pubDate>Mon, 24 May 2021 12:17:38 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/lab-notes-layout/</guid>
+      <description>Desc Text.</description>
+    </item>
+    
+    <item>
+      <title>Basic Stack Bof Methodology</title>
+      <link>https://rzul.me/posts/basic-stack-bof-methodology/</link>
+      <pubDate>Mon, 24 May 2021 10:23:06 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/basic-stack-bof-methodology/</guid>
+      <description>Desc Text.</description>
+    </item>
+    
+    <item>
+      <title>Boxes Checklist</title>
+      <link>https://rzul.me/posts/boxes-checklist/</link>
+      <pubDate>Mon, 24 May 2021 10:21:49 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/boxes-checklist/</guid>
+      <description>Desc Text.</description>
+    </item>
+    
+    <item>
+      <title>Peass 1</title>
+      <link>https://rzul.me/posts/peass-1/</link>
+      <pubDate>Sat, 08 May 2021 00:35:24 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/peass-1/</guid>
+      <description>Desc Text.</description>
+    </item>
+    
+    <item>
+      <title>Cyber Apocalypse</title>
+      <link>https://rzul.me/posts/cyber-apocalypse/</link>
+      <pubDate>Mon, 03 May 2021 12:02:44 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/cyber-apocalypse/</guid>
+      <description>Desc Text.</description>
     </item>
     
     <item>

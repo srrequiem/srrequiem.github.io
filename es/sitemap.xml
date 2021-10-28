@@ -2,6 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://rzul.me/categories/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/categories/"
+                />
+  </url><url>
+    <loc>https://rzul.me/categories/echoctf/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/echoctf-beginner/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/categories/echoctf-box/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/echoctf_flanders/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/posts/"
+                />
+  </url><url>
+    <loc>https://rzul.me/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/"
+                />
+  </url><url>
+    <loc>https://rzul.me/tags/ssh/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/tags/"
+                />
+  </url><url>
+    <loc>https://rzul.me/posts/buff/</loc>
+    <lastmod>2021-08-10T20:56:14-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/first/</loc>
+    <lastmod>2021-08-10T20:56:14-05:00</lastmod>
+  </url><url>
     <loc>https://rzul.me/posts/biot-ctf/</loc>
     <lastmod>2021-06-27T23:11:05-05:00</lastmod>
   </url><url>
@@ -16,45 +89,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="https://rzul.me/tags/ctf/"
-                />
-  </url><url>
-    <loc>https://rzul.me/posts/</loc>
-    <lastmod>2021-06-27T23:11:05-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/posts/"
-                />
-  </url><url>
-    <loc>https://rzul.me/</loc>
-    <lastmod>2021-06-27T23:11:05-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/"
-                />
-  </url><url>
-    <loc>https://rzul.me/tags/</loc>
-    <lastmod>2021-06-27T23:11:05-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/tags/"
                 />
   </url><url>
     <loc>https://rzul.me/tags/write-up/</loc>
@@ -78,6 +112,27 @@
   </url><url>
     <loc>https://rzul.me/tags/oscp-prep/</loc>
     <lastmod>2021-06-22T01:37:56-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/pivoting/</loc>
+    <lastmod>2021-05-26T19:04:57-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/lab-notes-layout/</loc>
+    <lastmod>2021-05-24T12:17:38-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/basic-stack-bof-methodology/</loc>
+    <lastmod>2021-05-24T10:23:06-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/boxes-checklist/</loc>
+    <lastmod>2021-05-24T10:21:49-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/peass-1/</loc>
+    <lastmod>2021-05-08T00:35:24-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/cyber-apocalypse/</loc>
+    <lastmod>2021-05-03T12:02:44-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/htb/</loc>
+    <lastmod>2021-05-03T12:02:44-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/posts/first-ctf/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
@@ -114,18 +169,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="https://rzul.me/search/"
-                />
-  </url><url>
-    <loc>https://rzul.me/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/categories/"
                 />
   </url>
 </urlset>

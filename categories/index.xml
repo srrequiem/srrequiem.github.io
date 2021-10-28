@@ -5,6 +5,25 @@
     <link>https://rzul.me/categories/</link>
     <description>Recent content in Categories on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Oct 2021 18:37:10 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>echoCTF</title>
+      <link>https://rzul.me/categories/echoctf/</link>
+      <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
+      
+      <guid>https://rzul.me/categories/echoctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>echoCTF - Box</title>
+      <link>https://rzul.me/categories/echoctf-box/</link>
+      <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
+      
+      <guid>https://rzul.me/categories/echoctf-box/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

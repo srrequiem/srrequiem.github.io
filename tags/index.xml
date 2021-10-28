@@ -6,7 +6,34 @@
     <description>Recent content in Tags on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Jun 2021 23:11:05 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Oct 2021 18:37:10 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>echoCTF - Beginner</title>
+      <link>https://rzul.me/tags/echoctf-beginner/</link>
+      <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/echoctf-beginner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://rzul.me/tags/ssh/</link>
+      <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>first</title>
+      <link>https://rzul.me/tags/first/</link>
+      <pubDate>Tue, 10 Aug 2021 20:56:14 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/first/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>CTF</title>
       <link>https://rzul.me/tags/ctf/</link>
@@ -40,6 +67,15 @@
       <pubDate>Tue, 22 Jun 2021 01:37:56 -0500</pubDate>
       
       <guid>https://rzul.me/tags/oscp-prep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTB</title>
+      <link>https://rzul.me/tags/htb/</link>
+      <pubDate>Mon, 03 May 2021 12:02:44 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/htb/</guid>
       <description></description>
     </item>
     
