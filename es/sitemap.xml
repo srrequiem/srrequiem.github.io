@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://rzul.me/categories/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,19 +16,25 @@
                 />
   </url><url>
     <loc>https://rzul.me/categories/echoctf/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/tags/echoctf-beginner/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/categories/echoctf-box/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/echoctf_flanders/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <loc>https://rzul.me/posts/echoctf_smithers/</loc>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/http/</loc>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/memcached/</loc>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/posts/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -41,7 +47,7 @@
                 />
   </url><url>
     <loc>https://rzul.me/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -53,11 +59,8 @@
                 href="https://rzul.me/"
                 />
   </url><url>
-    <loc>https://rzul.me/tags/ssh/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
-  </url><url>
     <loc>https://rzul.me/tags/</loc>
-    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -68,6 +71,12 @@
                 hreflang="es"
                 href="https://rzul.me/tags/"
                 />
+  </url><url>
+    <loc>https://rzul.me/posts/echoctf_flanders/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/ssh/</loc>
+    <lastmod>2021-10-27T18:37:10-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/posts/biot-ctf/</loc>
     <lastmod>2021-06-27T23:11:05-05:00</lastmod>
