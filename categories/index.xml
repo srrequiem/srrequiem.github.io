@@ -6,7 +6,25 @@
     <description>Recent content in Categories on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Oct 2021 15:03:19 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Nov 2021 19:31:11 -0600</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Buffer Overflow</title>
+      <link>https://rzul.me/categories/buffer-overflow/</link>
+      <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
+      
+      <guid>https://rzul.me/categories/buffer-overflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OSCP Prep</title>
+      <link>https://rzul.me/categories/oscp-prep/</link>
+      <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
+      
+      <guid>https://rzul.me/categories/oscp-prep/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>echoCTF</title>
       <link>https://rzul.me/categories/echoctf/</link>
