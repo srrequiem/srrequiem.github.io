@@ -6,7 +6,25 @@
     <description>Recent content in Categories on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Nov 2021 19:31:11 -0600</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Jan 2022 00:39:06 -0600</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTB</title>
+      <link>https://rzul.me/categories/htb/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/categories/htb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTB - Box</title>
+      <link>https://rzul.me/categories/htb-box/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/categories/htb-box/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Buffer Overflow</title>
       <link>https://rzul.me/categories/buffer-overflow/</link>

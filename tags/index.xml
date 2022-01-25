@@ -6,7 +6,43 @@
     <description>Recent content in Tags on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Nov 2021 19:31:11 -0600</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Jan 2022 00:39:06 -0600</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Active Directory</title>
+      <link>https://rzul.me/tags/active-directory/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/tags/active-directory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTB - Easy</title>
+      <link>https://rzul.me/tags/htb-easy/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/tags/htb-easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kerberoast</title>
+      <link>https://rzul.me/tags/kerberoast/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/tags/kerberoast/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>smb</title>
+      <link>https://rzul.me/tags/smb/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/tags/smb/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>BoF - Windows</title>
       <link>https://rzul.me/tags/bof-windows/</link>
