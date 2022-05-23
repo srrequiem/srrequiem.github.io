@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jan 2022 00:39:06 -0600</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 May 2022 21:21:56 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTB Cyber Apocalypse 2022</title>
+      <link>https://rzul.me/posts/htb-cyber-apocalypse-2022/</link>
+      <pubDate>Thu, 19 May 2022 21:21:56 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-cyber-apocalypse-2022/</guid>
+      <description>Cyber Apocalypse CTF 2022 - Intergalactic Chase</description>
+    </item>
+    
     <item>
       <title>Hack The Box - Active</title>
       <link>https://rzul.me/posts/htb-active/</link>

