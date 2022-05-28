@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 May 2022 21:21:56 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 May 2022 20:01:34 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Silo</title>
+      <link>https://rzul.me/posts/htb-silo/</link>
+      <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-silo/</guid>
+      <description>Write-up de la máquina Silo de la plataforma hackthebox.eu</description>
+    </item>
+    
     <item>
       <title>HTB Cyber Apocalypse 2022</title>
       <link>https://rzul.me/posts/htb-cyber-apocalypse-2022/</link>
@@ -59,15 +68,6 @@
       
       <guid>https://rzul.me/posts/biot-ctf/</guid>
       <description>Write-up de los retos realizados del BiOt CTF.</description>
-    </item>
-    
-    <item>
-      <title>NetSecFocus Trophy Room Checklist</title>
-      <link>https://rzul.me/posts/netsecfocus-trophy-room-checklist/</link>
-      <pubDate>Tue, 22 Jun 2021 01:37:56 -0500</pubDate>
-      
-      <guid>https://rzul.me/posts/netsecfocus-trophy-room-checklist/</guid>
-      <description>Serie de máquinas y write-ups que sirven como preparación para la OSCP</description>
     </item>
     
     <item>
