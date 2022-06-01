@@ -6,11 +6,11 @@
     <description>Recent content in Categories on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 May 2022 20:01:34 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 May 2022 23:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HTB</title>
       <link>https://rzul.me/categories/htb/</link>
-      <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
+      <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb/</guid>
       <description></description>
@@ -19,16 +19,25 @@
     <item>
       <title>HTB - Box</title>
       <link>https://rzul.me/categories/htb-box/</link>
-      <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
+      <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb-box/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>HTB - Medium</title>
+      <link>https://rzul.me/categories/htb-medium/</link>
+      <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/categories/htb-medium/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>HTB - Windows</title>
       <link>https://rzul.me/categories/htb-windows/</link>
-      <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
+      <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb-windows/</guid>
       <description></description>
@@ -37,7 +46,7 @@
     <item>
       <title>TJNull - OSCP</title>
       <link>https://rzul.me/categories/tjnull-oscp/</link>
-      <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
+      <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
       
       <guid>https://rzul.me/categories/tjnull-oscp/</guid>
       <description></description>
@@ -58,6 +67,15 @@
       <pubDate>Thu, 19 May 2022 21:21:56 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb-ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTB - Easy</title>
+      <link>https://rzul.me/categories/htb-easy/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/categories/htb-easy/</guid>
       <description></description>
     </item>
     

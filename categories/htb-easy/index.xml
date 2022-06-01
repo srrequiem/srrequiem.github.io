@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>HTB - Easy on Román Zuleta</title>
+    <link>https://rzul.me/categories/htb-easy/</link>
+    <description>Recent content in HTB - Easy on Román Zuleta</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 Jan 2022 00:39:06 -0600</lastBuildDate><atom:link href="https://rzul.me/categories/htb-easy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Active</title>
+      <link>https://rzul.me/posts/htb-active/</link>
+      <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-active/</guid>
+      <description>Write-up de la máquina Active de la plataforma hackthebox.eu</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -2,8 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://rzul.me/tags/achat/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/buffer-overflow/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
     <loc>https://rzul.me/categories/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,22 +21,70 @@
                 href="https://rzul.me/categories/"
                 />
   </url><url>
+    <loc>https://rzul.me/posts/htb-chatterbox/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/categories/htb/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/categories/htb-box/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/categories/htb-medium/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/categories/htb-windows/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/icacls/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/posts/"
+                />
+  </url><url>
+    <loc>https://rzul.me/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/"
+                />
+  </url><url>
+    <loc>https://rzul.me/tags/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/tags/"
+                />
+  </url><url>
+    <loc>https://rzul.me/categories/tjnull-oscp/</loc>
+    <lastmod>2022-05-31T23:23:58-05:00</lastmod>
+  </url><url>
     <loc>https://rzul.me/tags/forensics/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/posts/htb-silo/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb-box/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/htb-medium/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb-windows/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/tags/juicy-potato/</loc>
@@ -48,49 +102,7 @@
     <loc>https://rzul.me/tags/oracle-tns-listener/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/posts/"
-                />
-  </url><url>
-    <loc>https://rzul.me/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/"
-                />
-  </url><url>
     <loc>https://rzul.me/tags/sqlplus/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/</loc>
-    <lastmod>2022-05-27T20:01:34-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/tags/"
-                />
-  </url><url>
-    <loc>https://rzul.me/categories/tjnull-oscp/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/tags/volatility/</loc>
@@ -145,7 +157,7 @@
     <loc>https://rzul.me/posts/htb-active/</loc>
     <lastmod>2022-01-22T00:39:06-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/htb-easy/</loc>
+    <loc>https://rzul.me/categories/htb-easy/</loc>
     <lastmod>2022-01-22T00:39:06-06:00</lastmod>
   </url><url>
     <loc>https://rzul.me/tags/kerberoast/</loc>

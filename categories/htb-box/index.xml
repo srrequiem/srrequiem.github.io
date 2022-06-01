@@ -6,7 +6,16 @@
     <description>Recent content in HTB - Box on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 May 2022 20:01:34 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/htb-box/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 May 2022 23:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/htb-box/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Chatterbox</title>
+      <link>https://rzul.me/posts/htb-chatterbox/</link>
+      <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-chatterbox/</guid>
+      <description>Write-up de la máquina Chatterbox de la plataforma hackthebox.eu</description>
+    </item>
+    
     <item>
       <title>Hack The Box - Silo</title>
       <link>https://rzul.me/posts/htb-silo/</link>

