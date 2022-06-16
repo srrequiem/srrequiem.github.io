@@ -6,7 +6,16 @@
     <description>Recent content in Servicios Windows on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/servicios-windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 20:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/servicios-windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Control</title>
+      <link>https://rzul.me/posts/htb-control/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-control/</guid>
+      <description>Write-up de la máquina Control de la plataforma hackthebox.eu</description>
+    </item>
+    
     <item>
       <title>Hack The Box - Remote</title>
       <link>https://rzul.me/posts/htb-remote/</link>

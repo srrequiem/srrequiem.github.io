@@ -6,11 +6,11 @@
     <description>Recent content in Categories on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 20:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HTB</title>
       <link>https://rzul.me/categories/htb/</link>
-      <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb/</guid>
       <description></description>
@@ -19,9 +19,36 @@
     <item>
       <title>HTB - Box</title>
       <link>https://rzul.me/categories/htb-box/</link>
-      <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb-box/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTB - Hard</title>
+      <link>https://rzul.me/categories/htb-hard/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/categories/htb-hard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HTB - Windows</title>
+      <link>https://rzul.me/categories/htb-windows/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/categories/htb-windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TJNull - OSCP</title>
+      <link>https://rzul.me/categories/tjnull-oscp/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/categories/tjnull-oscp/</guid>
       <description></description>
     </item>
     
@@ -31,24 +58,6 @@
       <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
       
       <guid>https://rzul.me/categories/htb-easy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HTB - Windows</title>
-      <link>https://rzul.me/categories/htb-windows/</link>
-      <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
-      
-      <guid>https://rzul.me/categories/htb-windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>TJNull - OSCP</title>
-      <link>https://rzul.me/categories/tjnull-oscp/</link>
-      <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
-      
-      <guid>https://rzul.me/categories/tjnull-oscp/</guid>
       <description></description>
     </item>
     

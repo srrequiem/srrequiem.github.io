@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>sddl on Román Zuleta</title>
+    <link>https://rzul.me/tags/sddl/</link>
+    <description>Recent content in sddl on Román Zuleta</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Jun 2022 20:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/sddl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Control</title>
+      <link>https://rzul.me/posts/htb-control/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-control/</guid>
+      <description>Write-up de la máquina Control de la plataforma hackthebox.eu</description>
+    </item>
+    
+  </channel>
+</rss>

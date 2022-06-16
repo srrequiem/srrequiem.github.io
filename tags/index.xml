@@ -6,7 +6,124 @@
     <description>Recent content in Tags on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 20:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AppLocker</title>
+      <link>https://rzul.me/tags/applocker/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/applocker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AppLocker Bypass</title>
+      <link>https://rzul.me/tags/applocker-bypass/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/applocker-bypass/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>https://rzul.me/tags/http/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Invoke-Command</title>
+      <link>https://rzul.me/tags/invoke-command/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/invoke-command/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reg</title>
+      <link>https://rzul.me/tags/reg/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/reg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Registros Windows</title>
+      <link>https://rzul.me/tags/registros-windows/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/registros-windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sc</title>
+      <link>https://rzul.me/tags/sc/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/sc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sddl</title>
+      <link>https://rzul.me/tags/sddl/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/sddl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Servicios Windows</title>
+      <link>https://rzul.me/tags/servicios-windows/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/servicios-windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLi</title>
+      <link>https://rzul.me/tags/sqli/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/sqli/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQLi-RCE</title>
+      <link>https://rzul.me/tags/sqli-rce/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/sqli-rce/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlmap</title>
+      <link>https://rzul.me/tags/sqlmap/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/sqlmap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>X-Forwarded-For</title>
+      <link>https://rzul.me/tags/x-forwarded-for/</link>
+      <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
+      
+      <guid>https://rzul.me/tags/x-forwarded-for/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>JuicyPotato</title>
       <link>https://rzul.me/tags/juicypotato/</link>
@@ -40,15 +157,6 @@
       <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
       
       <guid>https://rzul.me/tags/seimpersonateprivilege/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Servicios Windows</title>
-      <link>https://rzul.me/tags/servicios-windows/</link>
-      <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
-      
-      <guid>https://rzul.me/tags/servicios-windows/</guid>
       <description></description>
     </item>
     
@@ -292,15 +400,6 @@
       <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
       
       <guid>https://rzul.me/tags/echoctf-beginner/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>http</title>
-      <link>https://rzul.me/tags/http/</link>
-      <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
-      
-      <guid>https://rzul.me/tags/http/</guid>
       <description></description>
     </item>
     
