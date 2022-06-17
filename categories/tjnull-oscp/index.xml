@@ -6,7 +6,16 @@
     <description>Recent content in TJNull - OSCP on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jun 2022 20:23:58 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/tjnull-oscp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 12:52:29 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/tjnull-oscp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Devel</title>
+      <link>https://rzul.me/posts/htb-devel/</link>
+      <pubDate>Fri, 17 Jun 2022 12:52:29 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-devel/</guid>
+      <description>Write-up de la máquina Devel de la plataforma hackthebox.eu</description>
+    </item>
+    
     <item>
       <title>Hack The Box - Control</title>
       <link>https://rzul.me/posts/htb-control/</link>

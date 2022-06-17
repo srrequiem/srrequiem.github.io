@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ftp on Román Zuleta</title>
+    <link>https://rzul.me/tags/ftp/</link>
+    <description>Recent content in ftp on Román Zuleta</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Jun 2022 12:52:29 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/ftp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - Devel</title>
+      <link>https://rzul.me/posts/htb-devel/</link>
+      <pubDate>Fri, 17 Jun 2022 12:52:29 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-devel/</guid>
+      <description>Write-up de la máquina Devel de la plataforma hackthebox.eu</description>
+    </item>
+    
+  </channel>
+</rss>

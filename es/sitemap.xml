@@ -2,14 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rzul.me/tags/applocker/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/applocker-bypass/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <loc>https://rzul.me/tags/asp-webshell/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/categories/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -21,29 +18,29 @@
                 href="https://rzul.me/categories/"
                 />
   </url><url>
-    <loc>https://rzul.me/posts/htb-control/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <loc>https://rzul.me/tags/ftp/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/htb-devel/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/categories/htb/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/categories/htb-box/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/htb-hard/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <loc>https://rzul.me/categories/htb-easy/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/categories/htb-windows/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/http/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/invoke-command/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <loc>https://rzul.me/tags/ms10-059/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/posts/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -55,14 +52,8 @@
                 href="https://rzul.me/posts/"
                 />
   </url><url>
-    <loc>https://rzul.me/tags/reg/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/registros-windows/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
-  </url><url>
     <loc>https://rzul.me/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -73,6 +64,49 @@
                 hreflang="es"
                 href="https://rzul.me/"
                 />
+  </url><url>
+    <loc>https://rzul.me/tags/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://rzul.me/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://rzul.me/tags/"
+                />
+  </url><url>
+    <loc>https://rzul.me/categories/tjnull-oscp/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/windows-kernel-exploit/</loc>
+    <lastmod>2022-06-17T12:52:29-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/applocker/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/applocker-bypass/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/posts/htb-control/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/categories/htb-hard/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/http/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/invoke-command/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/reg/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
+  </url><url>
+    <loc>https://rzul.me/tags/registros-windows/</loc>
+    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/tags/sc/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
@@ -92,29 +126,10 @@
     <loc>https://rzul.me/tags/sqlmap/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/tags/"
-                />
-  </url><url>
-    <loc>https://rzul.me/categories/tjnull-oscp/</loc>
-    <lastmod>2022-06-15T20:23:58-05:00</lastmod>
-  </url><url>
     <loc>https://rzul.me/tags/x-forwarded-for/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/posts/htb-remote/</loc>
-    <lastmod>2022-06-03T15:02:47-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb-easy/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
     <loc>https://rzul.me/tags/juicypotato/</loc>
