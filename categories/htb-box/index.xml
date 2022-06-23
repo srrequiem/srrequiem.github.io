@@ -6,7 +6,16 @@
     <description>Recent content in HTB - Box on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 12:52:29 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/htb-box/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jun 2022 19:46:25 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/htb-box/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hack The Box - SecNotes</title>
+      <link>https://rzul.me/posts/htb-secnotes/</link>
+      <pubDate>Wed, 22 Jun 2022 19:46:25 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-secnotes/</guid>
+      <description>Write-up de la máquina SecNotes de la plataforma hackthebox.eu</description>
+    </item>
+    
     <item>
       <title>Hack The Box - Devel</title>
       <link>https://rzul.me/posts/htb-devel/</link>
