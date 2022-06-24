@@ -16,5 +16,14 @@
       <description>Write-up de la máquina Remote de la plataforma hackthebox.eu</description>
     </item>
     
+    <item>
+      <title>Hack The Box - Silo</title>
+      <link>https://rzul.me/posts/htb-silo/</link>
+      <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
+      
+      <guid>https://rzul.me/posts/htb-silo/</guid>
+      <description>Write-up de la máquina Silo de la plataforma hackthebox.eu</description>
+    </item>
+    
   </channel>
 </rss>
