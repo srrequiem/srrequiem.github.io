@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>SQLi on Román Zuleta</title>
-    <link>https://rzul.me/tags/sqli/</link>
+    <link>https://srrequiem.xyz/tags/sqli/</link>
     <description>Recent content in SQLi on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2022 19:46:25 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/sqli/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jun 2022 19:46:25 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/tags/sqli/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hack The Box - SecNotes</title>
-      <link>https://rzul.me/posts/htb-secnotes/</link>
+      <link>https://srrequiem.xyz/posts/htb-secnotes/</link>
       <pubDate>Wed, 22 Jun 2022 19:46:25 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-secnotes/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-secnotes/</guid>
       <description>Write-up de la máquina SecNotes de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Control</title>
-      <link>https://rzul.me/posts/htb-control/</link>
+      <link>https://srrequiem.xyz/posts/htb-control/</link>
       <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-control/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-control/</guid>
       <description>Write-up de la máquina Control de la plataforma hackthebox.eu</description>
     </item>
     

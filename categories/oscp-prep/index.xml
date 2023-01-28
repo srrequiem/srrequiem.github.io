@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>OSCP Prep on Román Zuleta</title>
-    <link>https://rzul.me/categories/oscp-prep/</link>
+    <link>https://srrequiem.xyz/categories/oscp-prep/</link>
     <description>Recent content in OSCP Prep on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Nov 2021 19:31:11 -0600</lastBuildDate><atom:link href="https://rzul.me/categories/oscp-prep/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Nov 2021 19:31:11 -0600</lastBuildDate><atom:link href="https://srrequiem.xyz/categories/oscp-prep/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Buffer Overflow - OSCP</title>
-      <link>https://rzul.me/posts/bof-oscp/</link>
+      <link>https://srrequiem.xyz/posts/bof-oscp/</link>
       <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
       
-      <guid>https://rzul.me/posts/bof-oscp/</guid>
+      <guid>https://srrequiem.xyz/posts/bof-oscp/</guid>
       <description>Guía para configuración y práctica de buffer overflows para acreditación de OSCP</description>
     </item>
     

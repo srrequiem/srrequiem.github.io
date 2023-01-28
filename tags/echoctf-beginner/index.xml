@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>echoCTF - Beginner on Román Zuleta</title>
-    <link>https://rzul.me/tags/echoctf-beginner/</link>
+    <link>https://srrequiem.xyz/tags/echoctf-beginner/</link>
     <description>Recent content in echoCTF - Beginner on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Oct 2021 15:03:19 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/echoctf-beginner/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Oct 2021 15:03:19 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/tags/echoctf-beginner/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>echoCTF - Smithers</title>
-      <link>https://rzul.me/posts/echoctf_smithers/</link>
+      <link>https://srrequiem.xyz/posts/echoctf_smithers/</link>
       <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/echoctf_smithers/</guid>
+      <guid>https://srrequiem.xyz/posts/echoctf_smithers/</guid>
       <description>Write-up de la máquina smithers de la plataforma echoCTF.red</description>
     </item>
     
     <item>
       <title>echoCTF - Flanders</title>
-      <link>https://rzul.me/posts/echoctf_flanders/</link>
+      <link>https://srrequiem.xyz/posts/echoctf_flanders/</link>
       <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/echoctf_flanders/</guid>
+      <guid>https://srrequiem.xyz/posts/echoctf_flanders/</guid>
       <description>Write-up de la máquina flanders de la plataforma echoCTF.red</description>
     </item>
     

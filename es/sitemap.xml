@@ -2,343 +2,343 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rzul.me/tags/alternate-data-streams/</loc>
+    <loc>https://srrequiem.xyz/tags/alternate-data-streams/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://rzul.me/en/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://rzul.me/categories/"
-                />
-  </url><url>
-    <loc>https://rzul.me/posts/htb-jeeves/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb-box/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb-medium/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/categories/htb-windows/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/http/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/jenkins/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/keepass/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/posts/</loc>
+    <loc>https://srrequiem.xyz/categories/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/posts/"
+                href="https://srrequiem.xyz/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/posts/"
+                href="https://srrequiem.xyz/categories/"
                 />
   </url><url>
-    <loc>https://rzul.me/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-jeeves/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/categories/htb/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/categories/htb-box/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/categories/htb-medium/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/categories/htb-windows/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/http/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/jenkins/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/keepass/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/posts/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/"
+                href="https://srrequiem.xyz/en/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/"
+                href="https://srrequiem.xyz/posts/"
                 />
   </url><url>
-    <loc>https://rzul.me/tags/seimpersonateprivilege/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://rzul.me/tags/</loc>
+    <loc>https://srrequiem.xyz/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/tags/"
+                href="https://srrequiem.xyz/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/tags/"
+                href="https://srrequiem.xyz/"
                 />
   </url><url>
-    <loc>https://rzul.me/categories/tjnull-oscp/</loc>
+    <loc>https://srrequiem.xyz/tags/seimpersonateprivilege/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/csrf/</loc>
+    <loc>https://srrequiem.xyz/tags/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://srrequiem.xyz/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://srrequiem.xyz/tags/"
+                />
+  </url><url>
+    <loc>https://srrequiem.xyz/categories/tjnull-oscp/</loc>
+    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/csrf/</loc>
     <lastmod>2022-06-22T19:46:25-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-secnotes/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-secnotes/</loc>
     <lastmod>2022-06-22T19:46:25-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/smb/</loc>
+    <loc>https://srrequiem.xyz/tags/smb/</loc>
     <lastmod>2022-06-22T19:46:25-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/sqli/</loc>
+    <loc>https://srrequiem.xyz/tags/sqli/</loc>
     <lastmod>2022-06-22T19:46:25-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/wsl/</loc>
+    <loc>https://srrequiem.xyz/tags/wsl/</loc>
     <lastmod>2022-06-22T19:46:25-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/xss/</loc>
+    <loc>https://srrequiem.xyz/tags/xss/</loc>
     <lastmod>2022-06-22T19:46:25-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/asp-webshell/</loc>
+    <loc>https://srrequiem.xyz/tags/asp-webshell/</loc>
     <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/ftp/</loc>
+    <loc>https://srrequiem.xyz/tags/ftp/</loc>
     <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-devel/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-devel/</loc>
     <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/htb-easy/</loc>
+    <loc>https://srrequiem.xyz/categories/htb-easy/</loc>
     <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/ms10-059/</loc>
+    <loc>https://srrequiem.xyz/tags/ms10-059/</loc>
     <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/windows-kernel-exploit/</loc>
+    <loc>https://srrequiem.xyz/tags/windows-kernel-exploit/</loc>
     <lastmod>2022-06-17T12:52:29-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/applocker/</loc>
+    <loc>https://srrequiem.xyz/tags/applocker/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/applocker-bypass/</loc>
+    <loc>https://srrequiem.xyz/tags/applocker-bypass/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-control/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-control/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/htb-hard/</loc>
+    <loc>https://srrequiem.xyz/categories/htb-hard/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/invoke-command/</loc>
+    <loc>https://srrequiem.xyz/tags/invoke-command/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/reg/</loc>
+    <loc>https://srrequiem.xyz/tags/reg/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/registros-windows/</loc>
+    <loc>https://srrequiem.xyz/tags/registros-windows/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/sc/</loc>
+    <loc>https://srrequiem.xyz/tags/sc/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/sddl/</loc>
+    <loc>https://srrequiem.xyz/tags/sddl/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/servicios-windows/</loc>
+    <loc>https://srrequiem.xyz/tags/servicios-windows/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/sqli-rce/</loc>
+    <loc>https://srrequiem.xyz/tags/sqli-rce/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/sqlmap/</loc>
+    <loc>https://srrequiem.xyz/tags/sqlmap/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/x-forwarded-for/</loc>
+    <loc>https://srrequiem.xyz/tags/x-forwarded-for/</loc>
     <lastmod>2022-06-15T20:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-remote/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-remote/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/juicypotato/</loc>
+    <loc>https://srrequiem.xyz/tags/juicypotato/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/mountd/</loc>
+    <loc>https://srrequiem.xyz/tags/mountd/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/printspoofer/</loc>
+    <loc>https://srrequiem.xyz/tags/printspoofer/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/teamviewer/</loc>
+    <loc>https://srrequiem.xyz/tags/teamviewer/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/umbraco/</loc>
+    <loc>https://srrequiem.xyz/tags/umbraco/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/usosvc/</loc>
+    <loc>https://srrequiem.xyz/tags/usosvc/</loc>
     <lastmod>2022-06-03T15:02:47-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/achat/</loc>
+    <loc>https://srrequiem.xyz/tags/achat/</loc>
     <lastmod>2022-05-31T23:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/buffer-overflow/</loc>
+    <loc>https://srrequiem.xyz/tags/buffer-overflow/</loc>
     <lastmod>2022-05-31T23:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-chatterbox/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-chatterbox/</loc>
     <lastmod>2022-05-31T23:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/icacls/</loc>
+    <loc>https://srrequiem.xyz/tags/icacls/</loc>
     <lastmod>2022-05-31T23:23:58-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/forensics/</loc>
+    <loc>https://srrequiem.xyz/tags/forensics/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-silo/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-silo/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/microsoft-iis/</loc>
+    <loc>https://srrequiem.xyz/tags/microsoft-iis/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/odat/</loc>
+    <loc>https://srrequiem.xyz/tags/odat/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/oracle-bd/</loc>
+    <loc>https://srrequiem.xyz/tags/oracle-bd/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/oracle-tns-listener/</loc>
+    <loc>https://srrequiem.xyz/tags/oracle-tns-listener/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/sqlplus/</loc>
+    <loc>https://srrequiem.xyz/tags/sqlplus/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/volatility/</loc>
+    <loc>https://srrequiem.xyz/tags/volatility/</loc>
     <lastmod>2022-05-27T20:01:34-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/ctf/</loc>
+    <loc>https://srrequiem.xyz/categories/ctf/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/categories/ctf/"
+                href="https://srrequiem.xyz/en/categories/ctf/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/categories/ctf/"
+                href="https://srrequiem.xyz/categories/ctf/"
                 />
   </url><url>
-    <loc>https://rzul.me/tags/evtx/</loc>
+    <loc>https://srrequiem.xyz/tags/evtx/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/gtfobins/</loc>
+    <loc>https://srrequiem.xyz/tags/gtfobins/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/htb-ctf/</loc>
+    <loc>https://srrequiem.xyz/categories/htb-ctf/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-cyber-apocalypse-2022/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-cyber-apocalypse-2022/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/ida/</loc>
+    <loc>https://srrequiem.xyz/tags/ida/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/jwt/</loc>
+    <loc>https://srrequiem.xyz/tags/jwt/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/md-to-pdf/</loc>
+    <loc>https://srrequiem.xyz/tags/md-to-pdf/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/ntuser.dat/</loc>
+    <loc>https://srrequiem.xyz/tags/ntuser.dat/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/zip/</loc>
+    <loc>https://srrequiem.xyz/tags/zip/</loc>
     <lastmod>2022-05-19T21:21:56-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/active-directory/</loc>
+    <loc>https://srrequiem.xyz/tags/active-directory/</loc>
     <lastmod>2022-01-22T00:39:06-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/htb-active/</loc>
+    <loc>https://srrequiem.xyz/posts/htb-active/</loc>
     <lastmod>2022-01-22T00:39:06-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/kerberoast/</loc>
+    <loc>https://srrequiem.xyz/tags/kerberoast/</loc>
     <lastmod>2022-01-22T00:39:06-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/bof-windows/</loc>
+    <loc>https://srrequiem.xyz/tags/bof-windows/</loc>
     <lastmod>2021-11-17T19:31:11-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/buffer-overflow/</loc>
+    <loc>https://srrequiem.xyz/categories/buffer-overflow/</loc>
     <lastmod>2021-11-17T19:31:11-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/bof-oscp/</loc>
+    <loc>https://srrequiem.xyz/posts/bof-oscp/</loc>
     <lastmod>2021-11-17T19:31:11-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/oscp-prep/</loc>
+    <loc>https://srrequiem.xyz/categories/oscp-prep/</loc>
     <lastmod>2021-11-17T19:31:11-06:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/echoctf/</loc>
+    <loc>https://srrequiem.xyz/categories/echoctf/</loc>
     <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/echoctf-beginner/</loc>
+    <loc>https://srrequiem.xyz/tags/echoctf-beginner/</loc>
     <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/categories/echoctf-box/</loc>
+    <loc>https://srrequiem.xyz/categories/echoctf-box/</loc>
     <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/echoctf_smithers/</loc>
+    <loc>https://srrequiem.xyz/posts/echoctf_smithers/</loc>
     <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/memcached/</loc>
+    <loc>https://srrequiem.xyz/tags/memcached/</loc>
     <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/echoctf_flanders/</loc>
+    <loc>https://srrequiem.xyz/posts/echoctf_flanders/</loc>
     <lastmod>2021-10-27T18:37:10-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/tags/ssh/</loc>
+    <loc>https://srrequiem.xyz/tags/ssh/</loc>
     <lastmod>2021-10-27T18:37:10-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/biot-ctf/</loc>
+    <loc>https://srrequiem.xyz/posts/biot-ctf/</loc>
     <lastmod>2021-06-27T23:11:05-05:00</lastmod>
   </url><url>
-    <loc>https://rzul.me/posts/first-ctf/</loc>
+    <loc>https://srrequiem.xyz/posts/first-ctf/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/posts/first-ctf/"
+                href="https://srrequiem.xyz/en/posts/first-ctf/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/posts/first-ctf/"
+                href="https://srrequiem.xyz/posts/first-ctf/"
                 />
   </url><url>
-    <loc>https://rzul.me/archives/</loc>
+    <loc>https://srrequiem.xyz/archives/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/archives/"
+                href="https://srrequiem.xyz/en/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/archives/"
+                href="https://srrequiem.xyz/archives/"
                 />
   </url><url>
-    <loc>https://rzul.me/search/</loc>
+    <loc>https://srrequiem.xyz/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/search/"
+                href="https://srrequiem.xyz/en/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/search/"
+                href="https://srrequiem.xyz/search/"
                 />
   </url>
 </urlset>

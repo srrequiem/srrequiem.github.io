@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>JuicyPotato on Román Zuleta</title>
-    <link>https://rzul.me/tags/juicypotato/</link>
+    <link>https://srrequiem.xyz/tags/juicypotato/</link>
     <description>Recent content in JuicyPotato on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/juicypotato/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/tags/juicypotato/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hack The Box - Remote</title>
-      <link>https://rzul.me/posts/htb-remote/</link>
+      <link>https://srrequiem.xyz/posts/htb-remote/</link>
       <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-remote/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-remote/</guid>
       <description>Write-up de la máquina Remote de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Silo</title>
-      <link>https://rzul.me/posts/htb-silo/</link>
+      <link>https://srrequiem.xyz/posts/htb-silo/</link>
       <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-silo/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-silo/</guid>
       <description>Write-up de la máquina Silo de la plataforma hackthebox.eu</description>
     </item>
     

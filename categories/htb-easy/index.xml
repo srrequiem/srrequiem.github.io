@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>HTB - Easy on Román Zuleta</title>
-    <link>https://rzul.me/categories/htb-easy/</link>
+    <link>https://srrequiem.xyz/categories/htb-easy/</link>
     <description>Recent content in HTB - Easy on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jun 2022 12:52:29 -0500</lastBuildDate><atom:link href="https://rzul.me/categories/htb-easy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jun 2022 12:52:29 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/categories/htb-easy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hack The Box - Devel</title>
-      <link>https://rzul.me/posts/htb-devel/</link>
+      <link>https://srrequiem.xyz/posts/htb-devel/</link>
       <pubDate>Fri, 17 Jun 2022 12:52:29 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-devel/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-devel/</guid>
       <description>Write-up de la máquina Devel de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Remote</title>
-      <link>https://rzul.me/posts/htb-remote/</link>
+      <link>https://srrequiem.xyz/posts/htb-remote/</link>
       <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-remote/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-remote/</guid>
       <description>Write-up de la máquina Remote de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Active</title>
-      <link>https://rzul.me/posts/htb-active/</link>
+      <link>https://srrequiem.xyz/posts/htb-active/</link>
       <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
       
-      <guid>https://rzul.me/posts/htb-active/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-active/</guid>
       <description>Write-up de la máquina Active de la plataforma hackthebox.eu</description>
     </item>
     

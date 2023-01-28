@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>UsoSvc on Román Zuleta</title>
-    <link>https://rzul.me/tags/usosvc/</link>
+    <link>https://srrequiem.xyz/tags/usosvc/</link>
     <description>Recent content in UsoSvc on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://rzul.me/tags/usosvc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Jun 2022 15:02:47 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/tags/usosvc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hack The Box - Remote</title>
-      <link>https://rzul.me/posts/htb-remote/</link>
+      <link>https://srrequiem.xyz/posts/htb-remote/</link>
       <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-remote/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-remote/</guid>
       <description>Write-up de la máquina Remote de la plataforma hackthebox.eu</description>
     </item>
     

@@ -2,134 +2,134 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Román Zuleta</title>
-    <link>https://rzul.me/posts/</link>
+    <link>https://srrequiem.xyz/posts/</link>
     <description>Recent content in Posts on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jun 2022 22:19:32 -0500</lastBuildDate><atom:link href="https://rzul.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jun 2022 22:19:32 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hack The Box - Jeeves</title>
-      <link>https://rzul.me/posts/htb-jeeves/</link>
+      <link>https://srrequiem.xyz/posts/htb-jeeves/</link>
       <pubDate>Thu, 23 Jun 2022 22:19:32 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-jeeves/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-jeeves/</guid>
       <description>Write-up de la máquina Jeeves de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - SecNotes</title>
-      <link>https://rzul.me/posts/htb-secnotes/</link>
+      <link>https://srrequiem.xyz/posts/htb-secnotes/</link>
       <pubDate>Wed, 22 Jun 2022 19:46:25 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-secnotes/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-secnotes/</guid>
       <description>Write-up de la máquina SecNotes de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Devel</title>
-      <link>https://rzul.me/posts/htb-devel/</link>
+      <link>https://srrequiem.xyz/posts/htb-devel/</link>
       <pubDate>Fri, 17 Jun 2022 12:52:29 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-devel/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-devel/</guid>
       <description>Write-up de la máquina Devel de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Control</title>
-      <link>https://rzul.me/posts/htb-control/</link>
+      <link>https://srrequiem.xyz/posts/htb-control/</link>
       <pubDate>Wed, 15 Jun 2022 20:23:58 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-control/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-control/</guid>
       <description>Write-up de la máquina Control de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Remote</title>
-      <link>https://rzul.me/posts/htb-remote/</link>
+      <link>https://srrequiem.xyz/posts/htb-remote/</link>
       <pubDate>Fri, 03 Jun 2022 15:02:47 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-remote/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-remote/</guid>
       <description>Write-up de la máquina Remote de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Chatterbox</title>
-      <link>https://rzul.me/posts/htb-chatterbox/</link>
+      <link>https://srrequiem.xyz/posts/htb-chatterbox/</link>
       <pubDate>Tue, 31 May 2022 23:23:58 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-chatterbox/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-chatterbox/</guid>
       <description>Write-up de la máquina Chatterbox de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Hack The Box - Silo</title>
-      <link>https://rzul.me/posts/htb-silo/</link>
+      <link>https://srrequiem.xyz/posts/htb-silo/</link>
       <pubDate>Fri, 27 May 2022 20:01:34 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-silo/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-silo/</guid>
       <description>Write-up de la máquina Silo de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>HTB Cyber Apocalypse 2022</title>
-      <link>https://rzul.me/posts/htb-cyber-apocalypse-2022/</link>
+      <link>https://srrequiem.xyz/posts/htb-cyber-apocalypse-2022/</link>
       <pubDate>Thu, 19 May 2022 21:21:56 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/htb-cyber-apocalypse-2022/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-cyber-apocalypse-2022/</guid>
       <description>Cyber Apocalypse CTF 2022 - Intergalactic Chase</description>
     </item>
     
     <item>
       <title>Hack The Box - Active</title>
-      <link>https://rzul.me/posts/htb-active/</link>
+      <link>https://srrequiem.xyz/posts/htb-active/</link>
       <pubDate>Sat, 22 Jan 2022 00:39:06 -0600</pubDate>
       
-      <guid>https://rzul.me/posts/htb-active/</guid>
+      <guid>https://srrequiem.xyz/posts/htb-active/</guid>
       <description>Write-up de la máquina Active de la plataforma hackthebox.eu</description>
     </item>
     
     <item>
       <title>Buffer Overflow - OSCP</title>
-      <link>https://rzul.me/posts/bof-oscp/</link>
+      <link>https://srrequiem.xyz/posts/bof-oscp/</link>
       <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
       
-      <guid>https://rzul.me/posts/bof-oscp/</guid>
+      <guid>https://srrequiem.xyz/posts/bof-oscp/</guid>
       <description>Guía para configuración y práctica de buffer overflows para acreditación de OSCP</description>
     </item>
     
     <item>
       <title>echoCTF - Smithers</title>
-      <link>https://rzul.me/posts/echoctf_smithers/</link>
+      <link>https://srrequiem.xyz/posts/echoctf_smithers/</link>
       <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/echoctf_smithers/</guid>
+      <guid>https://srrequiem.xyz/posts/echoctf_smithers/</guid>
       <description>Write-up de la máquina smithers de la plataforma echoCTF.red</description>
     </item>
     
     <item>
       <title>echoCTF - Flanders</title>
-      <link>https://rzul.me/posts/echoctf_flanders/</link>
+      <link>https://srrequiem.xyz/posts/echoctf_flanders/</link>
       <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/echoctf_flanders/</guid>
+      <guid>https://srrequiem.xyz/posts/echoctf_flanders/</guid>
       <description>Write-up de la máquina flanders de la plataforma echoCTF.red</description>
     </item>
     
     <item>
       <title>BiOt CTF</title>
-      <link>https://rzul.me/posts/biot-ctf/</link>
+      <link>https://srrequiem.xyz/posts/biot-ctf/</link>
       <pubDate>Sun, 27 Jun 2021 23:11:05 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/biot-ctf/</guid>
+      <guid>https://srrequiem.xyz/posts/biot-ctf/</guid>
       <description>Write-up de los retos realizados del BiOt CTF.</description>
     </item>
     
     <item>
       <title>Mi Primer CTF</title>
-      <link>https://rzul.me/posts/first-ctf/</link>
+      <link>https://srrequiem.xyz/posts/first-ctf/</link>
       <pubDate>Wed, 07 Apr 2021 10:43:09 -0500</pubDate>
       
-      <guid>https://rzul.me/posts/first-ctf/</guid>
+      <guid>https://srrequiem.xyz/posts/first-ctf/</guid>
       <description>Primeras impresiones y Write-up de los retos resueltos del Shakti CTF 2021.</description>
     </item>
     

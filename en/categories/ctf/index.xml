@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>CTF on Román Zuleta</title>
-    <link>https://rzul.me/en/categories/ctf/</link>
+    <link>https://srrequiem.xyz/en/categories/ctf/</link>
     <description>Recent content in CTF on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Apr 2021 10:43:09 -0500</lastBuildDate><atom:link href="https://rzul.me/en/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 10:43:09 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/en/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First CTF</title>
-      <link>https://rzul.me/en/posts/first-ctf/</link>
+      <link>https://srrequiem.xyz/en/posts/first-ctf/</link>
       <pubDate>Wed, 07 Apr 2021 10:43:09 -0500</pubDate>
       
-      <guid>https://rzul.me/en/posts/first-ctf/</guid>
+      <guid>https://srrequiem.xyz/en/posts/first-ctf/</guid>
       <description>First impresions and Write-up of the Shakti CTF 2021 challenges that I solved.</description>
     </item>
     

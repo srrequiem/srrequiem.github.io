@@ -2,105 +2,105 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rzul.me/en/categories/</loc>
+    <loc>https://srrequiem.xyz/en/categories/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/categories/"
+                href="https://srrequiem.xyz/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/categories/"
+                href="https://srrequiem.xyz/en/categories/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/categories/ctf/</loc>
+    <loc>https://srrequiem.xyz/en/categories/ctf/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/categories/ctf/"
+                href="https://srrequiem.xyz/categories/ctf/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/categories/ctf/"
+                href="https://srrequiem.xyz/en/categories/ctf/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/posts/first-ctf/</loc>
+    <loc>https://srrequiem.xyz/en/posts/first-ctf/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/posts/first-ctf/"
+                href="https://srrequiem.xyz/posts/first-ctf/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/posts/first-ctf/"
+                href="https://srrequiem.xyz/en/posts/first-ctf/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/posts/</loc>
+    <loc>https://srrequiem.xyz/en/posts/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/posts/"
+                href="https://srrequiem.xyz/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/posts/"
+                href="https://srrequiem.xyz/en/posts/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/</loc>
+    <loc>https://srrequiem.xyz/en/</loc>
     <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/"
+                href="https://srrequiem.xyz/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/"
+                href="https://srrequiem.xyz/en/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/archives/</loc>
+    <loc>https://srrequiem.xyz/en/archives/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/archives/"
+                href="https://srrequiem.xyz/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/archives/"
+                href="https://srrequiem.xyz/en/archives/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/search/</loc>
+    <loc>https://srrequiem.xyz/en/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/search/"
+                href="https://srrequiem.xyz/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/search/"
+                href="https://srrequiem.xyz/en/search/"
                 />
   </url><url>
-    <loc>https://rzul.me/en/tags/</loc>
+    <loc>https://srrequiem.xyz/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://rzul.me/tags/"
+                href="https://srrequiem.xyz/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://rzul.me/en/tags/"
+                href="https://srrequiem.xyz/en/tags/"
                 />
   </url>
 </urlset>
