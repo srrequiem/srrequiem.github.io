@@ -2,7 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://srrequiem.xyz/tags/first/</loc>
+    <loc>https://srrequiem.xyz/categories/</loc>
+    <lastmod>2023-02-05T13:50:45-06:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://srrequiem.xyz/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://srrequiem.xyz/categories/"
+                />
+  </url><url>
+    <loc>https://srrequiem.xyz/categories/echoctf/</loc>
+    <lastmod>2023-02-05T13:50:45-06:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/echoctf-flags/</loc>
+    <lastmod>2023-02-05T13:50:45-06:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/env-vars/</loc>
+    <lastmod>2023-02-05T13:50:45-06:00</lastmod>
+  </url><url>
+    <loc>https://srrequiem.xyz/tags/environment/</loc>
     <lastmod>2023-02-05T13:50:45-06:00</lastmod>
   </url><url>
     <loc>https://srrequiem.xyz/posts/</loc>
@@ -39,19 +61,6 @@
   </url><url>
     <loc>https://srrequiem.xyz/tags/alternate-data-streams/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-  </url><url>
-    <loc>https://srrequiem.xyz/categories/</loc>
-    <lastmod>2022-06-23T22:19:32-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://srrequiem.xyz/en/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://srrequiem.xyz/categories/"
-                />
   </url><url>
     <loc>https://srrequiem.xyz/posts/htb-jeeves/</loc>
     <lastmod>2022-06-23T22:19:32-05:00</lastmod>
@@ -253,9 +262,6 @@
   </url><url>
     <loc>https://srrequiem.xyz/tags/kerberoast/</loc>
     <lastmod>2022-01-22T00:39:06-06:00</lastmod>
-  </url><url>
-    <loc>https://srrequiem.xyz/categories/echoctf/</loc>
-    <lastmod>2021-10-28T15:03:19-05:00</lastmod>
   </url><url>
     <loc>https://srrequiem.xyz/tags/echoctf-beginner/</loc>
     <lastmod>2021-10-28T15:03:19-05:00</lastmod>

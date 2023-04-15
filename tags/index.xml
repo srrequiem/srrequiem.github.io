@@ -8,11 +8,29 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Feb 2023 13:50:45 -0600</lastBuildDate><atom:link href="https://srrequiem.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>first</title>
-      <link>https://srrequiem.xyz/tags/first/</link>
+      <title>echoCTF - Flags</title>
+      <link>https://srrequiem.xyz/tags/echoctf-flags/</link>
       <pubDate>Sun, 05 Feb 2023 13:50:45 -0600</pubDate>
       
-      <guid>https://srrequiem.xyz/tags/first/</guid>
+      <guid>https://srrequiem.xyz/tags/echoctf-flags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>env vars</title>
+      <link>https://srrequiem.xyz/tags/env-vars/</link>
+      <pubDate>Sun, 05 Feb 2023 13:50:45 -0600</pubDate>
+      
+      <guid>https://srrequiem.xyz/tags/env-vars/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>environment</title>
+      <link>https://srrequiem.xyz/tags/environment/</link>
+      <pubDate>Sun, 05 Feb 2023 13:50:45 -0600</pubDate>
+      
+      <guid>https://srrequiem.xyz/tags/environment/</guid>
       <description></description>
     </item>
     
