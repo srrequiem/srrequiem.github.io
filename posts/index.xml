@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jun 2022 22:19:32 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Feb 2023 13:50:45 -0600</lastBuildDate><atom:link href="https://srrequiem.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Variables de entorno y cómo obtenerlas</title>
+      <link>https://srrequiem.xyz/posts/env-vars/</link>
+      <pubDate>Sun, 05 Feb 2023 13:50:45 -0600</pubDate>
+      
+      <guid>https://srrequiem.xyz/posts/env-vars/</guid>
+      <description>Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.</description>
+    </item>
+    
     <item>
       <title>Hack The Box - Jeeves</title>
       <link>https://srrequiem.xyz/posts/htb-jeeves/</link>
@@ -89,15 +98,6 @@
     </item>
     
     <item>
-      <title>Buffer Overflow - OSCP</title>
-      <link>https://srrequiem.xyz/posts/bof-oscp/</link>
-      <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
-      
-      <guid>https://srrequiem.xyz/posts/bof-oscp/</guid>
-      <description>Guía para configuración y práctica de buffer overflows para acreditación de OSCP</description>
-    </item>
-    
-    <item>
       <title>echoCTF - Smithers</title>
       <link>https://srrequiem.xyz/posts/echoctf_smithers/</link>
       <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
@@ -113,15 +113,6 @@
       
       <guid>https://srrequiem.xyz/posts/echoctf_flanders/</guid>
       <description>Write-up de la máquina flanders de la plataforma echoCTF.red</description>
-    </item>
-    
-    <item>
-      <title>BiOt CTF</title>
-      <link>https://srrequiem.xyz/posts/biot-ctf/</link>
-      <pubDate>Sun, 27 Jun 2021 23:11:05 -0500</pubDate>
-      
-      <guid>https://srrequiem.xyz/posts/biot-ctf/</guid>
-      <description>Write-up de los retos realizados del BiOt CTF.</description>
     </item>
     
     <item>

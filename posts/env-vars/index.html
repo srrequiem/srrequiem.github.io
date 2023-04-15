@@ -1,0 +1,489 @@
+<!doctype html><html lang=es dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Variables de entorno y cómo obtenerlas | Román Zuleta</title>
+<meta name=keywords content="first">
+<meta name=description content="Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.">
+<meta name=author content="Pantelis Roditis, Román Zuleta">
+<link rel=canonical href=https://srrequiem.xyz/posts/env-vars/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.bccfefac377bc340f06c260aed1bddf49a4354816d7c570d6aac75a997986c95.css integrity="sha256-vM/vrDd7w0DwbCYK7Rvd9JpDVIFtfFcNaqx1qZeYbJU=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://srrequiem.xyz/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://srrequiem.xyz/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://srrequiem.xyz/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://srrequiem.xyz/apple-touch-icon.png>
+<link rel=mask-icon href=https://srrequiem.xyz/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<link rel=alternate hreflang=es href=https://srrequiem.xyz/posts/env-vars/>
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript><meta property="og:title" content="Variables de entorno y cómo obtenerlas">
+<meta property="og:description" content="Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://srrequiem.xyz/posts/env-vars/">
+<meta property="og:image" content="https://srrequiem.xyz/images/posts/env-vars/cover.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2023-02-05T13:50:45-06:00">
+<meta property="article:modified_time" content="2023-02-05T13:50:45-06:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://srrequiem.xyz/images/posts/env-vars/cover.png">
+<meta name=twitter:title content="Variables de entorno y cómo obtenerlas">
+<meta name=twitter:description content="Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://srrequiem.xyz/posts/"},{"@type":"ListItem","position":2,"name":"Variables de entorno y cómo obtenerlas","item":"https://srrequiem.xyz/posts/env-vars/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Variables de entorno y cómo obtenerlas","name":"Variables de entorno y cómo obtenerlas","description":"Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.","keywords":["first"],"articleBody":"Antes de empezar El presente artículo no es de mi autoría si no de Pantelis Roditis (proditis@echothrust.com), esto es solamente una traducción realizada con el permiso del autor. El artículo original en inglés lo puedes encontrar en el siguiente enlace: Environment variables and how to get them - Pantelis Roditis.\nMe pareció buena idea traducirlo dado que gracias a su lectura me permitió encontrar las banderas de entorno de la plataforma echoCTF.RED, además de aprender más acerca del comportamiento de las variables de entorno.\nIntroducción  Una variable de entorno es un valor nombrado que puede ser accedido y puede afectar el comportamiento de un proceso ejecutado en una computadora.\n wikipedia   Piensa en las variables como nombres simbólicos que damos a los valores para evitar recordarlos. Imagina que usas el número 3.1415926535897932384626433 constantemente, a menos que seas una especie de robot, va a ser difícil recordarlo. Entonces, le asignas un nombre al valor pi=3.1415926535897932384626433 y ahora cada vez que quieras usar el valor simplemente usas el nombre simbólico pi, en vez de la secuencia gigante de números.\nEn este documento, se describirá el uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.\nPorque nos importa Entonces, ¿por qué son importantes las variables de entorno desde la perspectiva de seguridad?\nSolía ​​​​ser (en los viejos tiempos lol) que las variables de entorno eran visibles para todos y, como regla, la mayoría de los desarrolladores no las usaban para almacenar información confidencial. Sin embargo, a medida que crecía la adopción de variables de entorno, también aumentaba la necesidad de comenzar a almacenar información un poco más confidencial. Por lo tanto, se agregó la capacidad de ocultar las variables de entorno de otros usuarios y procesos a algunos, si no a todos, los sistemas UNIX y similares a UNIX (como Linux) y, por lo tanto, se limitó su superficie de ataque.\nAhora, nos hemos mudado a la era de los contenedores y las variables de entorno tienen un nuevo significado. Echa un vistazo rápido a Docker Hub y verás millones de imágenes que usan variables de entorno que contienen información confidencial. Desde nombre de usuario, contraseñas, claves de cifrado, tokens de autenticación, claves del sistema, hay una imagen con un uso de variable de entorno para adaptarse a cualquier imaginación…\nComo ingeniero de seguridad ofensivo o defensivo, saber cómo encontrar lo que está expuesto y poder acceder a esta información es una habilidad casi necesaria.\nY no nos engañemos, esta es definitivamente una habilidad que apreciarás mientras juegas en nuestra plataforma en línea echoCTF.RED, ya que las variables de entorno parecen más difíciles de obtener que el acceso del usuario root…\nComo funcionan Usaremos una variedad de sistemas para examinar cómo se comportan las variables de entorno. Cuando no se menciona un sistema o shell, se puede asumir con seguridad que se trata de bash.\nComencemos definiendo y usando algunas variables:\n$ myint=1 $ mystring=\"This is a long string\" $ echo $myint 1 $ echo $mystring This is a long string Si desde la misma terminal vuelves a ejecutar bash notarás que las variables han desaparecido.\n$ echo $mystring This is a long string $ bash $ echo $mystring $ Lo mismo sucederá si abres otra terminal e intentas acceder a la variable. Entonces, ¿por qué pasa eso?\nLas variables tienen efecto solo en la sesión actual. Para que una variable esté disponible en los comandos y sesiones subsecuentes que se generan a partir de uno existente, tenemos que “exportarlos” (usando export en la terminal).\n$ export mystring $ bash $ echo $mystring This is a long string Muchos comandos y la mayoría de las shells usan archivos de configuración cuando se inician (por ejemplo, ~/.bashrc) para instruirles sobre la configuración de variables. Además, algunos comandos establecen sus propias variables para ayudar a los comandos subsecuentes (por ejemplo, USER establecido por el inicio de sesión, etc.).\nVariables Docker Comprender el concepto de visibilidad de variables es especialmente importante en situaciones en las que las variables de entorno se configuran desde el inicio del sistema (como los contenedores docker), lo que, en determinadas condiciones, hace que se exporten al espacio de proceso global.\nNo profundizaremos en los detalles específicos de docker, sólo en la medida en que sea necesario para comprender las variables.\nVeamos un ejemplo con variables docker:\n$ docker run -it -e \"myvar=myvalue\" bash root@envlab: / # echo $myvar myvalue root@envlab: / #  Una cosa que notamos es que esta variable se exporta:\nroot@envlab: / # bash  root@envlab: / # echo $myvar myvalue Incluso si comenzamos un inicio de sesión bash, la variable todavía está allí:\nroot@envlab: / # bash -l 4df007c4e761:/# echo $myvar myvalue 4df007c4e761:/# Incluso si cambiamos de usuario y shell, la variable se encuentra ahí:\n4df007c4e761:/# su -s /bin/sh bin 4df007c4e761:/$ id uid=1(bin) gid=1(bin) groups=1(bin),1(bin),2(daemon),3(sys) 4df007c4e761:/$ echo $myvar myvalue Sin embargo, como podemos entender, esto podría tener algunos efectos secundarios muy peligrosos, por esta razón, muchos demonios que se ejecutan en el sistema eligen borrar el entorno para procesos posteriores (por ejemplo, php-fpm que tiene clear_env = yes por defecto). Esta es la razón por la que no se puede acceder a ETSCTF_FLAG cuando se obtiene shell como www-data.\nComo obtenerlas Entonces, vayamos a la parte jugosa sobre cómo encontrar y mostrar los valores de estas variables.\nprintenv - imprime todo o parte del entorno El comando printenv se puede usar para ver las variables actuales definidas en el entorno.\nroot@envlab: / # printenv HOSTNAME=envlab PWD=/ HOME=/root _BASH_VERSION=5.1.8 _BASH_BASELINE=5.1 _BASH_LATEST_PATCH=8 TERM=xterm SHLVL=1 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin _=/bin/printenv root@envlab: / #  env - imprime el entorno o ejecuta un programa con un entorno modificado Los comandos env y printenv se comportan exactamente igual cuando se usan sin parámetros. Sin embargo, env también se puede usar para ejecutar un comando con un entorno modificado.\n Imprimir le ambiente actual.  root@envlab: / # env HOSTNAME=envlab PWD=/ HOME=/root _BASH_VERSION=5.1.8 _BASH_BASELINE=5.1 _BASH_LATEST_PATCH=8 TERM=xterm SHLVL=1 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin _=/usr/bin/env root@envlab: / # Reiniciar el entorno y ejecutar /usr/bin/env para imprimir el entorno y ver que está vacío.  root@envlab: / # env -i /usr/bin/env  root@envlab: / #  Reiniciar el entorno y ejecutar /usr/local/bin/bash. Lo que obtenemos son las variables que bash define por defecto.  root@envlab: / # env -i /usr/local/bin/bash root@envlab: / # env PWD=/ SHLVL=1 _=/usr/bin/env root@envlab: / #  Ejecutar bash con la variable $HOME modificada.  root@envlab: / # env -i HOME=/home /usr/local/bin/bash root@envlab: / # echo $HOME /home root@envlab: / # env PWD=/ HOME=/home SHLVL=1 _=/usr/bin/env set BUILTIN - muestra o establece variables y funciones de shell Sin opciones, el nombre y el valor de cada variable se muestran en un formato que se puede reutilizar como entrada para configurar o restablecer las variables configuradas actualmente. Las variables de solo lectura no se pueden restablecer.\nWithout options, the name and value of each shell variable are displayed in a format that can be reused as input for setting or resetting the currently-set variables. Read-only variables cannot be reset.\nEste es un comando incorporado que se usa para definir y/o imprimir variables y funciones específicas de la shell.\nEjecutando solo set, devuelve muchas más variables que antes.\nroot@envlab: / # set BASH=/usr/local/bin/bash BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extquote:force_fignore:globasciiranges:hostcomplete:interactive_comments:progcomp:promptvars:sourcepath BASH_ALIASES=() BASH_ARGC=([0]=\"0\") BASH_ARGV=() BASH_CMDS=() BASH_LINENO=() BASH_SOURCE=() BASH_VERSINFO=([0]=\"5\" [1]=\"1\" [2]=\"8\" [3]=\"1\" [4]=\"release\" [5]=\"x86_64-pc-linux-musl\") BASH_VERSION='5.1.8(1)-release' COLUMNS=211 DIRSTACK=() EUID=0 GROUPS=() HISTFILE=/root/.bash_history HISTFILESIZE=500 HISTSIZE=500 HOME=/root HOSTNAME=envlab HOSTTYPE=x86_64 IFS=$' \\t\\n' LINES=55 MACHTYPE=x86_64-pc-linux-musl MAILCHECK=60 OPTERR=1 OPTIND=1 OSTYPE=linux-musl PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin PPID=0 PS1='\\s-\\v\\$ ' PS2=' ' PS4='+ ' PWD=/ SHELL=/bin/ash SHELLOPTS=braceexpand:emacs:hashall:histexpand:history:interactive-comments:monitor SHLVL=1 TERM=xterm UID=0 _=bash _BASH_BASELINE=5.1 _BASH_LATEST_PATCH=8 _BASH_VERSION=5.1.8 Estas son variables que están definidas por nuestra instancia de la shell actual y, a menos que se modifiquen de otra manera, no serán heredadas por los procesos secundarios. Por ejemplo, podemos ver que las variables relacionadas con BASH_ no están configuradas en la invocación de la siguiente shell (ash en el siguiente ejemplo).\nroot@envlab: / # /bin/ash / # set HISTFILE='/root/.ash_history' HOME='/root' HOSTNAME='envlab' IFS=' ' LINENO='' OPTIND='1' PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' PPID='1' PS1='\\w \\$ ' PS2=' ' PS4='+ ' PWD='/' SHLVL='2' TERM='xterm' _='/bin/sh' _BASH_BASELINE='5.1' _BASH_LATEST_PATCH='8' _BASH_VERSION='5.1.8' / #  Una ventaja adicional de usar set es que también muestra funciones que pueden haber sido definidas.\nroot@envlab: / # function mytest() { ls; } root@envlab: / # set|tail TERM=xterm UID=0 _=set _BASH_BASELINE=5.1 _BASH_LATEST_PATCH=8 _BASH_VERSION=5.1.8 mytest () { ls } root@envlab: / # mytest bin dev etc home lib media mnt opt proc root run sbin srv sys tmp usr var declare / typeset BUILTINS - declarar variables y/o darles atributos Declarar variables y/o darles atributos. Si no se dan nombres, se muestran los valores de las variables. Este comando tiene la capacidad de mostrar y manipular variables, así como sus atributos (por ejemplo, int, array, exported, etc.).\nSin argumentos, funciona como set, mostrando las variables y funciones de la shell y del entorno.\nenvlab:/# declare BASH=/usr/local/bin/bash BASH_ALIASES=() BASH_ARGC=([0]=\"0\") BASH_ARGV=() BASH_CMDS=() BASH_LINENO=() BASH_SOURCE=() . . . Sin embargo, si ejecutamos declare -p también podemos ver sus atributos.\nenvlab:/# declare -p declare -- BASH=\"/usr/local/bin/bash\" declare -i BASHPID declare -A BASH_ALIASES=() declare -a BASH_ARGC=([0]=\"0\") declare -x PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\" declare -ir UID=\"0\" Lo siguiente es lo que significan los atributos de declare:\n -a Cada nombre es una variable indexada en un arreglo. -A Cada nombre es una variable de un arreglo asociativo. -f Usar solo nombres de funciones. -i La variable se trata como un entero. -l Cuando se asigna un valor a la variable, todos los caracteres en mayúsculas se convierten en minúsculas. -n Da a cada nombre el atributo nameref, convirtiéndolo en una referencia de nombre a otra variable. -r Hacer nombres de solo lectura. -t Dar a cada nombre el atributo de seguimiento. -u Cuando se asigna un valor a la variable, todos los caracteres en minúsculas se convierten en mayúsculas. -x Marcar nombres para exportar a comandos subsecuentes a través del entorno.  Para obtener más detalles sobre el comando declare, consulte las páginas del manual bash(1) en la sección SHELL BUILTIN COMMANDS.\nEl comando typeset se comporta de manera muy similar a declare y está allí principalmente para la compatibilidad con otros shells. Sin embargo, typeset sin opciones, devuelve todas las variables y funciones de la shell integradas.\nps Todos los comandos anteriores que vimos funcionan en la sesión de la shell actual, sin embargo, muchas veces nos gustaría ver qué variables de entorno se definieron para una aplicación que ya se está ejecutando, que puede que nosotros hayamos iniciado o no.\nEl comando ps puede ayudar con eso. Este comando proporciona información sobre los procesos en ejecución en un sistema, como PID, nombre, tiempo de ejecución, memoria utilizada, etc. Al agregar algunas opciones adicionales, podemos ver mucha más información que solo estas. Las opciones que son de nuestro interés, junto con sus significados se pueden encontrar a continuación:\n a: Selecciona todos los procesos excepto los dos líderes de sesión. e: Muestra el entorno después del comando. w: Amplia salida. Utilice esta opción dos veces para un ancho ilimitado. f: Jerarquía de procesos en arte ASCII (forest). u: Muestra formato orientado al usuario.  root@105b97a5ef81:/# ps -afeww UID PID PPID C STIME TTY TIME CMD root 1 0 0 08:48 pts/0 00:00:00 /bin/bash /entrypoint.sh bash root 17 1 0 08:48 pts/0 00:00:00 bash root 93 17 0 08:55 pts/0 00:00:00 ps -feww root@105b97a5ef81:/# ps -aufeww USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND root 1 0.0 0.0 17964 2900 pts/0 Ss 08:48 0:00 /bin/bash /entrypoint.sh bash PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME=envlab TERM=xterm DEBIAN_FRONTEND=noninteractive HOME=/root root 17 0.0 0.0 18180 3348 pts/0 S 08:48 0:00 bash HOSTNAME=envlab PWD=/ HOME=/root DEBIAN_FRONTEND=noninteractive TERM=xterm SHLVL=1 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin _=/bin/bash root 94 0.0 0.0 36632 2908 pts/0 R+ 08:55 0:00 \\_ ps -ufeww HOSTNAME=envlab PWD=/ HOME=/root DEBIAN_FRONTEND=noninteractive TERM=xterm SHLVL=2 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin _=/bin/ps Podemos ver en el resultado anterior que obtenemos las variables de entorno tal como existen para cada uno de los comandos en ejecución. Sin embargo, hay algunas limitaciones. Si ejecutamos los mismos comandos que un usuario no root, podemos ver que no podemos ver el entorno de los procesos de otros usuarios.\ndatabus@63f7264d374e:/$ ps -aueww USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND root 1 0.0 0.0 17964 2992 pts/0 Ss 09:04 0:00 /bin/bash /entrypoint.sh bash root 18 0.0 0.0 18184 3280 pts/0 S 09:04 0:00 bash root 67 0.0 0.0 46844 2772 pts/0 S 09:09 0:00 su - databus databus 68 0.0 0.0 4276 708 pts/0 S 09:09 0:00 -su TERM=xterm PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games MAIL=/var/mail/databus HOME=/ SHELL=/bin/sh USER=databus LOGNAME=databus databus 71 0.0 0.0 18188 3292 pts/0 S 09:09 0:00 bash -l MAIL=/var/mail/databus USER=databus HOME=/ LOGNAME=databus TERM=xterm PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games SHELL=/bin/sh PWD=/ sampleu+ 152 0.8 0.0 18196 3056 pts/1 Ss+ 09:13 0:00 bash databus 160 0.0 0.0 36632 2888 pts/0 R+ 09:14 0:00 ps -aueww USER=databus PWD=/ HOME=/ MAIL=/var/mail/databus SHELL=/bin/sh TERM=xterm SHLVL=1 LOGNAME=databus PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games _=/bin/ps Como podemos ver, los tres primeros procesos pertenecientes a root y sampleuser (una línea antes de la última) no tienen información de entorno incluida en la salida de ps.\n/proc Hay otra forma de obtener el entorno de un proceso en ejecución y esto es a través de /proc, el pseudo-sistema de archivos de información del proceso.\nEl sistema de archivos proc es un pseudo-sistema de archivos que proporciona una interfaz para las estructuras de datos del núcleo. Es comúnmente montado en /proc, automáticamente por el sistema.\nEl sistema de archivos proporciona una consulta fácil para consultar y manipular las estructuras del kernel como si fueran archivos simples. Para cada proceso en el sistema, hay un directorio correspondiente en /proc// con la información del kernel exportado. Los archivos ubicados debajo de esa carpeta corresponden a diferentes tipos de información del kernel, pero los que nos interesan son environ y cmdline.\n/proc/[pid]/environ: Este archivo contiene el entorno inicial que se estableció cuando se inició el programa que se está ejecutando actualmente a través de execve(2). Las entradas están separadas por bytes nulos (\\0), y puede haber un byte nulo en el fin. Por lo tanto, para imprimir el entorno del proceso 1, lo haría.\nroot@63f7264d374e:/# strings /proc/1/environ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME=envlab TERM=xterm DEBIAN_FRONTEND=noninteractive HOME=/root /proc/[pid]/cmdline: Este archivo de solo lectura contiene la línea de comando completa para el proceso, a menos que el proceso sea un zombi. En el último caso, no hay nada en este archivo: es decir, una lectura de este archivo devolverá 0 caracteres. Los argumentos de la línea de comandos aparecen en este archivo como un conjunto de cadenas separadas por bytes nulos (\\0), con un byte nulo adicional después de la última cadena.\nroot@63f7264d374e:/# strings /proc/1/cmdline /bin/bash /entrypoint.sh bash La razón por la que queremos examinar el environ es bastante clara, sin embargo, cmdline puede no serlo. La razón por la que examinamos ambos archivos es que el comando que se inició puede incluir variables de entorno en su línea de comandos.\nTen en cuenta que, dependiendo de la opción de montaje hidepid=n, el sistema de archivos /proc puede comportarse de manera diferente:\n 0: Todo el mundo puede acceder a todos los directorios /proc/[pid]. Este es el comportamiento tradicional y el predeterminado si no se especifica la opción de montaje. 1: Los usuarios no pueden acceder a archivos y subdirectorios dentro de ningún directorio /proc/[pid] excepto el suyo propio (los directorios /proc/[pid] permanecen visibles). Los archivos confidenciales como /proc/[pid]/cmdline y /proc/[pid]/status ahora están protegidos contra otros usuarios. Esto hace que sea imposible saber si algún usuario está ejecutando un programa específico (siempre y cuando el programa no se revele por su comportamiento). 2: Como en el modo 1, pero además los directorios /proc/[pid] que pertenecen a otros usuarios se vuelven invisibles. Esto significa que las entradas /proc/[pid] ya no se pueden usar para descubrir los PID en el sistema. Esto no oculta el hecho de que existe un proceso con un valor PID específico (se puede aprender por otros medios, por ejemplo, mediante kill -0 $PID), pero oculta el UID y el GID de un proceso, que de otro modo podrían aprenderse empleando stat(2) en un directorio /proc/[pid]. Esto complica enormemente la tarea de un atacante de recopilar información sobre procesos en ejecución (por ejemplo, descubrir si algún demonio se está ejecutando con privilegios elevados, si otro usuario está ejecutando algún programa confidencial, si otros usuarios están ejecutando algún programa, etc.).  ¿Qué sigue? Espero que hayas disfrutado de la lectura y que hayas podido aprender algunos trucos adicionales para encontrar variables de entorno para tu sesión, así como para ejecutar procesos. Todo lo que tienes que hacer ahora es volver a echoCTF.RED y ver si puedes obtener las variables de entorno de esos objetivos que aún no has terminado 😂.\nTen en cuenta que otros shells (ash, ksh, csh, etc.) pueden comportarse de manera diferente con respecto al entorno y las variables y funciones integradas. Los comandos descritos deben ser los mismos en la mayoría, sin embargo, la salida puede diferir. Siempre es una buena idea consultar las páginas del manual del shell respectivo con el que se está trabajando antes de probar cosas al azar.\nReferencias  https://docs.oracle.com/cd/E19683-01/817-6958/userconcept-26/index.html https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-linux https://www.cs.ait.ac.th/~on/O/oreilly/unix/upt/ch06_01.htm  ","wordCount":"2807","inLanguage":"es","image":"https://srrequiem.xyz/images/posts/env-vars/cover.png","datePublished":"2023-02-05T13:50:45-06:00","dateModified":"2023-02-05T13:50:45-06:00","author":[{"@type":"Person","name":"Pantelis Roditis"},{"@type":"Person","name":"Román Zuleta"}],"mainEntityOfPage":{"@type":"WebPage","@id":"https://srrequiem.xyz/posts/env-vars/"},"publisher":{"@type":"Organization","name":"Román Zuleta","logo":{"@type":"ImageObject","url":"https://srrequiem.xyz/favicon.ico"}}}</script>
+</head>
+<body class=dark id=top>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://srrequiem.xyz/ accesskey=h title="Román Zuleta (Alt + H)">Román Zuleta</a>
+<div class=logo-switches>
+<ul class=lang-switch><li>|</li>
+<li>
+<a href=https://srrequiem.xyz/en/ title=English aria-label=English>En</a>
+</li>
+</ul>
+</div>
+</div>
+<ul id=menu>
+<li>
+<a href=https://srrequiem.xyz/archives/ title=Archivo>
+<span>Archivo</span>
+</a>
+</li>
+<li>
+<a href=https://srrequiem.xyz/categories/ title=Categorías>
+<span>Categorías</span>
+</a>
+</li>
+<li>
+<a href=https://srrequiem.xyz/tags/ title=Etiquetas>
+<span>Etiquetas</span>
+</a>
+</li>
+<li>
+<a href=https://srrequiem.xyz/projects/ title=Proyectos>
+<span>Proyectos</span>
+</a>
+</li>
+<li>
+<a href=https://srrequiem.xyz/search/ title="Buscar (Alt + /)" accesskey=/>
+<span>Buscar</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://srrequiem.xyz/>Inicio</a>&nbsp;»&nbsp;<a href=https://srrequiem.xyz/posts/>Posts</a></div>
+<h1 class=post-title>
+Variables de entorno y cómo obtenerlas
+</h1>
+<div class=post-description>
+Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.
+</div>
+<div class=post-meta><span title="2023-02-05 13:50:45 -0600 CST">febrero 5, 2023</span>&nbsp;·&nbsp;14 min&nbsp;·&nbsp;Pantelis Roditis, Román Zuleta&nbsp;|&nbsp;<a href=https://github.com/%3cpath_to_repo%3e/content/posts/env-vars.md rel="noopener noreferrer" target=_blank>Suggest Changes</a>
+</div>
+</header>
+<figure class=entry-cover><img loading=lazy src=https://srrequiem.xyz/images/posts/env-vars/cover.png alt="Pantelis Roditis avatar">
+<p></p>
+</figure><div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Tabla de Contenidos</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#antes-de-empezar aria-label="Antes de empezar">Antes de empezar</a></li>
+<li>
+<a href=#introducci%c3%b3n aria-label=Introducción>Introducción</a></li>
+<li>
+<a href=#porque-nos-importa aria-label="Porque nos importa">Porque nos importa</a></li>
+<li>
+<a href=#como-funcionan aria-label="Como funcionan">Como funcionan</a><ul>
+<li>
+<a href=#variables-docker aria-label="Variables Docker">Variables Docker</a></li></ul>
+</li>
+<li>
+<a href=#como-obtenerlas aria-label="Como obtenerlas">Como obtenerlas</a><ul>
+<li>
+<a href=#printenv---imprime-todo-o-parte-del-entorno aria-label="printenv - imprime todo o parte del entorno"><code>printenv</code> - imprime todo o parte del entorno</a></li>
+<li>
+<a href=#env---imprime-el-entorno-o-ejecuta-un-programa-con-un-entorno-modificado aria-label="env - imprime el entorno o ejecuta un programa con un entorno modificado"><code>env</code> - imprime el entorno o ejecuta un programa con un entorno modificado</a></li>
+<li>
+<a href=#set-builtin---muestra-o-establece-variables-y-funciones-de-shell aria-label="set BUILTIN - muestra o establece variables y funciones de shell"><code>set</code> BUILTIN - muestra o establece variables y funciones de shell</a></li>
+<li>
+<a href=#declare--typeset-builtins---declarar-variables-yo-darles-atributos aria-label="declare / typeset BUILTINS - declarar variables y/o darles atributos"><code>declare</code> / <code>typeset</code> BUILTINS - declarar variables y/o darles atributos</a></li>
+<li>
+<a href=#ps aria-label=ps>ps</a></li>
+<li>
+<a href=#proc aria-label=/proc>/proc</a></li></ul>
+</li>
+<li>
+<a href=#qu%c3%a9-sigue aria-label="¿Qué sigue?">¿Qué sigue?</a></li>
+<li>
+<a href=#referencias aria-label=Referencias>Referencias</a>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h2 id=antes-de-empezar>Antes de empezar<a hidden class=anchor aria-hidden=true href=#antes-de-empezar>#</a></h2>
+<p>El presente artículo no es de mi autoría si no de Pantelis Roditis (<a href=mailto:proditis@echothrust.com>proditis@echothrust.com</a>), esto es solamente una traducción realizada con el permiso del autor. El artículo original en inglés lo puedes encontrar en el siguiente enlace: <a href=https://gist.github.com/proditis/f12866ee89822e801cfab49b5f675484><em>Environment variables and how to get them - Pantelis Roditis</em></a>.</p>
+<p>Me pareció buena idea traducirlo dado que gracias a su lectura me permitió encontrar las banderas de entorno de la plataforma echoCTF.RED, además de aprender más acerca del comportamiento de las variables de entorno.</p>
+<h2 id=introducción>Introducción<a hidden class=anchor aria-hidden=true href=#introducción>#</a></h2>
+<blockquote>
+<p>Una <strong>variable de entorno</strong> es un valor nombrado que puede ser accedido y puede afectar el comportamiento de un proceso ejecutado en una computadora.</p>
+<ul>
+<li>wikipedia</li>
+</ul>
+</blockquote>
+<p>Piensa en las variables como nombres simbólicos que damos a los valores para evitar recordarlos. Imagina que usas el número <code>3.1415926535897932384626433</code> constantemente, a menos que seas una especie de robot, va a ser difícil recordarlo. Entonces, le asignas un nombre al valor <code>pi=3.1415926535897932384626433</code> y ahora cada vez que quieras usar el valor simplemente usas el nombre simbólico <code>pi</code>, en vez de la secuencia gigante de números.</p>
+<p>En este documento, se describirá el uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.</p>
+<h2 id=porque-nos-importa>Porque nos importa<a hidden class=anchor aria-hidden=true href=#porque-nos-importa>#</a></h2>
+<p>Entonces, ¿por qué son importantes las variables de entorno desde la perspectiva de seguridad?</p>
+<p>Solía ​​​​ser (en los viejos tiempos lol) que las variables de entorno eran visibles para todos y, como regla, la mayoría de los desarrolladores no las usaban para almacenar información confidencial.
+Sin embargo, a medida que crecía la adopción de variables de entorno, también aumentaba la necesidad de comenzar a almacenar información un poco más confidencial. Por lo tanto, se agregó la capacidad de ocultar las variables de entorno de otros usuarios y procesos a algunos, si no a todos, los sistemas UNIX y similares a UNIX (como Linux) y, por lo tanto, se limitó su superficie de ataque.</p>
+<p>Ahora, nos hemos mudado a la era de los contenedores y las variables de entorno tienen un nuevo significado. Echa un vistazo rápido a Docker Hub y verás millones de imágenes que usan variables de entorno que contienen información confidencial. Desde nombre de usuario, contraseñas, claves de cifrado, tokens de autenticación, claves del sistema, hay una imagen con un uso de variable de entorno para adaptarse a cualquier imaginación&mldr;</p>
+<p>Como ingeniero de seguridad ofensivo o defensivo, saber cómo encontrar lo que está expuesto y poder acceder a esta información es una habilidad casi necesaria.</p>
+<p>Y no nos engañemos, esta es definitivamente una habilidad que apreciarás mientras juegas en nuestra plataforma en línea echoCTF.RED, ya que las variables de entorno parecen más difíciles de obtener que el acceso del usuario root&mldr;</p>
+<h2 id=como-funcionan>Como funcionan<a hidden class=anchor aria-hidden=true href=#como-funcionan>#</a></h2>
+<p>Usaremos una variedad de sistemas para examinar cómo se comportan las variables de entorno. Cuando no se menciona un sistema o shell, se puede asumir con seguridad que se trata de bash.</p>
+<p>Comencemos definiendo y usando algunas variables:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ myint<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+$ mystring<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;This is a long string&#34;</span>
+$ echo $myint
+<span style=color:#ae81ff>1</span>
+$ echo $mystring
+This is a long string
+</code></pre></div><p>Si desde la misma terminal vuelves a ejecutar bash notarás que las variables han desaparecido.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ echo $mystring
+This is a long string
+
+$ bash
+$ echo $mystring
+
+$
+</code></pre></div><p>Lo mismo sucederá si abres otra terminal e intentas acceder a la variable. Entonces, ¿por qué pasa eso?</p>
+<p>Las variables tienen efecto solo en la sesión actual. Para que una variable esté disponible en los comandos y sesiones subsecuentes que se generan a partir de uno existente, tenemos que &ldquo;exportarlos&rdquo; (usando <code>export</code> en la terminal).</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ export mystring
+$ bash
+$ echo $mystring
+This is a long string
+</code></pre></div><p>Muchos comandos y la mayoría de las shells usan archivos de configuración cuando se inician (por ejemplo, <code>~/.bashrc</code>) para instruirles sobre la configuración de variables. Además, algunos comandos establecen sus propias variables para ayudar a los comandos subsecuentes (por ejemplo, <code>USER</code> establecido por el inicio de sesión, etc.).</p>
+<h3 id=variables-docker>Variables Docker<a hidden class=anchor aria-hidden=true href=#variables-docker>#</a></h3>
+<p>Comprender el concepto de visibilidad de variables es especialmente importante en situaciones en las que las variables de entorno se configuran desde el inicio del sistema (como los contenedores docker), lo que, en determinadas condiciones, hace que se exporten al espacio de proceso global.</p>
+<p><em>No profundizaremos en los detalles específicos de docker, sólo en la medida en que sea necesario para comprender las variables.</em></p>
+<p>Veamos un ejemplo con variables docker:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ docker run -it -e <span style=color:#e6db74>&#34;myvar=myvalue&#34;</span> bash 
+root@envlab: / <span style=color:#75715e># echo $myvar</span>
+myvalue
+root@envlab: / <span style=color:#75715e># </span>
+</code></pre></div><p>Una cosa que notamos es que esta variable se exporta:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># bash </span>
+root@envlab: / <span style=color:#75715e># echo $myvar</span>
+myvalue
+</code></pre></div><p>Incluso si comenzamos un inicio de sesión bash, la variable todavía está allí:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># bash -l</span>
+4df007c4e761:/# echo $myvar
+myvalue
+4df007c4e761:/# 
+</code></pre></div><p>Incluso si cambiamos de usuario y shell, la variable se encuentra ahí:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>4df007c4e761:/# su -s /bin/sh bin
+4df007c4e761:/$ id
+uid<span style=color:#f92672>=</span>1<span style=color:#f92672>(</span>bin<span style=color:#f92672>)</span> gid<span style=color:#f92672>=</span>1<span style=color:#f92672>(</span>bin<span style=color:#f92672>)</span> groups<span style=color:#f92672>=</span>1<span style=color:#f92672>(</span>bin<span style=color:#f92672>)</span>,1<span style=color:#f92672>(</span>bin<span style=color:#f92672>)</span>,2<span style=color:#f92672>(</span>daemon<span style=color:#f92672>)</span>,3<span style=color:#f92672>(</span>sys<span style=color:#f92672>)</span>
+4df007c4e761:/$ echo $myvar
+myvalue
+</code></pre></div><p>Sin embargo, como podemos entender, esto podría tener algunos efectos secundarios muy peligrosos, por esta razón, muchos demonios que se ejecutan en el sistema eligen borrar el entorno para procesos posteriores (por ejemplo, php-fpm que tiene <code>clear_env = yes</code> por defecto). Esta es la razón por la que no se puede acceder a <code>ETSCTF_FLAG</code> cuando se obtiene shell como <code>www-data</code>.</p>
+<h2 id=como-obtenerlas>Como obtenerlas<a hidden class=anchor aria-hidden=true href=#como-obtenerlas>#</a></h2>
+<p>Entonces, vayamos a la parte jugosa sobre cómo encontrar y mostrar los valores de estas variables.</p>
+<h3 id=printenv---imprime-todo-o-parte-del-entorno><code>printenv</code> - imprime todo o parte del entorno<a hidden class=anchor aria-hidden=true href=#printenv---imprime-todo-o-parte-del-entorno>#</a></h3>
+<p>El comando <code>printenv</code> se puede usar para ver las variables actuales definidas en el <em>entorno</em>.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># printenv</span>
+HOSTNAME<span style=color:#f92672>=</span>envlab
+PWD<span style=color:#f92672>=</span>/
+HOME<span style=color:#f92672>=</span>/root
+_BASH_VERSION<span style=color:#f92672>=</span>5.1.8
+_BASH_BASELINE<span style=color:#f92672>=</span>5.1
+_BASH_LATEST_PATCH<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>
+TERM<span style=color:#f92672>=</span>xterm
+SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+_<span style=color:#f92672>=</span>/bin/printenv
+root@envlab: / <span style=color:#75715e># </span>
+</code></pre></div><h3 id=env---imprime-el-entorno-o-ejecuta-un-programa-con-un-entorno-modificado><code>env</code> - imprime el entorno o ejecuta un programa con un entorno modificado<a hidden class=anchor aria-hidden=true href=#env---imprime-el-entorno-o-ejecuta-un-programa-con-un-entorno-modificado>#</a></h3>
+<p>Los comandos <code>env</code> y <code>printenv</code> se comportan exactamente igual cuando se usan sin parámetros. Sin embargo, <code>env</code> también se puede usar para ejecutar un comando con un entorno modificado.</p>
+<ol>
+<li>Imprimir le ambiente actual.</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># env</span>
+HOSTNAME<span style=color:#f92672>=</span>envlab
+PWD<span style=color:#f92672>=</span>/
+HOME<span style=color:#f92672>=</span>/root
+_BASH_VERSION<span style=color:#f92672>=</span>5.1.8
+_BASH_BASELINE<span style=color:#f92672>=</span>5.1
+_BASH_LATEST_PATCH<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>
+TERM<span style=color:#f92672>=</span>xterm
+SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+_<span style=color:#f92672>=</span>/usr/bin/env
+root@envlab: / <span style=color:#75715e>#</span>
+</code></pre></div><ol start=2>
+<li>Reiniciar el entorno y ejecutar <code>/usr/bin/env</code> para imprimir el entorno y ver que está vacío.</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># env -i /usr/bin/env </span>
+root@envlab: / <span style=color:#75715e># </span>
+</code></pre></div><ol start=3>
+<li>Reiniciar el entorno y ejecutar <code>/usr/local/bin/bash</code>. Lo que obtenemos son las variables que bash define por defecto.</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># env -i /usr/local/bin/bash</span>
+root@envlab: / <span style=color:#75715e># env</span>
+PWD<span style=color:#f92672>=</span>/
+SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+_<span style=color:#f92672>=</span>/usr/bin/env
+root@envlab: / <span style=color:#75715e># </span>
+</code></pre></div><ol start=4>
+<li>Ejecutar bash con la variable <code>$HOME</code> modificada.</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># env -i HOME=/home /usr/local/bin/bash</span>
+root@envlab: / <span style=color:#75715e># echo $HOME</span>
+/home
+root@envlab: / <span style=color:#75715e># env</span>
+PWD<span style=color:#f92672>=</span>/
+HOME<span style=color:#f92672>=</span>/home
+SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+_<span style=color:#f92672>=</span>/usr/bin/env
+</code></pre></div><h3 id=set-builtin---muestra-o-establece-variables-y-funciones-de-shell><code>set</code> BUILTIN - muestra o establece variables y funciones de shell<a hidden class=anchor aria-hidden=true href=#set-builtin---muestra-o-establece-variables-y-funciones-de-shell>#</a></h3>
+<p>Sin opciones, el nombre y el valor de cada variable se muestran en un formato que se puede reutilizar como entrada para configurar o restablecer las variables configuradas actualmente. Las variables de solo lectura no se pueden restablecer.</p>
+<p>Without options, the name and value of each shell variable are displayed in a format that can be reused as input for setting or resetting the currently-set variables. Read-only variables cannot be reset.</p>
+<p>Este es un comando incorporado que se usa para definir y/o imprimir variables y funciones específicas de la shell.</p>
+<p>Ejecutando solo <code>set</code>, devuelve muchas más variables que antes.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># set</span>
+BASH<span style=color:#f92672>=</span>/usr/local/bin/bash
+BASHOPTS<span style=color:#f92672>=</span>checkwinsize:cmdhist:complete_fullquote:expand_aliases:extquote:force_fignore:globasciiranges:hostcomplete:interactive_comments:progcomp:promptvars:sourcepath
+BASH_ALIASES<span style=color:#f92672>=()</span>
+BASH_ARGC<span style=color:#f92672>=([</span>0<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;0&#34;</span><span style=color:#f92672>)</span>
+BASH_ARGV<span style=color:#f92672>=()</span>
+BASH_CMDS<span style=color:#f92672>=()</span>
+BASH_LINENO<span style=color:#f92672>=()</span>
+BASH_SOURCE<span style=color:#f92672>=()</span>
+BASH_VERSINFO<span style=color:#f92672>=([</span>0<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;5&#34;</span> <span style=color:#f92672>[</span>1<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;1&#34;</span> <span style=color:#f92672>[</span>2<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;8&#34;</span> <span style=color:#f92672>[</span>3<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;1&#34;</span> <span style=color:#f92672>[</span>4<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;release&#34;</span> <span style=color:#f92672>[</span>5<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;x86_64-pc-linux-musl&#34;</span><span style=color:#f92672>)</span>
+BASH_VERSION<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;5.1.8(1)-release&#39;</span>
+COLUMNS<span style=color:#f92672>=</span><span style=color:#ae81ff>211</span>
+DIRSTACK<span style=color:#f92672>=()</span>
+EUID<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+GROUPS<span style=color:#f92672>=()</span>
+HISTFILE<span style=color:#f92672>=</span>/root/.bash_history
+HISTFILESIZE<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>
+HISTSIZE<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>
+HOME<span style=color:#f92672>=</span>/root
+HOSTNAME<span style=color:#f92672>=</span>envlab
+HOSTTYPE<span style=color:#f92672>=</span>x86_64
+IFS<span style=color:#f92672>=</span><span style=color:#e6db74>$&#39; \t\n&#39;</span>
+LINES<span style=color:#f92672>=</span><span style=color:#ae81ff>55</span>
+MACHTYPE<span style=color:#f92672>=</span>x86_64-pc-linux-musl
+MAILCHECK<span style=color:#f92672>=</span><span style=color:#ae81ff>60</span>
+OPTERR<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+OPTIND<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+OSTYPE<span style=color:#f92672>=</span>linux-musl
+PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PPID<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+PS1<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;\s-\v\$ &#39;</span>
+PS2<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&gt; &#39;</span>
+PS4<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;+ &#39;</span>
+PWD<span style=color:#f92672>=</span>/
+SHELL<span style=color:#f92672>=</span>/bin/ash
+SHELLOPTS<span style=color:#f92672>=</span>braceexpand:emacs:hashall:histexpand:history:interactive-comments:monitor
+SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>
+TERM<span style=color:#f92672>=</span>xterm
+UID<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+_<span style=color:#f92672>=</span>bash
+_BASH_BASELINE<span style=color:#f92672>=</span>5.1
+_BASH_LATEST_PATCH<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>
+_BASH_VERSION<span style=color:#f92672>=</span>5.1.8
+</code></pre></div><p>Estas son variables que están definidas por nuestra instancia de la shell actual y, a menos que se modifiquen de otra manera, no serán heredadas por los procesos secundarios. Por ejemplo, podemos ver que las variables relacionadas con <code>BASH_</code> no están configuradas en la invocación de la siguiente shell (<code>ash</code> en el siguiente ejemplo).</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># /bin/ash</span>
+/ <span style=color:#75715e># set</span>
+HISTFILE<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/root/.ash_history&#39;</span>
+HOME<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/root&#39;</span>
+HOSTNAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;envlab&#39;</span>
+IFS<span style=color:#f92672>=</span><span style=color:#e6db74>&#39; 	
+</span><span style=color:#e6db74>&#39;</span>
+LINENO<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&#39;</span>
+OPTIND<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;1&#39;</span>
+PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#39;</span>
+PPID<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;1&#39;</span>
+PS1<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;\w \$ &#39;</span>
+PS2<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&gt; &#39;</span>
+PS4<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;+ &#39;</span>
+PWD<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/&#39;</span>
+SHLVL<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;2&#39;</span>
+TERM<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;xterm&#39;</span>
+_<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/bin/sh&#39;</span>
+_BASH_BASELINE<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;5.1&#39;</span>
+_BASH_LATEST_PATCH<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;8&#39;</span>
+_BASH_VERSION<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;5.1.8&#39;</span>
+/ <span style=color:#75715e># </span>
+</code></pre></div><p>Una ventaja adicional de usar <code>set</code> es que también muestra funciones que pueden haber sido definidas.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@envlab: / <span style=color:#75715e># function mytest() { ls; }</span>
+root@envlab: / <span style=color:#75715e># set|tail</span>
+TERM<span style=color:#f92672>=</span>xterm
+UID<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>
+_<span style=color:#f92672>=</span>set
+_BASH_BASELINE<span style=color:#f92672>=</span>5.1
+_BASH_LATEST_PATCH<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>
+_BASH_VERSION<span style=color:#f92672>=</span>5.1.8
+mytest <span style=color:#f92672>()</span> 
+<span style=color:#f92672>{</span> 
+ ls
+<span style=color:#f92672>}</span>
+root@envlab: / <span style=color:#75715e># mytest</span>
+bin dev etc home lib media mnt opt proc root run sbin srv sys tmp usr var
+</code></pre></div><h3 id=declare--typeset-builtins---declarar-variables-yo-darles-atributos><code>declare</code> / <code>typeset</code> BUILTINS - declarar variables y/o darles atributos<a hidden class=anchor aria-hidden=true href=#declare--typeset-builtins---declarar-variables-yo-darles-atributos>#</a></h3>
+<p>Declarar variables y/o darles atributos. Si no se dan nombres, se muestran los valores de las variables. Este comando tiene la capacidad de mostrar y manipular variables, así como sus atributos (por ejemplo, int, array, exported, etc.).</p>
+<p>Sin argumentos, funciona como <code>set</code>, mostrando las variables y funciones de la shell y del entorno.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>envlab:/# declare
+BASH<span style=color:#f92672>=</span>/usr/local/bin/bash
+BASH_ALIASES<span style=color:#f92672>=()</span>
+BASH_ARGC<span style=color:#f92672>=([</span>0<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;0&#34;</span><span style=color:#f92672>)</span>
+BASH_ARGV<span style=color:#f92672>=()</span>
+BASH_CMDS<span style=color:#f92672>=()</span>
+BASH_LINENO<span style=color:#f92672>=()</span>
+BASH_SOURCE<span style=color:#f92672>=()</span>
+.
+.
+.
+</code></pre></div><p>Sin embargo, si ejecutamos <code>declare -p</code> también podemos ver sus atributos.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>envlab:/# declare -p
+declare -- BASH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/usr/local/bin/bash&#34;</span>
+declare -i BASHPID
+declare -A BASH_ALIASES<span style=color:#f92672>=()</span>
+declare -a BASH_ARGC<span style=color:#f92672>=([</span>0<span style=color:#f92672>]=</span><span style=color:#e6db74>&#34;0&#34;</span><span style=color:#f92672>)</span>
+declare -x PATH<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>
+declare -ir UID<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;0&#34;</span>
+</code></pre></div><p>Lo siguiente es lo que significan los atributos de <code>declare</code>:</p>
+<ul>
+<li><code>-a</code> Cada nombre es una variable indexada en un arreglo.</li>
+<li><code>-A</code> Cada nombre es una variable de un arreglo asociativo.</li>
+<li><code>-f</code> Usar solo nombres de funciones.</li>
+<li><code>-i</code> La variable se trata como un entero.</li>
+<li><code>-l</code> Cuando se asigna un valor a la variable, todos los caracteres en mayúsculas se convierten en minúsculas.</li>
+<li><code>-n</code> Da a cada nombre el atributo <code>nameref</code>, convirtiéndolo en una referencia de nombre a otra variable.</li>
+<li><code>-r</code> Hacer nombres de solo lectura.</li>
+<li><code>-t</code> Dar a cada nombre el atributo de seguimiento.</li>
+<li><code>-u</code> Cuando se asigna un valor a la variable, todos los caracteres en minúsculas se convierten en mayúsculas.</li>
+<li><code>-x</code> Marcar nombres para exportar a comandos subsecuentes a través del entorno.</li>
+</ul>
+<p>Para obtener más detalles sobre el comando <code>declare</code>, consulte las páginas del manual <code>bash(1)</code> en la sección <strong>SHELL BUILTIN COMMANDS</strong>.</p>
+<p>El comando <code>typeset</code> se comporta de manera muy similar a <code>declare</code> y está allí principalmente para la compatibilidad con otros shells. Sin embargo, <code>typeset</code> sin opciones, devuelve todas las variables y funciones de la shell integradas.</p>
+<h3 id=ps>ps<a hidden class=anchor aria-hidden=true href=#ps>#</a></h3>
+<p>Todos los comandos anteriores que vimos funcionan en la sesión de la shell actual, sin embargo, muchas veces nos gustaría ver qué variables de entorno se definieron para una aplicación que ya se está ejecutando, que puede que nosotros hayamos iniciado o no.</p>
+<p>El comando <code>ps</code> puede ayudar con eso. Este comando proporciona información sobre los procesos en ejecución en un sistema, como PID, nombre, tiempo de ejecución, memoria utilizada, etc. Al agregar algunas opciones adicionales, podemos ver mucha más información que solo estas. Las opciones que son de nuestro interés, junto con sus significados se pueden encontrar a continuación:</p>
+<ul>
+<li><code>a</code>: Selecciona todos los procesos excepto los dos líderes de sesión.</li>
+<li><code>e</code>: Muestra el entorno después del comando.</li>
+<li><code>w</code>: Amplia salida. Utilice esta opción dos veces para un ancho ilimitado.</li>
+<li><code>f</code>: Jerarquía de procesos en arte ASCII (forest).</li>
+<li><code>u</code>: Muestra formato orientado al usuario.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@105b97a5ef81:/# ps -afeww
+UID PID PPID C STIME TTY TIME CMD
+root <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span> 08:48 pts/0 00:00:00 /bin/bash /entrypoint.sh bash
+root <span style=color:#ae81ff>17</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>0</span> 08:48 pts/0 00:00:00 bash
+root <span style=color:#ae81ff>93</span> <span style=color:#ae81ff>17</span> <span style=color:#ae81ff>0</span> 08:55 pts/0 00:00:00 ps -feww
+
+root@105b97a5ef81:/# ps -aufeww
+USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+root <span style=color:#ae81ff>1</span> 0.0 0.0 <span style=color:#ae81ff>17964</span> <span style=color:#ae81ff>2900</span> pts/0 Ss 08:48 0:00 /bin/bash /entrypoint.sh bash PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOSTNAME<span style=color:#f92672>=</span>envlab TERM<span style=color:#f92672>=</span>xterm DEBIAN_FRONTEND<span style=color:#f92672>=</span>noninteractive HOME<span style=color:#f92672>=</span>/root
+root <span style=color:#ae81ff>17</span> 0.0 0.0 <span style=color:#ae81ff>18180</span> <span style=color:#ae81ff>3348</span> pts/0 S 08:48 0:00 bash HOSTNAME<span style=color:#f92672>=</span>envlab PWD<span style=color:#f92672>=</span>/ HOME<span style=color:#f92672>=</span>/root DEBIAN_FRONTEND<span style=color:#f92672>=</span>noninteractive TERM<span style=color:#f92672>=</span>xterm SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin _<span style=color:#f92672>=</span>/bin/bash
+root <span style=color:#ae81ff>94</span> 0.0 0.0 <span style=color:#ae81ff>36632</span> <span style=color:#ae81ff>2908</span> pts/0 R+ 08:55 0:00 <span style=color:#ae81ff>\_</span> ps -ufeww HOSTNAME<span style=color:#f92672>=</span>envlab PWD<span style=color:#f92672>=</span>/ HOME<span style=color:#f92672>=</span>/root DEBIAN_FRONTEND<span style=color:#f92672>=</span>noninteractive TERM<span style=color:#f92672>=</span>xterm SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span> PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin _<span style=color:#f92672>=</span>/bin/ps
+</code></pre></div><p>Podemos ver en el resultado anterior que obtenemos las variables de entorno tal como existen para cada uno de los comandos en ejecución. Sin embargo, hay algunas limitaciones. Si ejecutamos los mismos comandos que un usuario no root, podemos ver que no podemos ver el entorno de los procesos de otros usuarios.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>databus@63f7264d374e:/$ ps -aueww
+USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+root <span style=color:#ae81ff>1</span> 0.0 0.0 <span style=color:#ae81ff>17964</span> <span style=color:#ae81ff>2992</span> pts/0 Ss 09:04 0:00 /bin/bash /entrypoint.sh bash
+root <span style=color:#ae81ff>18</span> 0.0 0.0 <span style=color:#ae81ff>18184</span> <span style=color:#ae81ff>3280</span> pts/0 S 09:04 0:00 bash
+root <span style=color:#ae81ff>67</span> 0.0 0.0 <span style=color:#ae81ff>46844</span> <span style=color:#ae81ff>2772</span> pts/0 S 09:09 0:00 su - databus
+databus <span style=color:#ae81ff>68</span> 0.0 0.0 <span style=color:#ae81ff>4276</span> <span style=color:#ae81ff>708</span> pts/0 S 09:09 0:00 -su TERM<span style=color:#f92672>=</span>xterm PATH<span style=color:#f92672>=</span>/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games MAIL<span style=color:#f92672>=</span>/var/mail/databus HOME<span style=color:#f92672>=</span>/ SHELL<span style=color:#f92672>=</span>/bin/sh USER<span style=color:#f92672>=</span>databus LOGNAME<span style=color:#f92672>=</span>databus
+databus <span style=color:#ae81ff>71</span> 0.0 0.0 <span style=color:#ae81ff>18188</span> <span style=color:#ae81ff>3292</span> pts/0 S 09:09 0:00 bash -l MAIL<span style=color:#f92672>=</span>/var/mail/databus USER<span style=color:#f92672>=</span>databus HOME<span style=color:#f92672>=</span>/ LOGNAME<span style=color:#f92672>=</span>databus TERM<span style=color:#f92672>=</span>xterm PATH<span style=color:#f92672>=</span>/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games SHELL<span style=color:#f92672>=</span>/bin/sh PWD<span style=color:#f92672>=</span>/
+sampleu+ <span style=color:#ae81ff>152</span> 0.8 0.0 <span style=color:#ae81ff>18196</span> <span style=color:#ae81ff>3056</span> pts/1 Ss+ 09:13 0:00 bash
+databus <span style=color:#ae81ff>160</span> 0.0 0.0 <span style=color:#ae81ff>36632</span> <span style=color:#ae81ff>2888</span> pts/0 R+ 09:14 0:00 ps -aueww USER<span style=color:#f92672>=</span>databus PWD<span style=color:#f92672>=</span>/ HOME<span style=color:#f92672>=</span>/ MAIL<span style=color:#f92672>=</span>/var/mail/databus SHELL<span style=color:#f92672>=</span>/bin/sh TERM<span style=color:#f92672>=</span>xterm SHLVL<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> LOGNAME<span style=color:#f92672>=</span>databus PATH<span style=color:#f92672>=</span>/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games _<span style=color:#f92672>=</span>/bin/ps
+</code></pre></div><p>Como podemos ver, los tres primeros procesos pertenecientes a <code>root</code> y <code>sampleuser</code> (una línea antes de la última) no tienen información de entorno incluida en la salida de <code>ps</code>.</p>
+<h3 id=proc>/proc<a hidden class=anchor aria-hidden=true href=#proc>#</a></h3>
+<p>Hay otra forma de obtener el entorno de un proceso en ejecución y esto es a través de <code>/proc</code>, el pseudo-sistema de archivos de información del proceso.</p>
+<p>El sistema de archivos proc es un pseudo-sistema de archivos que proporciona una interfaz para las estructuras de datos del núcleo. Es comúnmente montado en <code>/proc</code>, automáticamente por el sistema.</p>
+<p>El sistema de archivos proporciona una consulta fácil para consultar y manipular las estructuras del kernel como si fueran archivos simples. Para cada proceso en el sistema, hay un directorio correspondiente en <code>/proc/&lt;pid>/</code> con la información del kernel exportado. Los archivos ubicados debajo de esa carpeta corresponden a diferentes tipos de información del kernel, pero los que nos interesan son <code>environ</code> y <code>cmdline</code>.</p>
+<p><code>/proc/[pid]/environ</code>: Este archivo contiene el entorno <strong>inicial</strong> que se estableció cuando se inició el programa que se está ejecutando actualmente a través de <code>execve(2).</code> Las entradas están separadas por bytes nulos (<code>\0</code>), y puede haber un byte nulo en el fin. Por lo tanto, para imprimir el entorno del proceso 1, lo haría.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@63f7264d374e:/# strings /proc/1/environ 
+PATH<span style=color:#f92672>=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME<span style=color:#f92672>=</span>envlab
+TERM<span style=color:#f92672>=</span>xterm
+DEBIAN_FRONTEND<span style=color:#f92672>=</span>noninteractive
+HOME<span style=color:#f92672>=</span>/root
+</code></pre></div><p><code>/proc/[pid]/cmdline</code>: Este archivo de solo lectura contiene la línea de comando completa para el proceso, a menos que el proceso sea un zombi. En el último caso, no hay nada en este archivo: es decir, una lectura de este archivo devolverá 0 caracteres. Los argumentos de la línea de comandos aparecen en este archivo como un conjunto de cadenas separadas por bytes nulos (<code>\0</code>), con un byte nulo adicional después de la última cadena.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>root@63f7264d374e:/# strings /proc/1/cmdline 
+/bin/bash
+/entrypoint.sh
+bash
+</code></pre></div><p>La razón por la que queremos examinar el <code>environ</code> es bastante clara, sin embargo, <code>cmdline</code> puede no serlo. La razón por la que examinamos ambos archivos es que el comando que se inició puede incluir variables de entorno en su línea de comandos.</p>
+<p>Ten en cuenta que, dependiendo de la opción de montaje <code>hidepid=n</code>, el sistema de archivos <code>/proc</code> puede comportarse de manera diferente:</p>
+<ul>
+<li><code>0</code>: Todo el mundo puede acceder a todos los directorios <code>/proc/[pid]</code>. Este es el comportamiento tradicional y el predeterminado si no se especifica la opción de montaje.</li>
+<li><code>1</code>: Los usuarios no pueden acceder a archivos y subdirectorios dentro de ningún directorio <code>/proc/[pid]</code> excepto el suyo propio (los directorios <code>/proc/[pid]</code> permanecen visibles). Los archivos confidenciales como <code>/proc/[pid]/cmdline</code> y <code>/proc/[pid]/status</code> ahora están protegidos contra otros usuarios. Esto hace que sea imposible saber si algún usuario está ejecutando un programa específico (siempre y cuando el programa no se revele por su comportamiento).</li>
+<li><code>2</code>: Como en el modo 1, pero además los directorios <code>/proc/[pid]</code> que pertenecen a otros usuarios se vuelven invisibles. Esto significa que las entradas <code>/proc/[pid]</code> ya no se pueden usar para descubrir los PID en el sistema. Esto no oculta el hecho de que existe un proceso con un valor PID específico (se puede aprender por otros medios, por ejemplo, mediante <code>kill -0 $PID</code>), pero oculta el UID y el GID de un proceso, que de otro modo podrían aprenderse empleando <code>stat(2)</code> en un directorio <code>/proc/[pid]</code>. Esto complica enormemente la tarea de un atacante de recopilar información sobre procesos en ejecución (por ejemplo, descubrir si algún demonio se está ejecutando con privilegios elevados, si otro usuario está ejecutando algún programa confidencial, si otros usuarios están ejecutando algún programa, etc.).</li>
+</ul>
+<h2 id=qué-sigue>¿Qué sigue?<a hidden class=anchor aria-hidden=true href=#qué-sigue>#</a></h2>
+<p>Espero que hayas disfrutado de la lectura y que hayas podido aprender algunos trucos adicionales para encontrar variables de entorno para tu sesión, así como para ejecutar procesos. Todo lo que tienes que hacer ahora es volver a echoCTF.RED y ver si puedes obtener las variables de entorno de esos objetivos que aún no has terminado 😂.</p>
+<p>Ten en cuenta que otros shells (ash, ksh, csh, etc.) pueden comportarse de manera diferente con respecto al entorno y las variables y funciones integradas. Los comandos descritos deben ser los mismos en la mayoría, sin embargo, la salida puede diferir. Siempre es una buena idea consultar las páginas del manual del shell respectivo con el que se está trabajando antes de probar cosas al azar.</p>
+<h2 id=referencias>Referencias<a hidden class=anchor aria-hidden=true href=#referencias>#</a></h2>
+<ul>
+<li><a href=https://docs.oracle.com/cd/E19683-01/817-6958/userconcept-26/index.html>https://docs.oracle.com/cd/E19683-01/817-6958/userconcept-26/index.html</a></li>
+<li><a href=https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-linux>https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-linux</a></li>
+<li><a href=https://www.cs.ait.ac.th/~on/O/oreilly/unix/upt/ch06_01.htm>https://www.cs.ait.ac.th/~on/O/oreilly/unix/upt/ch06_01.htm</a></li>
+</ul>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://srrequiem.xyz/tags/first/>first</a></li>
+</ul>
+<nav class=paginav>
+<a class=next href=https://srrequiem.xyz/posts/htb-jeeves/>
+<span class=title>Siguiente »</span>
+<br>
+<span>Hack The Box - Jeeves</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share Variables de entorno y cómo obtenerlas on twitter" href="https://twitter.com/intent/tweet/?text=Variables%20de%20entorno%20y%20c%c3%b3mo%20obtenerlas&url=https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f&hashtags=first"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Variables de entorno y cómo obtenerlas on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f&title=Variables%20de%20entorno%20y%20c%c3%b3mo%20obtenerlas&summary=Variables%20de%20entorno%20y%20c%c3%b3mo%20obtenerlas&source=https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Variables de entorno y cómo obtenerlas on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f&title=Variables%20de%20entorno%20y%20c%c3%b3mo%20obtenerlas"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Variables de entorno y cómo obtenerlas on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Variables de entorno y cómo obtenerlas on whatsapp" href="https://api.whatsapp.com/send?text=Variables%20de%20entorno%20y%20c%c3%b3mo%20obtenerlas%20-%20https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share Variables de entorno y cómo obtenerlas on telegram" href="https://telegram.me/share/url?text=Variables%20de%20entorno%20y%20c%c3%b3mo%20obtenerlas&url=https%3a%2f%2fsrrequiem.xyz%2fposts%2fenv-vars%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentcolor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
+</a>
+</div>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2023 <a href=https://srrequiem.xyz/>Román Zuleta</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+</body>
+</html>

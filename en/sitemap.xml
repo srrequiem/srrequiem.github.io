@@ -2,8 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://srrequiem.xyz/en/archives/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://srrequiem.xyz/archives/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://srrequiem.xyz/en/archives/"
+                />
+  </url><url>
     <loc>https://srrequiem.xyz/en/categories/</loc>
-    <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -15,47 +26,19 @@
                 href="https://srrequiem.xyz/en/categories/"
                 />
   </url><url>
-    <loc>https://srrequiem.xyz/en/categories/ctf/</loc>
-    <lastmod>2021-04-07T10:43:09-05:00</lastmod>
+    <loc>https://srrequiem.xyz/en/projects/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://srrequiem.xyz/categories/ctf/"
+                href="https://srrequiem.xyz/projects/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://srrequiem.xyz/en/categories/ctf/"
-                />
-  </url><url>
-    <loc>https://srrequiem.xyz/en/posts/first-ctf/</loc>
-    <lastmod>2021-04-07T10:43:09-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://srrequiem.xyz/posts/first-ctf/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://srrequiem.xyz/en/posts/first-ctf/"
-                />
-  </url><url>
-    <loc>https://srrequiem.xyz/en/posts/</loc>
-    <lastmod>2021-04-07T10:43:09-05:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://srrequiem.xyz/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://srrequiem.xyz/en/posts/"
+                href="https://srrequiem.xyz/en/projects/"
                 />
   </url><url>
     <loc>https://srrequiem.xyz/en/</loc>
-    <lastmod>2021-04-07T10:43:09-05:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -65,18 +48,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://srrequiem.xyz/en/"
-                />
-  </url><url>
-    <loc>https://srrequiem.xyz/en/archives/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://srrequiem.xyz/archives/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://srrequiem.xyz/en/archives/"
                 />
   </url><url>
     <loc>https://srrequiem.xyz/en/search/</loc>

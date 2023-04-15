@@ -5,17 +5,16 @@
     <link>https://srrequiem.xyz/en/</link>
     <description>Recent content on Román Zuleta</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 07 Apr 2021 10:43:09 -0500</lastBuildDate><atom:link href="https://srrequiem.xyz/en/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>My First CTF</title>
-      <link>https://srrequiem.xyz/en/posts/first-ctf/</link>
-      <pubDate>Wed, 07 Apr 2021 10:43:09 -0500</pubDate>
-      
-      <guid>https://srrequiem.xyz/en/posts/first-ctf/</guid>
-      <description>First impresions and Write-up of the Shakti CTF 2021 challenges that I solved.</description>
-    </item>
+    <language>en-us</language><atom:link href="https://srrequiem.xyz/en/index.xml" rel="self" type="application/rss+xml" />
     
+    <item>
+      <title>Personal projects</title>
+      <link>https://srrequiem.xyz/en/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://srrequiem.xyz/en/projects/</guid>
+      <description>Section dedicated to show published personal projects.</description>
+    </item>
     
     
   </channel>

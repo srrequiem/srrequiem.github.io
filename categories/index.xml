@@ -89,24 +89,6 @@
     </item>
     
     <item>
-      <title>Buffer Overflow</title>
-      <link>https://srrequiem.xyz/categories/buffer-overflow/</link>
-      <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
-      
-      <guid>https://srrequiem.xyz/categories/buffer-overflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OSCP Prep</title>
-      <link>https://srrequiem.xyz/categories/oscp-prep/</link>
-      <pubDate>Wed, 17 Nov 2021 19:31:11 -0600</pubDate>
-      
-      <guid>https://srrequiem.xyz/categories/oscp-prep/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>echoCTF</title>
       <link>https://srrequiem.xyz/categories/echoctf/</link>
       <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
