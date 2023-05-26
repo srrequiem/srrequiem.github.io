@@ -16,23 +16,5 @@
       <description>Uso de variables de entorno, cómo se puede acceder a ellas, manipularlas y aprovecharlas para ingenieros de seguridad tanto ofensivos como defensivos.</description>
     </item>
     
-    <item>
-      <title>echoCTF - Smithers</title>
-      <link>https://srrequiem.xyz/posts/echoctf_smithers/</link>
-      <pubDate>Thu, 28 Oct 2021 15:03:19 -0500</pubDate>
-      
-      <guid>https://srrequiem.xyz/posts/echoctf_smithers/</guid>
-      <description>Write-up de la máquina smithers de la plataforma echoCTF.red</description>
-    </item>
-    
-    <item>
-      <title>echoCTF - Flanders</title>
-      <link>https://srrequiem.xyz/posts/echoctf_flanders/</link>
-      <pubDate>Wed, 27 Oct 2021 18:37:10 -0500</pubDate>
-      
-      <guid>https://srrequiem.xyz/posts/echoctf_flanders/</guid>
-      <description>Write-up de la máquina flanders de la plataforma echoCTF.red</description>
-    </item>
-    
   </channel>
 </rss>
